@@ -20,6 +20,9 @@ public class MainWindow extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
+	public void showStatus(String status) {
+		sniperStatus.setText(status);
+	}
 	private JLabel createLabel1(String initialText) {
 		JLabel result = new JLabel(initialText);
 		result.setName(SNIPER_STATUS_NAME);
