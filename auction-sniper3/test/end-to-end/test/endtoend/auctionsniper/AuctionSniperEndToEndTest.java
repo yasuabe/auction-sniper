@@ -10,7 +10,7 @@ public class AuctionSniperEndToEndTest {
 	@Test public void sniperJoinsAuctionUntilAuctionCloses() throws Exception {
 		auction.startSellingItem();
 		application.startBiddingIn(auction);
-		auction.hasReceivedJoinRequestFromSniper();
+		auction.hasReceivedJoinRequestFrom(ApplicationRunner.SNIPER_XMPP_ID);
 		auction.announceClosed();
 		application.showsSniperHasLostAuction();
 	}
