@@ -19,7 +19,8 @@ public class AuctionMessageTranslatorTest {
 	private final Mockery context = new Mockery();
 	private final AuctionEventListener listener = context.mock(AuctionEventListener.class);
 	
-	private final AuctionMessageTranslator translator = new AuctionMessageTranslator();
+	private final AuctionMessageTranslator translator = new AuctionMessageTranslator(
+			this.listener);
 	
 	@Test public void notifiesAuctionCloseWhenCloseMessageReceived() {
 		context.checking(new Expectations() {{
