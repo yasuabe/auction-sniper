@@ -6,10 +6,8 @@ import java.awt.event.WindowEvent;
 import javax.swing.SwingUtilities;
 
 import org.jivesoftware.smack.Chat;
-import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
-import org.jivesoftware.smack.packet.Message;
 
 import auctionsniper.ui.MainWindow;
 import auctionsniper.xmpp.AuctionEventListener;
@@ -21,8 +19,6 @@ public class Main implements AuctionEventListener {
 	public static final int ARG_PASSWORD = 2;
 	public static final int ARG_ITEM_ID = 3;
 	
-	public static final String STATUS_JOINING = "Joining";
-	public static final String STATUS_LOST = "Lost";
 	public static final String MAIN_WINDOW_NAME = "Auction Sniper Main";
 	public static final String SNIPER_STATUS_NAME = "sniper status";
 	
@@ -85,8 +81,8 @@ public class Main implements AuctionEventListener {
 	@Override
 	public void auctionClosed() {
 		// TODO Auto-generated method stub
-		
-	}
+
+	}	
 	@Override
 	public void currentPrice(int i, int j) {
 		// TODO Auto-generated method stub

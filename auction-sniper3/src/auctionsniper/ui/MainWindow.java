@@ -11,8 +11,10 @@ import auctionsniper.Main;
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {
 	public static final String SNIPER_STATUS_NAME = "sniper status";
-	private final JLabel sniperStatus = createLabel1(Main.STATUS_JOINING);
+	private final JLabel sniperStatus = createLabel1(STATUS_JOINING);
 	public static final String STATUS_BIDDING = "Bidding";
+	public static final String STATUS_JOINING = "Joining";
+	public static final String STATUS_LOST = "Lost";
 	
 	public MainWindow() {
 		super("Auction Sniper");

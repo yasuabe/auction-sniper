@@ -1,7 +1,7 @@
 package test.endtoend.auctionsniper;
 
 import static test.endtoend.auctionsniper.FakeAuctionServer.XMPP_HOSTNAME;
-import static auctionsniper.Main.*;
+import static auctionsniper.ui.MainWindow.*;
 import auctionsniper.Main;
 import auctionsniper.ui.MainWindow;
 
