@@ -12,6 +12,8 @@ import auctionsniper.Main;
 public class MainWindow extends JFrame {
 	public static final String SNIPER_STATUS_NAME = "sniper status";
 	private final JLabel sniperStatus = createLabel1(Main.STATUS_JOINING);
+	public static final String STATUS_BIDDING = "Bidding";
+	
 	public MainWindow() {
 		super("Auction Sniper");
 		setName(Main.MAIN_WINDOW_NAME);

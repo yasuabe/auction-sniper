@@ -3,6 +3,7 @@ package test.endtoend.auctionsniper;
 import static test.endtoend.auctionsniper.FakeAuctionServer.XMPP_HOSTNAME;
 import static auctionsniper.Main.*;
 import auctionsniper.Main;
+import auctionsniper.ui.MainWindow;
 
 public class ApplicationRunner {
 	public static final String SNIPER_ID = "sniper";
@@ -34,10 +35,7 @@ public class ApplicationRunner {
 	public void stop() {
 		if (driver != null) driver.dispose();
 	}
-
 	public void hasShownSniperIsBidding() {
-		// TODO Auto-generated method stub
-		
+		driver.showsSniperStatus(MainWindow.STATUS_BIDDING);
 	}
-
 }
