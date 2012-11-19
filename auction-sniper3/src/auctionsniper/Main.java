@@ -87,4 +87,9 @@ public class Main implements AuctionEventListener {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public void currentPrice(int i, int j) {
+		// TODO Auto-generated method stub
+		
+	}
 }
