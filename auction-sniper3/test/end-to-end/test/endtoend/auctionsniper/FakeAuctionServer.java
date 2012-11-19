@@ -70,4 +70,19 @@ public class FakeAuctionServer {
 	public String getItemId() {
 		return itemId;
 	}
+
+	public void hasReceivedJoinRequestFrom(String sniperXmppId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void reportPrice(int i, int j, String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void hasReceivedBid(int i, String sniperXmppId) {
+		// TODO Auto-generated method stub
+		
+	}
 }
