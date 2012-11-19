@@ -1,5 +1,8 @@
 package auctionsniper;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.SwingUtilities;
 
 import org.jivesoftware.smack.Chat;
@@ -52,6 +55,7 @@ public class Main {
 
 	private void joinAuction(XMPPConnection connection, String itemId)
 			throws XMPPException {
+		disconnectWhenUICloses(connection);
 		Chat chat = connection.getChatManager().createChat(
 				auctionId(itemId, connection), new MessageListener() {
 					public void processMessage(Chat arg0, Message arg1) {
@@ -65,6 +69,13 @@ public class Main {
 				});
 		this.notToBeGCd = chat;
 		chat.sendMessage(new Message());
+	}
+	private void disconnectWhenUICloses(final XMPPConnection connection) {
+		ui.addWindowListener(new WindowAdapter() {
+			@Override public void windowClosed(WindowEvent e) {
+				connection.disconnect();
+			}
+		});
 	}
 	private static String auctionId(String itemId, XMPPConnection connection) {
 		return String.format(AUCTION_ID_FORMAT, itemId, connection.getServiceName());
