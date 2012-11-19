@@ -3,6 +3,7 @@ package test.endtoend.auctionsniper;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
+import org.hamcrest.Matcher;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.ChatManagerListener;
 import org.jivesoftware.smack.MessageListener;
@@ -22,8 +23,12 @@ public class FakeAuctionServer {
 			messages .add(message);
 		}
 
-		public void receivesAMessage() throws InterruptedException {
-			assertThat("Message", messages.poll(5, TimeUnit.SECONDS), is(notNullValue()));
+		public void receivesAMessage(Matcher<? super String> messageMatcher) 
+				throws InterruptedException {
+
+			final Message message = messages.poll(5, TimeUnit.SECONDS);
+			assertThat("Message", messages, is(notNullValue()));
+			assertThat(message.getBody(), messageMatcher);
 		}
 	}
 	public static final String XMPP_HOSTNAME = "localhost";
@@ -56,7 +61,7 @@ public class FakeAuctionServer {
 	}
 
 	public void hasReceivedJoinRequestFromSniper() throws InterruptedException {
-		messageListener.receivesAMessage();
+		messageListener.receivesAMessage(is(anything()));
 	}
 
 	public void announceClosed() throws XMPPException {
@@ -84,6 +89,7 @@ public class FakeAuctionServer {
 
 	public void hasReceivedBid(int bid, String sniperId) throws InterruptedException {
 		assertThat(currentChat.getParticipant(), equalTo(sniperId));
-		messageListener.receivesAMessage();
+		messageListener.receivesAMessage(
+				equalTo(String.format("SOLVersion: 1.1; Command: BID; Price: %d;", bid)));
 	}
 }
