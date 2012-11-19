@@ -80,10 +80,12 @@ public class Main implements AuctionEventListener {
 	}
 	@Override
 	public void auctionClosed() {
-		// TODO Auto-generated method stub
-
-	}	
-	@Override
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override public void run() {
+				ui.showStatus(MainWindow.STATUS_LOST);
+			}
+		});
+	}	@Override
 	public void currentPrice(int i, int j) {
 		// TODO Auto-generated method stub
 		
