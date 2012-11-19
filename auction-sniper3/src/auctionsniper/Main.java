@@ -12,8 +12,10 @@ import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
 
 import auctionsniper.ui.MainWindow;
+import auctionsniper.xmpp.AuctionEventListener;
+import auctionsniper.xmpp.AuctionMessageTranslator;
 
-public class Main {
+public class Main implements AuctionEventListener {
 	public static final int ARG_HOSTNAME = 0;
 	public static final int ARG_USERNAME = 1;
 	public static final int ARG_PASSWORD = 2;
@@ -52,21 +54,12 @@ public class Main {
 				connectTo(args[ARG_HOSTNAME], args[ARG_USERNAME],
 						args[ARG_PASSWORD]), args[ARG_ITEM_ID]);
 	}
-
 	private void joinAuction(XMPPConnection connection, String itemId)
 			throws XMPPException {
+
 		disconnectWhenUICloses(connection);
 		Chat chat = connection.getChatManager().createChat(
-				auctionId(itemId, connection), new MessageListener() {
-					public void processMessage(Chat arg0, Message arg1) {
-						SwingUtilities.invokeLater(new Runnable() {
-							@Override
-							public void run() {
-								ui.showStatus(Main.STATUS_LOST);
-							}
-						});
-					}
-				});
+				auctionId(itemId, connection), new AuctionMessageTranslator(this));
 		this.notToBeGCd = chat;
 		chat.sendMessage(JOIN_COMMAND_FORMAT);
 	}
@@ -88,5 +81,10 @@ public class Main {
 		connection.login(userName, password, AUCTION_RESOURCE);
 		
 		return connection;
+	}
+	@Override
+	public void auctionClosed() {
+		// TODO Auto-generated method stub
+		
 	}
 }
