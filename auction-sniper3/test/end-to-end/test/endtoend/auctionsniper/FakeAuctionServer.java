@@ -22,12 +22,10 @@ public class FakeAuctionServer {
 			messages .add(message);
 		}
 
-		public void receivedAMessage() throws InterruptedException {
+		public void receivesAMessage() throws InterruptedException {
 			assertThat("Message", messages.poll(5, TimeUnit.SECONDS), is(notNullValue()));
 		}
-		
 	}
-
 	public static final String XMPP_HOSTNAME = "localhost";
 	public static final String ITEM_ID_AS_LOGIN = "auction-%s";
 	public static final String AUCTION_PASSWORD = "auction";
@@ -58,7 +56,7 @@ public class FakeAuctionServer {
 	}
 
 	public void hasReceivedJoinRequestFromSniper() throws InterruptedException {
-		messageListener.receivedAMessage();
+		messageListener.receivesAMessage();
 	}
 
 	public void announceClosed() throws XMPPException {
