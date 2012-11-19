@@ -82,8 +82,8 @@ public class FakeAuctionServer {
 				price, increment, bidder));
 	}
 
-	public void hasReceivedBid(int i, String sniperXmppId) {
-		// TODO Auto-generated method stub
-		
+	public void hasReceivedBid(int bid, String sniperId) throws InterruptedException {
+		assertThat(currentChat.getParticipant(), equalTo(sniperId));
+		messageListener.receivesAMessage();
 	}
 }
