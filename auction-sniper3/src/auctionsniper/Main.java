@@ -99,7 +99,10 @@ public class Main implements SniperListener {
 	}
 	@Override
 	public void sniperBidding() {
-		// TODO Auto-generated method stub
-		
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override public void run() {
+				ui.showStatus(MainWindow.STATUS_BIDDING);
+			}
+		});
 	}
 }
