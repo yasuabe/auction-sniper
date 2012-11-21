@@ -33,8 +33,7 @@ public class AuctionSniperTest {
 			one(auction ).bid(price + increment);
 			atLeast(1).of(sniperListener).sniperBidding();
 		}});
-		//TODO 暫定の null
-		sniper.currentPrice(price, increment, null);
+		sniper.currentPrice(price, increment, PriceSource.FromOtherBidder);
 	}
 	@Test public void reportsIsWinningWhenCurrentPriceComesFromSniper() {
 		context.checking(new Expectations() {{
