@@ -8,9 +8,11 @@ import auctionsniper.AuctionEvent;
 
 public class AuctionMessageTranslator implements MessageListener {
 	private final AuctionEventListener listener;
-
-	public AuctionMessageTranslator(AuctionEventListener listener) {
+	private final String sniperId;
+	
+	public AuctionMessageTranslator(String sniperId, AuctionEventListener listener) {
 		this.listener = listener;
+		this.sniperId = sniperId;
 	}
 
 	@Override public void processMessage(Chat chat, Message message) {
@@ -19,7 +21,7 @@ public class AuctionMessageTranslator implements MessageListener {
 		if ("CLOSE".equals(eventType)) {
 			listener.auctionClosed();
 		} else if ("PRICE".equals(eventType)) {
-			//TODO 暫定のnull
-			listener.currentPrice(event.currentPrice(), event.increment(), null);		}
+			listener.currentPrice(event.currentPrice(), event.increment(), event.isFrom(sniperId));
+		}
 	}
 }

@@ -3,6 +3,9 @@ package auctionsniper;
 import java.util.HashMap;
 import java.util.Map;
 
+import auctionsniper.xmpp.AuctionEventListener.PriceSource;
+import static auctionsniper.xmpp.AuctionEventListener.PriceSource.*;
+
 public class AuctionEvent {
 	private final Map<String, String> fields = new HashMap<String, String>();
 
@@ -32,4 +35,8 @@ public class AuctionEvent {
 	static String[] fieldsIn(String messageBody) {
 		return messageBody.split(";");
 	}
+	public PriceSource isFrom(String sniperId) {
+		return sniperId.equals(bidder()) ? FromSniper: FromOtherBidder;
+	}
+	private String bidder() { return get("Bidder"); }
 }
