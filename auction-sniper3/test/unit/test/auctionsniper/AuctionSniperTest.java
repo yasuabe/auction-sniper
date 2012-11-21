@@ -31,6 +31,7 @@ public class AuctionSniperTest {
 			one(auction ).bid(price + increment);
 			atLeast(1).of(sniperListener).sniperBidding();
 		}});
-		sniper.currentPrice(price, increment);
+		//TODO 暫定の null
+		sniper.currentPrice(price, increment, null);
 	}
 }

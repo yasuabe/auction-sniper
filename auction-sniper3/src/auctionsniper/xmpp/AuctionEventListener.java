@@ -7,5 +7,5 @@ public interface AuctionEventListener {
 		FromOtherBidder
 	}
 	void auctionClosed();
-	void currentPrice(int i, int j);
+	void currentPrice(int price, int increment, PriceSource priceSource);
 }

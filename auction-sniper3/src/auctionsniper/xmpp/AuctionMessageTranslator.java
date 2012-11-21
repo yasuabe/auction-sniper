@@ -19,7 +19,7 @@ public class AuctionMessageTranslator implements MessageListener {
 		if ("CLOSE".equals(eventType)) {
 			listener.auctionClosed();
 		} else if ("PRICE".equals(eventType)) {
-			listener.currentPrice(event.currentPrice(),event.increment());
-		}
+			//TODO 暫定のnull
+			listener.currentPrice(event.currentPrice(), event.increment(), null);		}
 	}
 }
