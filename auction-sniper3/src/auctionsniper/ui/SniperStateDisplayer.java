@@ -30,7 +30,6 @@ public class SniperStateDisplayer implements SniperListener {
 
 	@Override
 	public void sniperWinning() {
-		// TODO Auto-generated method stub
-		
+		showStatus(MainWindow.STATUS_WINNING);
 	}
 }
