@@ -27,4 +27,10 @@ public class SniperStateDisplayer implements SniperListener {
 			@Override public void run() { ui.showStatus(status); }
 		});
 	}
+
+	@Override
+	public void sniperWinning() {
+		// TODO Auto-generated method stub
+		
+	}
 }
