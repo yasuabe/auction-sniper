@@ -31,20 +31,20 @@ public class ApplicationRunner {
 		driver.showsSniperStatus(STATUS_JOINING);
 	}
 
-	public void showsSniperHasLostAuction() {
+	public void showsSniperHasLostAuction(int lastPrice, int lastBid) {
 		driver.showsSniperStatus(STATUS_LOST);
 	}
 
 	public void stop() {
 		if (driver != null) driver.dispose();
 	}
-	public void hasShownSniperIsBidding() {
+	public void hasShownSniperIsBidding(int lastPrice, int lastBid) {
 		driver.showsSniperStatus(MainWindow.STATUS_BIDDING);
 	}
-	public void hasShownSniperIsWinning() {
+	public void hasShownSniperIsWinning(int winningBid) {
 		driver.showsSniperStatus(STATUS_WINNING);
 	}
 
-	public void showsSniperHasWonAuction() {
+	public void showsSniperHasWonAuction(int lastPrice) {
 		driver.showsSniperStatus(STATUS_WON);
 	}}
