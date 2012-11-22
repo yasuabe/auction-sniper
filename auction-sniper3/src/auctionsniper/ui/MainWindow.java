@@ -1,14 +1,11 @@
 package auctionsniper.ui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.border.LineBorder;
 
 import auctionsniper.Main;
 
@@ -24,6 +21,8 @@ public class MainWindow extends JFrame {
 
 	public static final String APPLICATION_TITLE = "Auction Sniper";
 	
+	private final SnipersTableModel snipers = new SnipersTableModel();
+	
 	public MainWindow() {
 		super(APPLICATION_TITLE);
 		setName(Main.MAIN_WINDOW_NAME);
@@ -33,6 +32,7 @@ public class MainWindow extends JFrame {
 		setVisible(true);
 	}
 	public void showStatus(String status) {
+		snipers.setStatusText(status);
 	}
 	private void fillContentPane(JTable snipersTable) {
 		final Container contentPane = getContentPane();
@@ -41,7 +41,7 @@ public class MainWindow extends JFrame {
 		contentPane.add(new JScrollPane(snipersTable), BorderLayout.CENTER);
 	}
 	private JTable makeSnipersTable() {
-		final JTable snipersTable = new JTable();
+		final JTable snipersTable = new JTable(snipers);
 		snipersTable.setName(SNIPERS_TABLE_NAME);
 		return snipersTable;
 	}
