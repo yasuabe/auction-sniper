@@ -1,25 +1,29 @@
 package test.endtoend.auctionsniper;
 
+import static auctionsniper.ui.MainWindow.STATUS_BIDDING;
 import static auctionsniper.ui.MainWindow.STATUS_JOINING;
 import static auctionsniper.ui.MainWindow.STATUS_LOST;
 import static auctionsniper.ui.MainWindow.STATUS_WINNING;
 import static auctionsniper.ui.MainWindow.STATUS_WON;
 import static test.endtoend.auctionsniper.FakeAuctionServer.XMPP_HOSTNAME;
 import auctionsniper.Main;
-import auctionsniper.ui.MainWindow;
 
 public class ApplicationRunner {
 	public static final String SNIPER_ID = "sniper";
 	public static final String SNIPER_PASSWORD = "sniper";
 	public static final String SNIPER_XMPP_ID = SNIPER_ID + "@" + XMPP_HOSTNAME + "/Auction";
+
 	private AuctionSniperDriver driver;
+	private String itemId;
 
 	public void startBiddingIn(final FakeAuctionServer auction) {
+		itemId = auction.getItemId();
 		Thread thread = new Thread("Test Application") {
 			@Override
 			public void run() {
 				try {
-					Main.main(XMPP_HOSTNAME, SNIPER_ID, SNIPER_PASSWORD, auction.getItemId());
+					Main.main(XMPP_HOSTNAME, 
+							SNIPER_ID, SNIPER_PASSWORD, auction.getItemId());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -28,23 +32,27 @@ public class ApplicationRunner {
 		thread.setDaemon(true);
 		thread.start();
 		driver = new AuctionSniperDriver(1000);
-		driver.showsSniperStatus(STATUS_JOINING);
+		driver.showsSniperStatus(itemId, 0, 0, STATUS_JOINING);
 	}
 
 	public void showsSniperHasLostAuction(int lastPrice, int lastBid) {
-		driver.showsSniperStatus(STATUS_LOST);
+		driver.showsSniperStatus(itemId, lastPrice, lastBid,
+				STATUS_LOST);
 	}
 
 	public void stop() {
 		if (driver != null) driver.dispose();
 	}
 	public void hasShownSniperIsBidding(int lastPrice, int lastBid) {
-		driver.showsSniperStatus(MainWindow.STATUS_BIDDING);
+		driver.showsSniperStatus(itemId, lastPrice, lastBid,
+				STATUS_BIDDING);
 	}
 	public void hasShownSniperIsWinning(int winningBid) {
-		driver.showsSniperStatus(STATUS_WINNING);
+		driver.showsSniperStatus(itemId, winningBid, winningBid,
+				STATUS_WINNING);
 	}
-
 	public void showsSniperHasWonAuction(int lastPrice) {
-		driver.showsSniperStatus(STATUS_WON);
-	}}
+		driver.showsSniperStatus(itemId, lastPrice, lastPrice,
+				STATUS_WON);
+	}
+}
