@@ -16,6 +16,7 @@ import auctionsniper.Main;
 import static java.lang.String.format;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
+import static org.hamcrest.Matchers.hasProperty;
 
 public class FakeAuctionServer {
 	class SingleMessageListener implements MessageListener {
@@ -30,8 +31,7 @@ public class FakeAuctionServer {
 				throws InterruptedException {
 
 			final Message message = messages.poll(5, TimeUnit.SECONDS);
-			assertThat("Message", messages, is(notNullValue()));
-			assertThat(message.getBody(), messageMatcher);
+			assertThat(message, hasProperty("body", hasProperty("body", messageMatcher)));
 		}
 	}
 	public static final String XMPP_HOSTNAME = "localhost";
