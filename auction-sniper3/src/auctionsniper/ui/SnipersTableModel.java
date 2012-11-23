@@ -6,7 +6,8 @@ import auctionsniper.SniperSnapshot;
 
 @SuppressWarnings("serial")
 public class SnipersTableModel extends AbstractTableModel {
-	private static final SniperSnapshot STARTING_UP = new SniperSnapshot("", 0, 0);
+	//TODO 臨時null
+	private static final SniperSnapshot STARTING_UP = new SniperSnapshot("", 0, 0, null);
 
 	private String      statusText  = MainWindow.STATUS_JOINING;
 	private SniperSnapshot sniperState = STARTING_UP;

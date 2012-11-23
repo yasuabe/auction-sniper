@@ -11,6 +11,7 @@ import auctionsniper.Auction;
 import auctionsniper.AuctionSniper;
 import auctionsniper.SniperListener;
 import auctionsniper.SniperSnapshot;
+import auctionsniper.SniperState;
 
 import static auctionsniper.xmpp.AuctionEventListener.PriceSource;
 
@@ -50,7 +51,7 @@ public class AuctionSniperTest {
 		context.checking(new Expectations() {{
 			one(auction).bid(bid);
 			atLeast(1).of(sniperListener).sniperBidding(
-					new SniperSnapshot(ITEM_ID, price, bid));
+					new SniperSnapshot(ITEM_ID, price, bid, SniperState.BIDDING));
 		}});
 		sniper.currentPrice(price, increment, PriceSource.FromOtherBidder);
 	}

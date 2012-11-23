@@ -36,7 +36,8 @@ public class SnipersTableModelTest {
 		context.checking(new Expectations(){{
 			one(listener).tableChanged(with(aRowChangedEvent()));
 		}});
-		model.sniperStatusChanged(new SniperSnapshot("item id", 555, 666),
+		//TODO 臨時null
+		model.sniperStatusChanged(new SniperSnapshot("item id", 555, 666, null),
 				MainWindow.STATUS_BIDDING);
 		assertColumnEquals(Column.ITEM_IDENTIFIER, "item id");
 		assertColumnEquals(Column.LAST_PRICE, 555);
