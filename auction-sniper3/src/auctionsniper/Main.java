@@ -10,7 +10,7 @@ import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 
 import auctionsniper.ui.MainWindow;
-import auctionsniper.ui.SniperStateDisplayer;
+import auctionsniper.ui.SwingThreadSniperListener;
 import auctionsniper.xmpp.AuctionMessageTranslator;
 import auctionsniper.xmpp.XMPPAuction;
 
@@ -63,7 +63,7 @@ public class Main {
 		chat.addMessageListener(
 				new AuctionMessageTranslator(
 						connection.getUser(),
-						new AuctionSniper(auction, itemId, new SniperStateDisplayer(ui))));
+						new AuctionSniper(auction, itemId, new SwingThreadSniperListener(ui))));
 		auction.join();
 	}
 	private void disconnectWhenUICloses(final XMPPConnection connection) {

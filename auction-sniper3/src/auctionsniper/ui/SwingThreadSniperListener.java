@@ -5,11 +5,11 @@ import javax.swing.SwingUtilities;
 import auctionsniper.SniperListener;
 import auctionsniper.SniperSnapshot;
 
-public class SniperStateDisplayer implements SniperListener {
+public class SwingThreadSniperListener implements SniperListener {
 
 	private final MainWindow ui;
 
-	public SniperStateDisplayer(MainWindow ui) {
+	public SwingThreadSniperListener(MainWindow ui) {
 		this.ui = ui;
 	}
 	@Override
