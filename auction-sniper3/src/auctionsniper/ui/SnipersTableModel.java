@@ -23,6 +23,10 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
 	public int getColumnCount() {
 		return Column.values().length;
 	}
+	@Override
+	public String getColumnName(int column) {
+		return Column.at(column).name;
+	}
 	public int getRowCount() { return 1; }
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
