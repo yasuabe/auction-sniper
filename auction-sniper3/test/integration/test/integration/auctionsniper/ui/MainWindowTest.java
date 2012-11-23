@@ -13,9 +13,9 @@ import com.objogate.wl.swing.probe.ValueMatcherProbe;
 
 public class MainWindowTest {
 
-	private final SnipersTableModel tableModel =new SnipersTableModel();
-	private final MainWindow mainWindow = new MainWindow(tableModel);
-	private final AuctionSniperDriver driver = new AuctionSniperDriver(100);
+	private final SnipersTableModel   tableModel = new SnipersTableModel();
+	private final MainWindow          mainWindow = new MainWindow(tableModel);
+	private final AuctionSniperDriver driver     = new AuctionSniperDriver(100);
 
 	@Test
 	public void makesUserRequestWhenJoinButtonClicked() {
