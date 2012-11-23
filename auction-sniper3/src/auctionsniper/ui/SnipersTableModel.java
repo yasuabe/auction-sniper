@@ -12,9 +12,6 @@ import auctionsniper.SniperState;
 
 @SuppressWarnings("serial")
 public class SnipersTableModel extends AbstractTableModel implements SniperListener {
-	//TODO 既存テストを通すために itemId をべた書きした
-	private static final SniperSnapshot STARTING_UP = SniperSnapshot.joining("item-54321");
-	 
     private static String[] STATUS_TEXT = {
         "Joining",
         "Bidding",
@@ -22,7 +19,6 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
         "Won",
         "Lost"
         };
-	private SniperSnapshot snapshot = STARTING_UP;
 	private List<SniperSnapshot> snapshots = new ArrayList<SniperSnapshot>();
 	
 	public int getColumnCount() {
@@ -43,9 +39,9 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
 		snapshots.set(row, newSnapshot);
 		fireTableRowsUpdated(row, row);
 	}
-	private int rowMatching(SniperSnapshot newSnapShot) {
+	private int rowMatching(SniperSnapshot snapshot) {
 		for (int i = 0; i < snapshots.size(); i++) {
-			if (newSnapShot.isForSameItemAs(snapshots.get(i))) {
+			if (snapshot.isForSameItemAs(snapshots.get(i))) {
 				return i;
 			}
 		}
@@ -56,5 +52,7 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
 	}
 	public void addSniper(SniperSnapshot joining) {
 		snapshots.add(joining);
+		int row = snapshots.size() - 1;
+		fireTableRowsInserted(row, row);
 	}
 }
