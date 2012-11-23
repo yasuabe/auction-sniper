@@ -8,7 +8,9 @@ import auctionsniper.SniperState;
 public class SnipersTableModel extends AbstractTableModel {
 	private String statusText = MainWindow.STATUS_JOINING;
 	
-	public int getColumnCount() { return 1; }
+	public int getColumnCount() {
+		return Column.values().length;
+	}
 	public int getRowCount() { return 1; }
 	public Object getValueAt(int rowIndex, int columnIndex) { return statusText; }
 	
