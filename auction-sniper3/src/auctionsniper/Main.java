@@ -56,7 +56,6 @@ public class Main {
 		for (int i = 3; i < args.length; ++i) {
 			main.joinAuction(connection, args[i]);
 		}
-		main.joinAuction(connection, args[ARG_ITEM_ID]);
 	}
 	private void joinAuction(XMPPConnection connection, String itemId)
 			throws Exception {
