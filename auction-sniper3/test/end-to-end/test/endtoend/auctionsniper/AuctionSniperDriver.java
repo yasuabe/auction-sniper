@@ -58,6 +58,7 @@ public class AuctionSniperDriver extends JFrameDriver {
 		JTextFieldDriver newItemId = new JTextFieldDriver(this,
 				JTextField.class, named(MainWindow.NEW_ITEM_ID_NAME));
 		newItemId.focusWithMouse();
+		newItemId.focusWithMouse();
 		return newItemId;
 	}
 }
