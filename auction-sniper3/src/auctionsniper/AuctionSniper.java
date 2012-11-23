@@ -20,11 +20,7 @@ public class AuctionSniper implements AuctionEventListener {
 
 	@Override
 	public void auctionClosed() {
-		if (isWinning) {
-			sniperListener.sniperStateChanged(snapshot.closed(SniperState.WON));
-		} else {
-			sniperListener.sniperStateChanged(snapshot.closed(SniperState.LOST));
-		}
+		sniperListener.sniperStateChanged(snapshot.closed());
 	}
 
 	@Override

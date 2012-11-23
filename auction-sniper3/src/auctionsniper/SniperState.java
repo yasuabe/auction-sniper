@@ -1,9 +1,20 @@
 package auctionsniper;
 
 public enum SniperState {
-	JOINING, //
-	BIDDING, //
-	WINNING, //
+	JOINING {
+		@Override public SniperState whenAuctionClosed() { return LOST; }
+	},
+	BIDDING {
+		@Override public SniperState whenAuctionClosed() { return LOST; }
+	},
+	WINNING {
+		@Override public SniperState whenAuctionClosed() { return WON; }
+	},
 	LOST, //
-	WON
+	WON;
+
+	public SniperState whenAuctionClosed() {
+		// TODO 後で Defect に変更
+		throw new AssertionError();
+	}
 }
