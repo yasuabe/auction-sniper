@@ -14,7 +14,6 @@ public enum SniperState {
 	WON;
 
 	public SniperState whenAuctionClosed() {
-		// TODO 後で Defect に変更
-		throw new AssertionError();
+		throw new Defect("Auction is already closed");
 	}
 }
