@@ -1,5 +1,7 @@
 package auctionsniper;
 
+import static auctionsniper.SniperState.*;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -30,16 +32,13 @@ public class SniperSnapshot {
 		return ToStringBuilder.reflectionToString(this);
 	}
 
-	public static SniperSnapshot joining(String itemId2) {
-		// TODO Auto-generated method stub
-		return null;
+	public static SniperSnapshot joining(String itemId) {
+		return new SniperSnapshot(itemId, 0, 0, JOINING);
 	}
-	public SniperSnapshot winning(int price) {
-		// TODO Auto-generated method stub
-		return null;
+	public SniperSnapshot winning(int newLastPrice) {
+		return new SniperSnapshot(itemId, newLastPrice, lastBid, WINNING);
 	}
-	public SniperSnapshot bidding(int price, int bid) {
-		// TODO Auto-generated method stub
-		return null;
+	public SniperSnapshot bidding(int newLastPrice, int newLastBid) {
+		return new SniperSnapshot(itemId, newLastPrice, newLastBid, BIDDING);
 	}
 }
