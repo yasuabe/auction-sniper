@@ -9,9 +9,9 @@ import static auctionsniper.xmpp.AuctionEventListener.PriceSource.*;
 public class AuctionEvent {
 	private final Map<String, String> fields = new HashMap<String, String>();
 
-	public String type() { return get("Event"); }
+	public String type() {      return get(   "Event"); }
 	public int currentPrice() { return getInt("CurrentPrice"); }
-	public int increment() { return getInt("Increment"); }
+	public int increment() {    return getInt("Increment"); }
 
 	private int getInt(String fieldName) {
 		return Integer.parseInt(get(fieldName));

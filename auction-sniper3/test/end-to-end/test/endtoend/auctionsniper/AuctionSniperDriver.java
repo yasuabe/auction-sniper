@@ -33,6 +33,7 @@ public class AuctionSniperDriver extends JFrameDriver {
 	public void hasColumnTitles() {
 		JTableHeaderDriver headers = new JTableHeaderDriver(
 				this, JTableHeader.class);
+
 		headers.hasHeaders(matching(
 				withLabelText("Item"),
 				withLabelText("Last Price"),

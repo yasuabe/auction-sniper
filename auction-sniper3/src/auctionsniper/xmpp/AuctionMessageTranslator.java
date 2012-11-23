@@ -8,7 +8,7 @@ import auctionsniper.AuctionEvent;
 
 public class AuctionMessageTranslator implements MessageListener {
 	private final AuctionEventListener listener;
-	private final String sniperId;
+	private final String               sniperId;
 	
 	public AuctionMessageTranslator(String sniperId, AuctionEventListener listener) {
 		this.listener = listener;
@@ -16,8 +16,9 @@ public class AuctionMessageTranslator implements MessageListener {
 	}
 
 	@Override public void processMessage(Chat chat, Message message) {
-		AuctionEvent event = AuctionEvent.from(message.getBody());
-		String eventType = event.type();
+		AuctionEvent event     = AuctionEvent.from(message.getBody());
+		String       eventType = event.type();
+
 		if ("CLOSE".equals(eventType)) {
 			listener.auctionClosed();
 		} else if ("PRICE".equals(eventType)) {

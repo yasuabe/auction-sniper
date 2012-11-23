@@ -16,8 +16,8 @@ import auctionsniper.xmpp.AuctionMessageTranslator;
 @RunWith(JMock.class)
 public class AuctionMessageTranslatorTest {
 
-	private static final String SNIPER_ID = "sniper id";
-	public static final Chat UNUSED_CHAT = null;
+	private static final String SNIPER_ID   = "sniper id";
+	public  static final Chat   UNUSED_CHAT = null;
 	
 	private final Mockery context = new Mockery();
 	private final AuctionEventListener listener = context.mock(AuctionEventListener.class);
