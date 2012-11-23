@@ -88,6 +88,21 @@ public class SnipersTableModelTest {
 		model.sniperStateChanged(new SniperSnapshot("item 1", 123, 234,
 				SniperState.WINNING));
 	}
+	@Test
+	public void updatesCorrectRowForSniper() {
+		context.checking(new Expectations() {{
+			allowing(listener).tableChanged(with(anyInsertionEvent()));
+			allowing(listener).tableChanged(with(aChangeInRow(1)));
+		}});
+		SniperSnapshot item1 = SniperSnapshot.joining("item 1");
+		model.addSniper(SniperSnapshot.joining("item 0"));
+		model.addSniper(item1);
+
+		SniperSnapshot winning1 = item1.winning(123);
+		model.sniperStateChanged(winning1);
+		
+		assertRowMatchesSnapshot(1, winning1);
+	}
 	private void assertRowMatchesSnapshot(int row, SniperSnapshot snapshot) {
 		assertEquals(snapshot.itemId, cellValue(row, Column.ITEM_IDENTIFIER));
 		assertEquals(snapshot.lastPrice, cellValue(row, Column.LAST_PRICE));
