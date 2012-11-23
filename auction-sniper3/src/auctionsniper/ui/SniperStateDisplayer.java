@@ -19,9 +19,12 @@ public class SniperStateDisplayer implements SniperListener {
 	}
 
 	@Override
-	public void sniperBidding(SniperState sniperState) {
-		//TODO @sniperStateを追加
-		showStatus(MainWindow.STATUS_BIDDING);
+	public void sniperBidding(final SniperState sniperState) {
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override public void run() { 
+				ui.showStatusChanged(sniperState, MainWindow.STATUS_BIDDING); 
+			}
+		});
 	}
 
 	private void showStatus(final String status) {
