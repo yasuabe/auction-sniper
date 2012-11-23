@@ -48,6 +48,32 @@ public class SnipersTableModelTest {
 			assertEquals(column.name, model.getColumnName(column.ordinal()));
 		}
 	}
+	@Test public void notifiesListenersWhenAddingASniper() {
+		SniperSnapshot joining = SniperSnapshot.joining("item123");
+		context.checking(new Expectations() {{
+			one(listener).tableChanged(with(anInsertionAtRow(0)));
+		}});
+		assertEquals(0, model.getRowCount());
+		
+		model.addSniper(joining);
+		
+		assertEquals(1, model.getRowCount());
+		assertRowMatchesSnapshot(0, joining);
+	}
+	private void assertRowMatchesSnapshot(int row, SniperSnapshot snapshot) {
+		assertEquals(snapshot.itemId, cellValue(row, Column.ITEM_IDENTIFIER));
+		assertEquals(snapshot.lastPrice, cellValue(row, Column.LAST_PRICE));
+		assertEquals(snapshot.lastBid, cellValue(row, Column.LAST_BID));
+		assertEquals(SnipersTableModel.textFor(snapshot.state),
+				cellValue(row, Column.SNIPER_STATE));
+	}
+	Matcher<TableModelEvent> anInsertionAtRow(final int row) {
+		return samePropertyValuesAs(new TableModelEvent(model, row, row,
+				TableModelEvent.ALL_COLUMNS, TableModelEvent.INSERT));
+	}
+	private Object cellValue(int rowIndex, Column column) {
+		return model.getValueAt(rowIndex, column.ordinal());
+	}
 	private void assertColumnEquals(Column column, Object expected) {
 		final int rowIndex = 0;
 		final int columnIndex = column.ordinal();
