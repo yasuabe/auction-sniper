@@ -1,5 +1,7 @@
 package test.auctionsniper;
 
+import org.hamcrest.FeatureMatcher;
+import org.hamcrest.Matcher;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.States;
@@ -14,6 +16,7 @@ import auctionsniper.SniperSnapshot;
 import auctionsniper.SniperState;
 
 import static auctionsniper.xmpp.AuctionEventListener.PriceSource;
+import static org.hamcrest.CoreMatchers.*;
 
 @RunWith(JMock.class)
 public class AuctionSniperTest {
@@ -71,5 +74,14 @@ public class AuctionSniperTest {
 		}});
 		sniper.currentPrice(123, 45, PriceSource.FromSniper);
 		sniper.auctionClosed();
+	}
+	private Matcher<SniperSnapshot> aSniperThatIs(final SniperState state) {
+		return new FeatureMatcher<SniperSnapshot, SniperState>(
+				equalTo(state), "sniper that is ", "was") {
+			@Override
+			protected SniperState featureValueOf(SniperSnapshot actual) {
+				return actual.state;
+			}
+		};
 	}
 }
