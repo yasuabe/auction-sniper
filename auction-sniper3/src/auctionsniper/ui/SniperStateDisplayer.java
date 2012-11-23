@@ -41,4 +41,10 @@ public class SniperStateDisplayer implements SniperListener {
 	public void sniperWon() {
 		showStatus(MainWindow.STATUS_WON);
 	}
+
+	@Override
+	public void sniperStateChanged(SniperSnapshot state) {
+		// TODO Auto-generated method stub
+		
+	}
 }
