@@ -38,11 +38,6 @@ public class SnipersTableModel extends AbstractTableModel {
 			throw new IllegalArgumentException("No column at " + columnIndex);
 		}
 	}	
-	
-	public void setStatusText(String newStatusText) {
-		statusText = newStatusText;
-		fireTableRowsUpdated(0, 0);
-	}
 	public void sniperStatusChanged(SniperSnapshot newSnapshot) {
 		sniperState  = newSnapshot;
 		statusText   = STATUS_TEXT[newSnapshot.state.ordinal()];
