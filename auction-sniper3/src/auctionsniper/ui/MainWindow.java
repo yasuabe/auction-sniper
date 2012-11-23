@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 
 import auctionsniper.Main;
 import auctionsniper.SniperSnapshot;
+import auctionsniper.UserRequestListener;
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {
@@ -63,5 +64,9 @@ public class MainWindow extends JFrame {
 	}
 	public void showStatusChanged(SniperSnapshot sniperState) {
 		snipers.sniperStateChanged(sniperState);		
+	}
+	public void addUserRequestListener(UserRequestListener userRequestListener) {
+		// TODO Auto-generated method stub
+		
 	}
 }
