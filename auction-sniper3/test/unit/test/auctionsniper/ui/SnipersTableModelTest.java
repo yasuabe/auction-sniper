@@ -15,7 +15,10 @@ import org.jmock.Mockery;
 import org.junit.Before;
 import org.junit.Test;
 
+import auctionsniper.AuctionSniper;
+import auctionsniper.Defect;
 import auctionsniper.SniperSnapshot;
+import auctionsniper.SniperState;
 import auctionsniper.ui.Column;
 import auctionsniper.ui.SnipersTableModel;
 
@@ -79,6 +82,11 @@ public class SnipersTableModelTest {
 		
 		assertEquals("item 0", cellValue(0, Column.ITEM_IDENTIFIER));
 		assertEquals("item 1", cellValue(1, Column.ITEM_IDENTIFIER));
+	}
+	@Test(expected = Defect.class)
+	public void throwsDefectIfNoExistingSniperForAnUpdate() {
+		model.sniperStateChanged(new SniperSnapshot("item 1", 123, 234,
+				SniperState.WINNING));
 	}
 	private void assertRowMatchesSnapshot(int row, SniperSnapshot snapshot) {
 		assertEquals(snapshot.itemId, cellValue(row, Column.ITEM_IDENTIFIER));
