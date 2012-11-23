@@ -66,7 +66,7 @@ public class AuctionSniperTest {
 					then(sniperState.is("bidding"));
 
 			atLeast(1).of(sniperListener).sniperStateChanged(
-					new SniperSnapshot(ITEM_ID, 135, 135,SniperState. WINNING));
+					new SniperSnapshot(ITEM_ID, 135, 135,SniperState.WINNING));
 					when(sniperState.is("bidding"));
 		}});
 		sniper.currentPrice(123, 12, PriceSource.FromOtherBidder);
@@ -75,7 +75,7 @@ public class AuctionSniperTest {
 	@Test public void reportsWonIfAuctionClosesWhenWinning() {
 		context.checking(new Expectations() {{
 			ignoring(auction);
-			allowing(sniperListener).sniperWinning();
+			allowing(sniperListener).sniperStateChanged(with(aSniperThatIs(SniperState.WINNING)));
 				then(sniperState.is("winning"));
 			atLeast(1).of(sniperListener).sniperWon();
 				when(sniperState.is("winning"));
