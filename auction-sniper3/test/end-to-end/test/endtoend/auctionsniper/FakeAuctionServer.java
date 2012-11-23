@@ -31,7 +31,7 @@ public class FakeAuctionServer {
 				throws InterruptedException {
 
 			final Message message = messages.poll(5, TimeUnit.SECONDS);
-			assertThat(message, hasProperty("body", hasProperty("body", messageMatcher)));
+			assertThat(message, hasProperty("body", messageMatcher));
 		}
 	}
 	public static final String XMPP_HOSTNAME = "localhost";
