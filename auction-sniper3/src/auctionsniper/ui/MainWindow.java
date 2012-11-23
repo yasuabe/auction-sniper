@@ -46,8 +46,7 @@ public class MainWindow extends JFrame {
 		snipersTable.setName(SNIPERS_TABLE_NAME);
 		return snipersTable;
 	}
-	public void showStatusChanged(SniperState sniperState, String statusBidding) {
-		// TODO Auto-generated method stub
-		
+	public void showStatusChanged(SniperState sniperState, String statusText) {
+		snipers.sniperStatusChanged(sniperState, statusText);		
 	}
 }
