@@ -14,12 +14,6 @@ import auctionsniper.SniperSnapshot;
 public class MainWindow extends JFrame {
 	private static final String SNIPERS_TABLE_NAME = "Snipers Table";
 	
-	public static final String STATUS_BIDDING = "Bidding";
-	public static final String STATUS_JOINING = "Joining";
-	public static final String STATUS_WINNING = "Winning";
-	public static final String STATUS_WON = "Won";
-	public static final String STATUS_LOST = "Lost";
-
 	public static final String APPLICATION_TITLE = "Auction Sniper";
 	
 	private final SnipersTableModel snipers = new SnipersTableModel();
