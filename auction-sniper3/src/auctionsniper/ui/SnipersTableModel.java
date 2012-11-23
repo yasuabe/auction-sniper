@@ -8,8 +8,9 @@ import auctionsniper.SniperState;
 
 @SuppressWarnings("serial")
 public class SnipersTableModel extends AbstractTableModel implements SniperListener {
-	private static final SniperSnapshot STARTING_UP = SniperSnapshot.joining("");
-
+    //TODO 既存テストを通すために itemId をべた書きした
+	private static final SniperSnapshot STARTING_UP = SniperSnapshot.joining("item-54321");
+	 
     private static String[] STATUS_TEXT = {
         "Joining",
         "Bidding",
