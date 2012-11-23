@@ -13,13 +13,13 @@ public class ApplicationRunner {
 
 	private AuctionSniperDriver driver;
 
-	public void startBiddingIn(final FakeAuctionServer auction) {
+	public void startBiddingIn(final FakeAuctionServer... auctions) {
 		Thread thread = new Thread("Test Application") {
 			@Override
 			public void run() {
 				try {
-					Main.main(XMPP_HOSTNAME, 
-							SNIPER_ID, SNIPER_PASSWORD, auction.getItemId());
+					//TODO arguments を作って呼び出す
+					Main.main(XMPP_HOSTNAME, SNIPER_ID, SNIPER_PASSWORD, null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -27,6 +27,7 @@ public class ApplicationRunner {
 		};
 		thread.setDaemon(true);
 		thread.start();
+
 		driver = new AuctionSniperDriver(1000);
 		driver.hasTitle(MainWindow.APPLICATION_TITLE);
 		driver.hasColumnTitles();
