@@ -2,14 +2,14 @@ package auctionsniper.ui;
 
 import javax.swing.table.AbstractTableModel;
 
-import auctionsniper.SniperState;
+import auctionsniper.SniperSnapshot;
 
 @SuppressWarnings("serial")
 public class SnipersTableModel extends AbstractTableModel {
-	private static final SniperState STARTING_UP = new SniperState("", 0, 0);
+	private static final SniperSnapshot STARTING_UP = new SniperSnapshot("", 0, 0);
 
 	private String      statusText  = MainWindow.STATUS_JOINING;
-	private SniperState sniperState = STARTING_UP;
+	private SniperSnapshot sniperState = STARTING_UP;
 	
 	public int getColumnCount() {
 		return Column.values().length;
@@ -35,7 +35,7 @@ public class SnipersTableModel extends AbstractTableModel {
 		statusText = newStatusText;
 		fireTableRowsUpdated(0, 0);
 	}
-	public void sniperStatusChanged(SniperState state, String newStatusText) {
+	public void sniperStatusChanged(SniperSnapshot state, String newStatusText) {
 		sniperState  = state;
 		statusText   = newStatusText;
 		fireTableRowsUpdated(0, 0);

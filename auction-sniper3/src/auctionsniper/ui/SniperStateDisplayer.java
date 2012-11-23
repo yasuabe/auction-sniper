@@ -3,7 +3,7 @@ package auctionsniper.ui;
 import javax.swing.SwingUtilities;
 
 import auctionsniper.SniperListener;
-import auctionsniper.SniperState;
+import auctionsniper.SniperSnapshot;
 
 public class SniperStateDisplayer implements SniperListener {
 
@@ -19,7 +19,7 @@ public class SniperStateDisplayer implements SniperListener {
 	}
 
 	@Override
-	public void sniperBidding(final SniperState sniperState) {
+	public void sniperBidding(final SniperSnapshot sniperState) {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override public void run() { 
 				ui.showStatusChanged(sniperState, MainWindow.STATUS_BIDDING); 

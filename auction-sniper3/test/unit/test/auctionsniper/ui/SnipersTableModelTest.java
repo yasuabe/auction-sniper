@@ -14,7 +14,7 @@ import org.jmock.Mockery;
 import org.junit.Before;
 import org.junit.Test;
 
-import auctionsniper.SniperState;
+import auctionsniper.SniperSnapshot;
 import auctionsniper.ui.Column;
 import auctionsniper.ui.MainWindow;
 import auctionsniper.ui.SnipersTableModel;
@@ -36,7 +36,7 @@ public class SnipersTableModelTest {
 		context.checking(new Expectations(){{
 			one(listener).tableChanged(with(aRowChangedEvent()));
 		}});
-		model.sniperStatusChanged(new SniperState("item id", 555, 666),
+		model.sniperStatusChanged(new SniperSnapshot("item id", 555, 666),
 				MainWindow.STATUS_BIDDING);
 		assertColumnEquals(Column.ITEM_IDENTIFIER, "item id");
 		assertColumnEquals(Column.LAST_PRICE, 555);
