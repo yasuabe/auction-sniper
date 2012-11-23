@@ -4,7 +4,6 @@ import auctionsniper.xmpp.AuctionEventListener;
 
 public class AuctionSniper implements AuctionEventListener {
 
-	private boolean              isWinning  = false;
 	private SniperSnapshot       snapshot;
 	
 	private final SniperListener sniperListener;
@@ -15,24 +14,30 @@ public class AuctionSniper implements AuctionEventListener {
 		this.auction        = auction;
 		this.sniperListener = sniperListener;
 		this.itemId         = itemId;
-		this.snapshot = SniperSnapshot.joining(itemId);
+		this.snapshot       = SniperSnapshot.joining(itemId);
 	}
 
 	@Override
 	public void auctionClosed() {
-		sniperListener.sniperStateChanged(snapshot.closed());
+		snapshot = snapshot.closed();
+		notifyChange();
 	}
 
 	@Override
 	public void currentPrice(int price, int increment, PriceSource priceSource) {
-		isWinning = priceSource == PriceSource.FromSniper;
-		if (isWinning) {
+		switch (priceSource) {
+		case FromSniper:
 			snapshot = snapshot.winning(price);
-		} else {
-			final int bid = price + increment;
+			break;
+		case FromOtherBidder:
+			int bid = price + increment;
 			auction.bid(bid);
 			snapshot = snapshot.bidding(price, bid);
+			break;
 		}
-		sniperListener.sniperStateChanged(snapshot);
+		notifyChange();
+	}
+	private void notifyChange() {
+		this.sniperListener.sniperStateChanged(snapshot);
 	}
 }
