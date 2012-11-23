@@ -3,6 +3,7 @@ package auctionsniper.ui;
 import javax.swing.SwingUtilities;
 
 import auctionsniper.SniperListener;
+import auctionsniper.SniperState;
 
 public class SniperStateDisplayer implements SniperListener {
 
@@ -18,7 +19,8 @@ public class SniperStateDisplayer implements SniperListener {
 	}
 
 	@Override
-	public void sniperBidding() {
+	public void sniperBidding(SniperState sniperState) {
+		//TODO @sniperStateを追加
 		showStatus(MainWindow.STATUS_BIDDING);
 	}
 
