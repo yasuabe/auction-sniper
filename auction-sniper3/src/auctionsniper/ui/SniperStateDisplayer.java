@@ -22,7 +22,7 @@ public class SniperStateDisplayer implements SniperListener {
 	public void sniperBidding(final SniperSnapshot sniperState) {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override public void run() { 
-				ui.showStatusChanged(sniperState, MainWindow.STATUS_BIDDING); 
+				ui.showStatusChanged(sniperState); 
 			}
 		});
 	}
@@ -43,8 +43,12 @@ public class SniperStateDisplayer implements SniperListener {
 	}
 
 	@Override
-	public void sniperStateChanged(SniperSnapshot state) {
-		// TODO Auto-generated method stub
-		
+	public void sniperStateChanged(final SniperSnapshot snapshot) {
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				ui.showStatusChanged(snapshot);
+			}
+		});
 	}
 }
