@@ -1,9 +1,9 @@
 package test.auctionsniper.ui;
 
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.samePropertyValuesAs;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-import static org.hamcrest.Matchers.samePropertyValuesAs;
 
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -17,7 +17,6 @@ import org.junit.Test;
 import auctionsniper.SniperSnapshot;
 import auctionsniper.SniperState;
 import auctionsniper.ui.Column;
-import auctionsniper.ui.MainWindow;
 import auctionsniper.ui.SnipersTableModel;
 
 public class SnipersTableModelTest {
@@ -37,7 +36,7 @@ public class SnipersTableModelTest {
 		context.checking(new Expectations(){{
 			one(listener).tableChanged(with(aRowChangedEvent()));
 		}});
-		model.sniperStatusChanged(new SniperSnapshot("item id", 555, 666, SniperState.BIDDING));
+		model.sniperStateChanged(new SniperSnapshot("item id", 555, 666, SniperState.BIDDING));
 		assertColumnEquals(Column.ITEM_IDENTIFIER, "item id");
 		assertColumnEquals(Column.LAST_PRICE, 555);
 		assertColumnEquals(Column.LAST_BID, 666);
