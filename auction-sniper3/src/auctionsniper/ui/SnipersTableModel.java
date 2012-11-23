@@ -8,11 +8,14 @@ import auctionsniper.SniperSnapshot;
 public class SnipersTableModel extends AbstractTableModel {
 	//TODO 臨時null
 	private static final SniperSnapshot STARTING_UP = new SniperSnapshot("", 0, 0, null);
+
 	private static String[] STATUS_TEXT = {
 		MainWindow.STATUS_JOINING,
-		MainWindow.STATUS_BIDDING
+		MainWindow.STATUS_BIDDING,
+		MainWindow.STATUS_WINNING,
+		MainWindow.STATUS_LOST,
+		MainWindow.STATUS_WON
 	};
-
 	private String      statusText  = MainWindow.STATUS_JOINING;
 	private SniperSnapshot sniperState = STARTING_UP;
 	

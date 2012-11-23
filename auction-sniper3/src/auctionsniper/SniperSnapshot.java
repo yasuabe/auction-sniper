@@ -41,4 +41,7 @@ public class SniperSnapshot {
 	public SniperSnapshot bidding(int newLastPrice, int newLastBid) {
 		return new SniperSnapshot(itemId, newLastPrice, newLastBid, BIDDING);
 	}
+	public SniperSnapshot closed(SniperState state) {
+		return new SniperSnapshot(itemId, lastPrice, lastBid, state);
+	}
 }
