@@ -49,7 +49,7 @@ public class Main {
 	public static void main(String... args) throws Exception {
 		Main main = new Main();
 		main.joinAuction(
-				connectTo(args[ARG_HOSTNAME], args[ARG_USERNAME],
+				connection(args[ARG_HOSTNAME], args[ARG_USERNAME],
 						args[ARG_PASSWORD]), args[ARG_ITEM_ID]);
 	}
 	private void joinAuction(XMPPConnection connection, String itemId)
@@ -79,7 +79,7 @@ public class Main {
 		return String.format(AUCTION_ID_FORMAT, itemId, connection.getServiceName());
 	}
 
-	private static XMPPConnection connectTo(
+	private static XMPPConnection connection(
 			String hostName, String userName, String password) throws XMPPException {
 		XMPPConnection connection = new XMPPConnection(hostName);
 		connection.connect();
