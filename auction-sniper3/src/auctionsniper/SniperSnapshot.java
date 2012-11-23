@@ -29,4 +29,17 @@ public class SniperSnapshot {
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
 	}
+
+	public static SniperSnapshot joining(String itemId2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public SniperSnapshot winning(int price) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public SniperSnapshot bidding(int price, int bid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
