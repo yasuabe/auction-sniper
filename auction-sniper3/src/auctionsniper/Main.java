@@ -63,7 +63,7 @@ public class Main {
 		chat.addMessageListener(
 				new AuctionMessageTranslator(
 						connection.getUser(),
-						new AuctionSniper(auction, new SniperStateDisplayer(ui))));
+						new AuctionSniper(auction, itemId, new SniperStateDisplayer(ui))));
 		auction.join();
 	}
 	private void disconnectWhenUICloses(final XMPPConnection connection) {

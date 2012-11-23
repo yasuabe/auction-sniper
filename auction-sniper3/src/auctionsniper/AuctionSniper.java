@@ -4,13 +4,15 @@ import auctionsniper.xmpp.AuctionEventListener;
 
 public class AuctionSniper implements AuctionEventListener {
 
-	private boolean isWinning  = false;
+	private boolean              isWinning  = false;
 	private final SniperListener sniperListener;
-	private final Auction auction;
+	private final Auction        auction;
+	private final String         itemId;
 
-	public AuctionSniper(Auction auction, SniperListener sniperListener) {
-		this.auction = auction;
+	public AuctionSniper(Auction auction, String itemId, SniperListener sniperListener) {
+		this.auction        = auction;
 		this.sniperListener = sniperListener;
+		this.itemId         = itemId;
 	}
 
 	@Override
@@ -28,9 +30,9 @@ public class AuctionSniper implements AuctionEventListener {
 		if (isWinning) {
 			sniperListener.sniperWinning();
 		} else {
-			auction.bid(price + increment);
-			//TODO 暫定 null
-			sniperListener.sniperBidding(null);
+			final int bid = price + increment;
+			auction.bid(bid);
+			sniperListener.sniperBidding(new SniperState(itemId, price, bid));
 		}
 	}
 }

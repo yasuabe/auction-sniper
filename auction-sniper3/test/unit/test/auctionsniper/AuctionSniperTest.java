@@ -21,7 +21,7 @@ public class AuctionSniperTest {
 	private final Mockery context = new Mockery();
 	protected SniperListener sniperListener = context.mock(SniperListener.class);
 	protected final Auction auction = context.mock(Auction.class);
-	private final AuctionSniper sniper = new AuctionSniper(auction, sniperListener);
+	private final AuctionSniper sniper = new AuctionSniper(auction, ITEM_ID, sniperListener);
 
 	private final States sniperState = context.states("sniper");
 	
