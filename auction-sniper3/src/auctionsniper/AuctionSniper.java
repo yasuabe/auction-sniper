@@ -43,4 +43,7 @@ public class AuctionSniper implements AuctionEventListener {
 	public void addSniperListener(SniperListener listener) {
 		listeners.addListener(listener);
 	}
+	public SniperSnapshot getSnapshot() {
+		return snapshot;
+	}
 }

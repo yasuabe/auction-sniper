@@ -22,7 +22,8 @@ public class SnipersTableModel extends AbstractTableModel implements
         "Won",
         "Lost"
         };
-	private List<SniperSnapshot> snapshots = new ArrayList<SniperSnapshot>();
+    private final ArrayList<AuctionSniper> notToBeGCd = new ArrayList<>();
+    private List<SniperSnapshot> snapshots = new ArrayList<SniperSnapshot>();
 	
 	public int getColumnCount() {
 		return Column.values().length;
@@ -60,7 +61,8 @@ public class SnipersTableModel extends AbstractTableModel implements
 	}
 	@Override
 	public void addSniper(AuctionSniper sniper) {
-		// TODO Auto-generated method stub
-		
+		notToBeGCd.add(sniper);
+		addSniper(sniper.getSnapshot());
+		sniper.addSniperListener(new SwingThreadSniperListener(this));
 	}
 }
