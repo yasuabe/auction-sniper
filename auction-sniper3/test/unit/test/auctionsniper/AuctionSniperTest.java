@@ -1,6 +1,8 @@
 package test.auctionsniper;
 
 import static auctionsniper.SniperState.*;
+import static test.auctionsniper.util.TestData.newSnapshot;
+
 import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
 import org.jmock.Expectations;
@@ -11,6 +13,8 @@ import org.jmock.integration.junit4.JMock;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import test.auctionsniper.util.TestData;
 
 import auctionsniper.Auction;
 import auctionsniper.AuctionSniper;
@@ -63,7 +67,7 @@ public class AuctionSniperTest {
 		context.checking(new Expectations() {{
 			one(auction).bid(bid);
 			atLeast(1).of(sniperListener).sniperStateChanged(
-					new SniperSnapshot(ITEM_ID, price, bid, BIDDING));
+					TestData.newSnapshot(ITEM_ID, price, bid, BIDDING));
 		}});
 		sniper.currentPrice(price, increment, PriceSource.FromOtherBidder);
 	}
@@ -75,7 +79,7 @@ public class AuctionSniperTest {
 					then(sniperState.is("bidding"));
 
 			atLeast(1).of(sniperListener).sniperStateChanged(
-					new SniperSnapshot(ITEM_ID, 135, 135,WINNING));
+					TestData.newSnapshot(ITEM_ID, 135, 135, WINNING));
 					when(sniperState.is("bidding"));
 		}});
 		sniper.currentPrice(123, 12, PriceSource.FromOtherBidder);
@@ -104,7 +108,7 @@ public class AuctionSniperTest {
 			allowing(auction).bid(bid);
 
 			atLeast(1).of(sniperListener).sniperStateChanged(
-					new SniperSnapshot(ITEM_ID, price, bid, LOSING));
+					TestData.newSnapshot(ITEM_ID, price, bid, LOSING));
 			when(sniperState.is("winning"));
 		}});
 		sniper.currentPrice(123, 45, PriceSource.FromOtherBidder);
@@ -119,7 +123,7 @@ public class AuctionSniperTest {
 
 		context.checking(new Expectations() {{
 			atLeast(1).of(sniperListener).sniperStateChanged(
-					new SniperSnapshot(ITEM_ID, price, 0, LOSING));
+					TestData.newSnapshot(ITEM_ID, price, 0, LOSING));
 		}});
 		sniper.currentPrice(price, increment, PriceSource.FromOtherBidder);
 	}
@@ -129,7 +133,7 @@ public class AuctionSniperTest {
 		allowingSniperLosing();
 		context.checking(new Expectations() {{
 			atLeast(1).of(sniperListener).sniperStateChanged(
-					new SniperSnapshot(ITEM_ID, 1230, 0, LOST));
+					TestData.newSnapshot(ITEM_ID, 1230, 0, LOST));
 			when(sniperState.is("losing"));
 		}});
 
@@ -145,10 +149,10 @@ public class AuctionSniperTest {
 
 		context.checking(new Expectations() {{
 			atLeast(1).of(sniperListener).sniperStateChanged(
-					new SniperSnapshot(ITEM_ID, price1, 0, LOSING));
+					TestData.newSnapshot(ITEM_ID, price1, 0, LOSING));
 			inSequence(states);
 			atLeast(1).of(sniperListener).sniperStateChanged(
-					new SniperSnapshot(ITEM_ID, price2, 0, LOSING));
+					TestData.newSnapshot(ITEM_ID, price2, 0, LOSING));
 			inSequence(states);
 		}});
 		sniper.currentPrice(price1, 25, PriceSource.FromOtherBidder);
@@ -172,7 +176,7 @@ public class AuctionSniperTest {
 	private void expectSniperToFailWhenItIs(final String state) {
 		context.checking(new Expectations() {{
 			atLeast(1).of(sniperListener).sniperStateChanged(
-					new SniperSnapshot(ITEM_ID, 00, 0, SniperState.FAILED));
+					TestData.newSnapshot(ITEM_ID, 00, 0, SniperState.FAILED));
 			when(sniperState.is(state));
 		}});
 	}

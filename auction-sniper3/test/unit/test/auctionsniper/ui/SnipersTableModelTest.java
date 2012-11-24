@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.samePropertyValuesAs;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import static test.auctionsniper.util.TestData.newSnapshot;
 
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -84,8 +85,7 @@ public class SnipersTableModelTest {
 	}
 	@Test(expected = Defect.class)
 	public void throwsDefectIfNoExistingSniperForAnUpdate() {
-		model.sniperStateChanged(new SniperSnapshot("item 1", 123, 234,
-				SniperState.WINNING));
+		model.sniperStateChanged(newSnapshot("item 1", 123, 234, SniperState.WINNING));
 	}
 	@Test
 	public void updatesCorrectRowForSniper() {
