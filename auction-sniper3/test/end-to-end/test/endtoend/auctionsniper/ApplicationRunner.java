@@ -60,12 +60,17 @@ public class ApplicationRunner {
 		driver.showsSniperStatus(auction.getItemId(), lastPrice, lastPrice,
 				SnipersTableModel.textFor(SniperState.WON));
 	}
-	public void startBiddingWithStopPrice(FakeAuctionServer auction, int i) {
-		// TODO Auto-generated method stub
-		
+	public void startBiddingWithStopPrice(FakeAuctionServer auction, int stopPrice) {
+	    startSniper();
+	    openBiddingFor(auction, stopPrice);
 	}
 	public void hasShownSniperIsLosing(FakeAuctionServer auction, int i, int j) {
 		// TODO Auto-generated method stub
 		
+	}
+	private void openBiddingFor(FakeAuctionServer auction, int stopPrice) {
+		final String itemId = auction.getItemId();
+		driver.startBiddingWithStopPrice(itemId, stopPrice);
+		driver.showsSniperStatus(itemId, 0, 0, textFor(SniperState.JOINING));
 	}
 }

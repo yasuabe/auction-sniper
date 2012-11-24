@@ -61,4 +61,8 @@ public class AuctionSniperDriver extends JFrameDriver {
 		newItemId.focusWithMouse();
 		return newItemId;
 	}
+	public void startBiddingWithStopPrice(String itemId, int stopPrice) {
+		// TODO Auto-generated method stub
+		
+	}
 }
