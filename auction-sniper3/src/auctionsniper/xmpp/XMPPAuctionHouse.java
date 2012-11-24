@@ -1,25 +1,37 @@
 package auctionsniper.xmpp;
 
+import org.jivesoftware.smack.XMPPConnection;
+import org.jivesoftware.smack.XMPPException;
+
 import auctionsniper.Auction;
 import auctionsniper.AuctionHouse;
 
 public class XMPPAuctionHouse implements AuctionHouse {
 
+	public static final String AUCTION_RESOURCE = "Auction";
+	private XMPPConnection connection;
+
 	@Override
 	public Auction auctionFor(String itemId) {
-		// TODO Auto-generated method stub
-		return null;
+	    return new XMPPAuction(connection, itemId);
 	}
 
-	public static XMPPAuctionHouse connect(String string, String string2,
-			String string3) {
-		// TODO Auto-generated method stub
-		return null;
+	public XMPPAuctionHouse(XMPPConnection connection) {
+		this.connection = connection;
+	}
+
+	public static XMPPAuctionHouse connect(//
+			String hostname, String username, String password) //
+			throws XMPPException {
+
+		XMPPConnection connection = new XMPPConnection(hostname);
+		connection.connect();
+		connection.login(username, password, AUCTION_RESOURCE);
+
+		return new XMPPAuctionHouse(connection);
 	}
 
 	public void disconnect() {
-		// TODO Auto-generated method stub
-		
+		connection.disconnect();		
 	}
-
 }
