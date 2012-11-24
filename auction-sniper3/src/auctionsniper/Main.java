@@ -76,13 +76,4 @@ public class Main {
 			}
 		});
 	}
-	//TODO private からpublic に変えた。後で戻す。
-	public static XMPPConnection connection(
-			String hostName, String userName, String password) throws XMPPException {
-		XMPPConnection connection = new XMPPConnection(hostName);
-		connection.connect();
-		connection.login(userName, password, AUCTION_RESOURCE);
-		
-		return connection;
-	}
 }
