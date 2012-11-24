@@ -18,7 +18,7 @@ import auctionsniper.Main;
 import auctionsniper.xmpp.AuctionEventListener;
 import auctionsniper.xmpp.XMPPAuction;
 
-public class XMPPAuctionTest {
+public class XMPPAuctionHouseTest {
 	private final FakeAuctionServer auctionServer = new FakeAuctionServer(
 			"item-54321");
 	private XMPPConnection connection;
