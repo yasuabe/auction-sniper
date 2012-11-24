@@ -2,22 +2,11 @@ package auctionsniper;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.SwingUtilities;
 
-import org.jivesoftware.smack.Chat;
-import org.jivesoftware.smack.XMPPConnection;
-import org.jivesoftware.smack.XMPPException;
-
 import auctionsniper.ui.MainWindow;
 import auctionsniper.ui.SnipersTableModel;
-import auctionsniper.ui.SwingThreadSniperListener;
-import auctionsniper.util.Announcer;
-import auctionsniper.xmpp.AuctionEventListener;
-import auctionsniper.xmpp.AuctionMessageTranslator;
-import auctionsniper.xmpp.XMPPAuction;
 import auctionsniper.xmpp.XMPPAuctionHouse;
 
 public class Main {
@@ -35,6 +24,7 @@ public class Main {
 
 	private MainWindow ui;
 	private final SnipersTableModel snipers = new SnipersTableModel();
+	private final SniperPortfolio portfolio = new SniperPortfolio();
 	
 	public Main() throws Exception {
 		startUserInterface();
@@ -42,7 +32,7 @@ public class Main {
 	private void startUserInterface() throws Exception {
 		SwingUtilities.invokeAndWait(new Runnable() {
 			@Override public void run() {
-				ui = new MainWindow(snipers);
+				ui = new MainWindow(portfolio);
 			}
 		});
 	}
