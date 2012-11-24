@@ -3,7 +3,6 @@ package auctionsniper;
 import java.util.ArrayList;
 
 import auctionsniper.ui.SnipersTableModel;
-import auctionsniper.ui.SwingThreadSniperListener;
 
 public class SniperLauncher implements UserRequestListener {
 	private final ArrayList<Auction> notToBeGCd = new ArrayList<>();
@@ -21,7 +20,7 @@ public class SniperLauncher implements UserRequestListener {
 		Auction auction = auctionHouse.auctionFor(itemId);
 
 		notToBeGCd.add(auction);
-		AuctionSniper sniper = new AuctionSniper(itemId, auction, new SwingThreadSniperListener(snipers));
+		AuctionSniper sniper = new AuctionSniper(itemId, auction);
 		auction.addAuctionEventListener(sniper);
 
 		auction.join();

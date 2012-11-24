@@ -1,18 +1,18 @@
 package auctionsniper;
 
+import auctionsniper.util.Announcer;
 import auctionsniper.xmpp.AuctionEventListener;
 
 public class AuctionSniper implements AuctionEventListener {
 
 	private SniperSnapshot       snapshot;
 	
-	private final SniperListener sniperListener;
+	private final Announcer<SniperListener> listeners = Announcer.to(SniperListener.class);
 	private final Auction        auction;
 	private final String         itemId;
 
-	public AuctionSniper(String itemId, Auction auction, SniperListener sniperListener) {
+	public AuctionSniper(String itemId, Auction auction) {
 		this.auction        = auction;
-		this.sniperListener = sniperListener;
 		this.itemId         = itemId;
 		this.snapshot       = SniperSnapshot.joining(itemId);
 	}
@@ -38,6 +38,9 @@ public class AuctionSniper implements AuctionEventListener {
 		notifyChange();
 	}
 	private void notifyChange() {
-		this.sniperListener.sniperStateChanged(snapshot);
+		this.listeners.announce().sniperStateChanged(snapshot);
+	}
+	public void addSniperListener(SniperListener listener) {
+		listeners.addListener(listener);
 	}
 }
