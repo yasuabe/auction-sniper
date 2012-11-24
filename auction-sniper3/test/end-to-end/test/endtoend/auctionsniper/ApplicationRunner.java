@@ -75,8 +75,7 @@ public class ApplicationRunner {
 		driver.showsSniperStatus(itemId, 0, 0, textFor(SniperState.JOINING));
 	}
 	public void hasShownSniperHasFailed(FakeAuctionServer auction) {
-		// TODO Auto-generated method stub
-		Assert.fail();
+	    driver.showsSniperStatus(auction.getItemId(), 0, 0, textFor(SniperState.FAILED));
 	}
 	public void reportsInvalidMessage(FakeAuctionServer auction,
 			String brokenMessage) {
