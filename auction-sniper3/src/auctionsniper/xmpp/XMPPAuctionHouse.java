@@ -5,6 +5,7 @@ import org.jivesoftware.smack.XMPPException;
 
 import auctionsniper.Auction;
 import auctionsniper.AuctionHouse;
+import auctionsniper.Item;
 
 public class XMPPAuctionHouse implements AuctionHouse {
 
@@ -12,8 +13,9 @@ public class XMPPAuctionHouse implements AuctionHouse {
 	private XMPPConnection connection;
 
 	@Override
-	public Auction auctionFor(String itemId) {
-	    return new XMPPAuction(connection, itemId);
+	public Auction auctionFor(Item item) {
+		//TODO XMPPAuction でItem を浮けとるようにする
+	    return new XMPPAuction(connection, item.identifier);
 	}
 
 	public XMPPAuctionHouse(XMPPConnection connection) {

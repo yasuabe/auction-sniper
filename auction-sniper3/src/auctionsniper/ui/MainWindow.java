@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import auctionsniper.Item;
 import auctionsniper.Main;
 import auctionsniper.SniperPortfolio;
 import auctionsniper.UserRequestListener;
@@ -61,7 +62,8 @@ public class MainWindow extends JFrame {
 		joinAuctionButton.setName(JOIN_BUTTON_NAME);
 		joinAuctionButton.addActionListener(new ActionListener() {
 			@Override public void actionPerformed(ActionEvent e) {
-				userRequests.announce().joinAuction(itemIdField.getText());
+				//TODO stop price をテキストボックスから取るようにする
+				userRequests.announce().joinAuction(new Item(itemIdField.getText(), 0));
 			}
 		});
 		controls.add(joinAuctionButton);

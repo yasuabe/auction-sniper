@@ -12,6 +12,7 @@ import org.junit.Test;
 import auctionsniper.Auction;
 import auctionsniper.AuctionHouse;
 import auctionsniper.AuctionSniper;
+import auctionsniper.Item;
 import auctionsniper.SniperCollector;
 import auctionsniper.SniperLauncher;
 
@@ -28,7 +29,8 @@ public class SniperLauncherTest {
 	public void addsNewSniperToCollectorAndThenJoinsAuction() {
 		final String itemId = "item 123";
 		context.checking(new Expectations() {{
-			allowing(auctionHouse).auctionFor(itemId); will(returnValue(auction));
+			//TODO -1
+			allowing(auctionHouse).auctionFor(new Item(itemId, -1)); will(returnValue(auction));
 
 			oneOf(auction).addAuctionEventListener(with(sniperForItem(itemId)));
 				when(auctionState.isNot("not joined"));
@@ -38,7 +40,8 @@ public class SniperLauncherTest {
 
 			oneOf(auction).join(); then(auctionState.is("joined"));
 		}});
-		launcher.joinAuction(itemId);
+		//TODO -1
+		launcher.joinAuction(new Item(itemId, -1));
 	}
 	protected Matcher<AuctionSniper> sniperForItem(String itemId) {
 		return new FeatureMatcher<AuctionSniper, String>(
