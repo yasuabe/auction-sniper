@@ -8,7 +8,7 @@ import auctionsniper.values.Price;
 import auctionsniper.xmpp.AuctionEventListener;
 
 public class AuctionSniper implements AuctionEventListener {
-
+	//TODO rule 8. No classes with more than two instance variables
 	private SniperSnapshot       snapshot;
 	//TODO rule 4. First class collections
 	private final Announcer<SniperListener> listeners = Announcer.to(SniperListener.class);
@@ -52,7 +52,6 @@ public class AuctionSniper implements AuctionEventListener {
 	public SniperSnapshot getSnapshot() {
 		return snapshot;
 	}
-
 	@Override
 	public void auctionFailed() {
 		snapshot = snapshot.failed();

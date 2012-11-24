@@ -8,6 +8,7 @@ import auctionsniper.AuctionEvent;
 
 public class AuctionMessageTranslator implements MessageListener {
 	private final AuctionEventListener listener;
+	//TODO rule 3. Wrap all primitives and Strings
 	private final String               sniperId;
 	private final XMPPFailureReporter  failureReporter;
 	
@@ -30,10 +31,12 @@ public class AuctionMessageTranslator implements MessageListener {
 	//TODO 長すぎるメソッド
 	private void translate(String body) throws Exception {
 		AuctionEvent event     = AuctionEvent.from(body);
+		//TODO rule 3. Wrap all primitives and Strings
 		String       eventType = event.type();
 
 		if ("CLOSE".equals(eventType)) {
 			listener.auctionClosed();
+		//TODO rule 2. Don’t use the ELSE keyword 
 		} else if ("PRICE".equals(eventType)) {
 			listener.currentPrice(
 					event.currentPrice(), event.increment(), event.isFrom(sniperId));

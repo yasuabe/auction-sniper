@@ -13,11 +13,13 @@ import auctionsniper.values.Increment;
 import auctionsniper.values.Price;
 import auctionsniper.values.ValueObject;
 
+//TODO rule 7. Keep all entities small
 public class XMPPAuction implements Auction {
 	public static final String ITEM_ID_AS_LOGIN  = "auction-%s";
 	public static final String AUCTION_ID_FORMAT = ITEM_ID_AS_LOGIN + "@%s/"
 			+ XMPPAuctionHouse.AUCTION_RESOURCE;
 
+	//TODO rule 8. No classes with more than two instance variables
 	private Announcer<AuctionEventListener> auctionEventListeners =
 			Announcer.to(AuctionEventListener.class);
 			 
@@ -57,6 +59,7 @@ public class XMPPAuction implements Auction {
 		return new AuctionMessageTranslator(connection.getUser(),
 				auctionEventListeners.announce(), failureReporter);
 	}
+	//TODO 長すぎるメソッド
 	private AuctionEventListener chatDisconnectorFor(
 			final AuctionMessageTranslator translator) {
 
