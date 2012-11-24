@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 
 import auctionsniper.xmpp.AuctionEventListener;
 import auctionsniper.xmpp.AuctionMessageTranslator;
+import auctionsniper.xmpp.XMPPFailureReporter;
 
 @RunWith(JMock.class)
 public class AuctionMessageTranslatorTest {
@@ -20,6 +21,7 @@ public class AuctionMessageTranslatorTest {
 	public  static final Chat   UNUSED_CHAT = null;
 	
 	private final Mockery context = new Mockery();
+	private final XMPPFailureReporter failureReporter = context.mock(XMPPFailureReporter.class);
 	private final AuctionEventListener listener = context.mock(AuctionEventListener.class);
 	
 	private final AuctionMessageTranslator translator = //
@@ -55,20 +57,27 @@ public class AuctionMessageTranslatorTest {
 		translator.processMessage(UNUSED_CHAT, message);
 	}
 	@Test public void notifiesAuctionFailedWhenBadMessageReceived() {
-		context.checking(new Expectations() {{
-			exactly(1).of(listener).auctionFailed();
-		}});
-		Message message = new Message();
-		message.setBody("a bad message");
-		translator.processMessage(UNUSED_CHAT, message);
+		String badMessage = "a bad message";
+		expectFailureWithMessage(badMessage);
+
+		translator.processMessage(UNUSED_CHAT, message(badMessage));
 	}
 	@Test public void notifiesAuctionFailedWhenEventTypeMissing() {
-		context.checking(new Expectations() {{
-			exactly(1).of(listener).auctionFailed();
-		}});
+		String badMessage = "SOLVersion: 1.1; CurrentPrice: 234; Increment: 5; Bidder: "+ SNIPER_ID + ";";
+		expectFailureWithMessage(badMessage);
+
+		translator.processMessage(UNUSED_CHAT, message(badMessage));
+	}
+	private Message message(String body) {
 		Message message = new Message();
-		message.setBody("SOLVersion: 1.1; CurrentPrice: 234; Increment: 5; Bidder: "
-				+ SNIPER_ID + ";"	);
-		translator.processMessage(UNUSED_CHAT, message);
+		message.setBody(body);
+		return message;
+	}
+	private void expectFailureWithMessage(final String badMessage) {
+		context.checking(new Expectations() {{
+			oneOf(listener).auctionFailed();
+			oneOf(failureReporter).cannotTranslateMessage(with(SNIPER_ID),
+					with(badMessage), with(any(Exception.class)));
+		}});
 	}
 }
