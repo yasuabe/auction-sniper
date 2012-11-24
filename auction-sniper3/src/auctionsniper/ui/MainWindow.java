@@ -68,7 +68,6 @@ public class MainWindow extends JFrame {
 				return itemIdField.getText();
 			}
 			private int stopPrice() {
-				System.out.println(stopPriceField);
 				return ((Number) stopPriceField.getValue()).intValue();
 			}
 		});
