@@ -16,13 +16,21 @@ public class AuctionMessageTranslator implements MessageListener {
 	}
 
 	@Override public void processMessage(Chat chat, Message message) {
-		AuctionEvent event     = AuctionEvent.from(message.getBody());
+		try {
+			translate(message.getBody());
+		} catch (Exception parseException) {
+			listener.auctionFailed();
+		}
+	}
+	private void translate(String body) throws Exception {
+		AuctionEvent event     = AuctionEvent.from(body);
 		String       eventType = event.type();
 
 		if ("CLOSE".equals(eventType)) {
 			listener.auctionClosed();
 		} else if ("PRICE".equals(eventType)) {
-			listener.currentPrice(event.currentPrice(), event.increment(), event.isFrom(sniperId));
+			listener.currentPrice(
+					event.currentPrice(), event.increment(), event.isFrom(sniperId));
 		}
 	}
 }
