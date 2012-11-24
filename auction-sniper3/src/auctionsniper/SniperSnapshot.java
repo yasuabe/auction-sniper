@@ -36,7 +36,7 @@ public class SniperSnapshot {
 	}
 
 	public static SniperSnapshot joining(String itemId) {
-		return new SniperSnapshot(itemId, Price.fromInt(0), Price.fromInt(0), JOINING);
+		return new SniperSnapshot(itemId, Price.ZERO, Price.ZERO, JOINING);
 	}
 	public SniperSnapshot winning(Price newLastPrice) {
 		return new SniperSnapshot(itemId, newLastPrice, lastBid, WINNING);
@@ -54,7 +54,6 @@ public class SniperSnapshot {
 		return itemId.equals(sniperSnapshot.itemId);
 	}
 	public SniperSnapshot failed() {
-		//TODO Price.fromInt(0) が重複
-		return new SniperSnapshot(itemId, Price.fromInt(0), Price.fromInt(0), SniperState.FAILED);
+		return new SniperSnapshot(itemId, Price.ZERO, Price.ZERO, SniperState.FAILED);
 	}
 }

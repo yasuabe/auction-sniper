@@ -5,6 +5,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 
 public class Price {
 	
+	public static final Price ZERO = new Price(0);
 	private final int value;
 
 	private Price(int value) {
