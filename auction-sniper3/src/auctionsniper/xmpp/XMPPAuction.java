@@ -1,8 +1,7 @@
 package auctionsniper.xmpp;
 
-import static auctionsniper.Main.BID_COMMAND_FORMAT;
-import static auctionsniper.Main.JOIN_COMMAND_FORMAT;
-import static java.lang.String.format;
+import static auctionsniper.util.CommandFormat.BID;
+import static auctionsniper.util.CommandFormat.JOIN;
 
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.XMPPConnection;
@@ -18,7 +17,7 @@ public class XMPPAuction implements Auction {
 	public static final String ITEM_ID_AS_LOGIN  = "auction-%s";
 	public static final String AUCTION_ID_FORMAT = ITEM_ID_AS_LOGIN + "@%s/"
 			+ XMPPAuctionHouse.AUCTION_RESOURCE;
-	
+
 	private Announcer<AuctionEventListener> auctionEventListeners =
 			Announcer.to(AuctionEventListener.class);
 			 
@@ -33,11 +32,11 @@ public class XMPPAuction implements Auction {
 	    addAuctionEventListener(chatDisconnectorFor(translator));
 	}
 	@Override public void bid(Price amount) {
-		sendMessage(format(BID_COMMAND_FORMAT, amount.toInt()));
+		sendMessage(BID.format(amount));
 	}
 	@Override
 	public void join() {
-		sendMessage(JOIN_COMMAND_FORMAT);
+		sendMessage(JOIN.format());
 	}
 	private void sendMessage(final String message) {
 		try {
