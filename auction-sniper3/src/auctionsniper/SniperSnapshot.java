@@ -11,7 +11,7 @@ import auctionsniper.values.Price;
 public class SniperSnapshot {
 
 	//TODO rule 8. No classes with more than two instance variables
-	public final String      itemId;
+	public final String      itemId; //TODO rule 3. Wrap all primitives and Strings
 	public final Price       lastPrice;
 	public final Price       lastBid;
 	public final SniperState state;
@@ -38,14 +38,14 @@ public class SniperSnapshot {
 	public static SniperSnapshot joining(String itemId) {
 		return new SniperSnapshot(itemId, Price.fromInt(0), Price.fromInt(0), JOINING);
 	}
-	public SniperSnapshot winning(int newLastPrice) {
-		return new SniperSnapshot(itemId, Price.fromInt(newLastPrice), lastBid, WINNING);
+	public SniperSnapshot winning(Price newLastPrice) {
+		return new SniperSnapshot(itemId, newLastPrice, lastBid, WINNING);
 	}
-	public SniperSnapshot bidding(int newLastPrice, int newLastBid) {
-		return new SniperSnapshot(itemId, Price.fromInt(newLastPrice), Price.fromInt(newLastBid), BIDDING);
+	public SniperSnapshot bidding(Price newLastPrice, Price newLastBid) {
+		return new SniperSnapshot(itemId, newLastPrice, newLastBid, BIDDING);
 	}
-	public SniperSnapshot losing(int newLastPrice) {
-		return new SniperSnapshot(itemId, Price.fromInt(newLastPrice), lastBid, SniperState.LOSING);
+	public SniperSnapshot losing(Price newLastPrice) {
+		return new SniperSnapshot(itemId, newLastPrice, lastBid, SniperState.LOSING);
 	}
 	public SniperSnapshot closed() {
 		return new SniperSnapshot(itemId, lastPrice, lastBid, state.whenAuctionClosed());
@@ -54,6 +54,7 @@ public class SniperSnapshot {
 		return itemId.equals(sniperSnapshot.itemId);
 	}
 	public SniperSnapshot failed() {
+		//TODO Price.fromInt(0) が重複
 		return new SniperSnapshot(itemId, Price.fromInt(0), Price.fromInt(0), SniperState.FAILED);
 	}
 }

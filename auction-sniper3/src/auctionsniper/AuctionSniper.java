@@ -1,6 +1,7 @@
 package auctionsniper;
 
 import auctionsniper.util.Announcer;
+import auctionsniper.values.Price;
 import auctionsniper.xmpp.AuctionEventListener;
 
 public class AuctionSniper implements AuctionEventListener {
@@ -27,15 +28,15 @@ public class AuctionSniper implements AuctionEventListener {
 	public void currentPrice(int price, int increment, PriceSource priceSource) {
 		switch (priceSource) {
 		case FromSniper:
-			snapshot = snapshot.winning(price);
+			snapshot = snapshot.winning(Price.fromInt(price));
 			break;
 		case FromOtherBidder:
 			int bid = price + increment;
 			if (item.allowsBid(bid)) {
 				auction.bid(bid);
-				snapshot = snapshot.bidding(price, bid);
+				snapshot = snapshot.bidding(Price.fromInt(price), Price.fromInt(bid));
 			} else {
-				snapshot = snapshot.losing(price);
+				snapshot = snapshot.losing(Price.fromInt(price));
 			}
 			break;
 		}
