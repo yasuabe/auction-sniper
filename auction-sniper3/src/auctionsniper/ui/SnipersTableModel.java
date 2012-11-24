@@ -8,7 +8,6 @@ import javax.swing.table.AbstractTableModel;
 import auctionsniper.AuctionSniper;
 import auctionsniper.Defect;
 import auctionsniper.PortfolioListener;
-import auctionsniper.SniperCollector;
 import auctionsniper.SniperListener;
 import auctionsniper.SniperSnapshot;
 import auctionsniper.SniperState;

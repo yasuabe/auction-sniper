@@ -9,13 +9,12 @@ import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 
 import auctionsniper.Auction;
-import auctionsniper.Main;
 import auctionsniper.util.Announcer;
 
 public class XMPPAuction implements Auction {
 	public static final String ITEM_ID_AS_LOGIN = "auction-%s";
 	public static final String AUCTION_ID_FORMAT = ITEM_ID_AS_LOGIN + "@%s/"
-			+ Main.AUCTION_RESOURCE;
+			+ XMPPAuctionHouse.AUCTION_RESOURCE;
 	
 	private Announcer<AuctionEventListener> auctionEventListeners =
 			Announcer.to(AuctionEventListener.class);
