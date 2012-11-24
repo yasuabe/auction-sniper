@@ -30,7 +30,7 @@ import static org.hamcrest.CoreMatchers.*;
 @RunWith(JMock.class)
 public class AuctionSniperTest {
 	protected static final String ITEM_ID = "item-id";
-	public static final Item ITEM = newItem(ITEM_ID, 1234);
+	public    static final Item   ITEM    = newItem(ITEM_ID, 1234);
 	
 	private final Mockery context = new Mockery();
 	protected SniperListener sniperListener = context.mock(SniperListener.class);
@@ -66,7 +66,7 @@ public class AuctionSniperTest {
 		final int increment = 25;
 		final int bid = price + increment;
 		context.checking(new Expectations() {{
-			one(auction).bid(bid);
+			one(auction).bid(Price.fromInt(bid));
 			atLeast(1).of(sniperListener).sniperStateChanged(
 					TestData.newSnapshot(ITEM_ID, price, bid, BIDDING));
 		}});
@@ -106,7 +106,7 @@ public class AuctionSniperTest {
 		allowingSniperWinning();
 		context.checking(new Expectations() {{
 			int bid = 123 + 45;
-			allowing(auction).bid(bid);
+			allowing(auction).bid(Price.fromInt(bid));
 
 			atLeast(1).of(sniperListener).sniperStateChanged(
 					TestData.newSnapshot(ITEM_ID, price, bid, LOSING));

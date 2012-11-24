@@ -13,7 +13,7 @@ import auctionsniper.util.Announcer;
 import auctionsniper.values.Price;
 
 public class XMPPAuction implements Auction {
-	public static final String ITEM_ID_AS_LOGIN = "auction-%s";
+	public static final String ITEM_ID_AS_LOGIN  = "auction-%s";
 	public static final String AUCTION_ID_FORMAT = ITEM_ID_AS_LOGIN + "@%s/"
 			+ XMPPAuctionHouse.AUCTION_RESOURCE;
 	
@@ -30,8 +30,8 @@ public class XMPPAuction implements Auction {
 				auctionId(itemId, connection), translator);
 	    addAuctionEventListener(chatDisconnectorFor(translator));
 	}
-	@Override public void bid(int amount) {
-		sendMessage(format(BID_COMMAND_FORMAT, amount));
+	@Override public void bid(Price amount) {
+		sendMessage(format(BID_COMMAND_FORMAT, amount.toInt()));
 	}
 	@Override
 	public void join() {

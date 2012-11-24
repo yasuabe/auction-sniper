@@ -34,7 +34,7 @@ public class AuctionSniper implements AuctionEventListener {
 		case FromOtherBidder:
 			Price bid = price.add(increment);
 			if (item.allowsBid(bid)) {
-				auction.bid(bid.toInt());
+				auction.bid(bid);
 				snapshot = snapshot.bidding(price, bid);
 			} else {
 				snapshot = snapshot.losing(price);
