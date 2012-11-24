@@ -53,7 +53,7 @@ public class AuctionSniper implements AuctionEventListener {
 
 	@Override
 	public void auctionFailed() {
-		// TODO Auto-generated method stub
-		
+		snapshot = snapshot.failed();
+		this.listeners.announce().sniperStateChanged(snapshot);
 	}
 }
