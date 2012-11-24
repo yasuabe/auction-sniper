@@ -96,8 +96,7 @@ public class FakeAuctionServer {
 		receivesAMessageMatching(sniperId, 
 				equalTo(format(Main.BID_COMMAND_FORMAT, bid)));
 	}
-	public void sendInvalidMessageContaining(String brokenMessage) {
-		// TODO Auto-generated method stub
-		Assert.fail();
+	public void sendInvalidMessageContaining(String brokenMessage) throws XMPPException {
+		currentChat.sendMessage(brokenMessage);
 	}
 }

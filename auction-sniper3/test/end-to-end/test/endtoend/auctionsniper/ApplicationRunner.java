@@ -1,6 +1,9 @@
 package test.endtoend.auctionsniper;
 
 import static test.endtoend.auctionsniper.FakeAuctionServer.XMPP_HOSTNAME;
+
+import org.junit.Assert;
+
 import auctionsniper.Main;
 import auctionsniper.SniperState;
 import auctionsniper.ui.MainWindow;
@@ -73,7 +76,7 @@ public class ApplicationRunner {
 	}
 	public void hasShownSniperHasFailed(FakeAuctionServer auction) {
 		// TODO Auto-generated method stub
-		
+		Assert.fail();
 	}
 	public void reportsInvalidMessage(FakeAuctionServer auction,
 			String brokenMessage) {
