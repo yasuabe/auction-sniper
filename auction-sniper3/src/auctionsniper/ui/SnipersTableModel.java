@@ -8,8 +8,8 @@ import javax.swing.table.AbstractTableModel;
 import auctionsniper.AuctionSniper;
 import auctionsniper.PortfolioListener;
 import auctionsniper.SniperListener;
-import auctionsniper.SniperSnapshot;
 import auctionsniper.SniperState;
+import auctionsniper.snapshot.SniperSnapshot;
 import auctionsniper.util.Defect;
 
 @SuppressWarnings("serial")

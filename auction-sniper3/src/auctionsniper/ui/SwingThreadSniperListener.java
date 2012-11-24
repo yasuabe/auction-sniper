@@ -3,7 +3,7 @@ package auctionsniper.ui;
 import javax.swing.SwingUtilities;
 
 import auctionsniper.SniperListener;
-import auctionsniper.SniperSnapshot;
+import auctionsniper.snapshot.SniperSnapshot;
 
 public class SwingThreadSniperListener implements SniperListener {
 

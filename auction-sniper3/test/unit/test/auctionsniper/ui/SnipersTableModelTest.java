@@ -5,7 +5,6 @@ import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.samePropertyValuesAs;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-import static test.auctionsniper.util.TestData.newSnapshot;
 
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -16,8 +15,9 @@ import org.jmock.Mockery;
 import org.junit.Before;
 import org.junit.Test;
 
-import auctionsniper.SniperSnapshot;
-import auctionsniper.SniperState;
+import test.auctionsniper.util.TestData;
+
+import auctionsniper.snapshot.SniperSnapshot;
 import auctionsniper.ui.Column;
 import auctionsniper.ui.SnipersTableModel;
 import auctionsniper.util.Defect;
@@ -87,7 +87,7 @@ public class SnipersTableModelTest {
 	}
 	@Test(expected = Defect.class)
 	public void throwsDefectIfNoExistingSniperForAnUpdate() {
-		model.sniperStateChanged(newSnapshot("item 1", 123, 234, SniperState.WINNING));
+		model.sniperStateChanged(TestData.winningSnapshot("item 1", 123, 234));
 	}
 	@Test
 	public void updatesCorrectRowForSniper() {
@@ -106,9 +106,9 @@ public class SnipersTableModelTest {
 	}
 	private void assertRowMatchesSnapshot(int row, SniperSnapshot snapshot) {
 		assertEquals(snapshot.itemId, cellValue(row, Column.ITEM_IDENTIFIER));
-		assertEquals(snapshot.lastPrice, cellValue(row, Column.LAST_PRICE));
-		assertEquals(snapshot.lastBid, cellValue(row, Column.LAST_BID));
-		assertEquals(SnipersTableModel.textFor(snapshot.state),
+		assertEquals(snapshot.lastPrice(), cellValue(row, Column.LAST_PRICE));
+		assertEquals(snapshot.lastBid(), cellValue(row, Column.LAST_BID));
+		assertEquals(SnipersTableModel.textFor(snapshot.getState()),
 				cellValue(row, Column.SNIPER_STATE));
 	}
 	Matcher<TableModelEvent> anInsertionAtRow(final int row) {

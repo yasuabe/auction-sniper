@@ -1,6 +1,6 @@
 package auctionsniper.ui;
 
-import auctionsniper.SniperSnapshot;
+import auctionsniper.snapshot.SniperSnapshot;
 
 public enum Column {
 	
@@ -11,17 +11,17 @@ public enum Column {
 	}, //
 	LAST_PRICE("Last Price") {
 		@Override public Object valueIn(SniperSnapshot snapshot) {
-			return snapshot.lastPrice;
+			return snapshot.lastPrice();
 		}
 	}, //
 	LAST_BID("Last Bid") {
 		@Override public Object valueIn(SniperSnapshot snapshot) {
-			return snapshot.lastBid;
+			return snapshot.lastBid();
 		}
 	}, //
 	SNIPER_STATE("State") {
 		@Override public Object valueIn(SniperSnapshot snapshot) {
-			return SnipersTableModel.textFor(snapshot.state);
+			return SnipersTableModel.textFor(snapshot.getState());
 		}
 	};
 	public final String name;
