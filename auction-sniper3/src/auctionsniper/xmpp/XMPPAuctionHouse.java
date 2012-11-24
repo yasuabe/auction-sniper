@@ -15,8 +15,9 @@ public class XMPPAuctionHouse implements AuctionHouse {
 
 	@Override
 	public Auction auctionFor(Item item) {
+		//臨時null
 		//TODO XMPPAuction でItem を浮けとるようにする
-	    return new XMPPAuction(connection, item.identifier);
+	    return new XMPPAuction(connection, item.identifier, null);
 	}
 
 	public XMPPAuctionHouse(XMPPConnection connection) {
