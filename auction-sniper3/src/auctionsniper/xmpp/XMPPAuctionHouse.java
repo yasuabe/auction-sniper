@@ -25,7 +25,7 @@ public class XMPPAuctionHouse implements AuctionHouse {
 	    return new XMPPAuction(connection, item.identifier, failureReporter);
 	}
 
-	public XMPPAuctionHouse(XMPPConnection connection) {
+	public XMPPAuctionHouse(XMPPConnection connection) throws XMPPAuctionException {
 		this.connection      = connection;
 		this.failureReporter = new LoggingXMPPFailureReporter(makeLogger());
 	}
@@ -50,21 +50,20 @@ public class XMPPAuctionHouse implements AuctionHouse {
 	public void disconnect() {
 		connection.disconnect();		
 	}
-	private Logger makeLogger()  {
+	private Logger makeLogger() throws SecurityException, XMPPAuctionException  {
 		Logger logger = Logger.getLogger(LOGGER_NAME);
 		logger.setUseParentHandlers(false);
 		logger.addHandler(simpleFileHandler());
 		return logger;
 	}
-	private FileHandler simpleFileHandler() {
+	private FileHandler simpleFileHandler() throws XMPPAuctionException {
 		try {
 			FileHandler handler = new FileHandler(LOG_FILE_NAME);
 			handler.setFormatter(new SimpleFormatter());
 
 			return handler;
 		} catch (Exception e) {
-			//TODO 後で XMPPAuctionException を作る
-			throw new RuntimeException(
+			throw new XMPPAuctionException (
 					"Could not create logger FileHandler "
 							+ FilenameUtils.getFullPath(LOG_FILE_NAME), e);
 		}

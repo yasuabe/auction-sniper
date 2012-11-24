@@ -51,7 +51,7 @@ public class XMPPAuctionHouseTest {
 	public void receivesEventsFromAuctionServerAfterJoining() throws Exception {
 		CountDownLatch auctionWasClosed = new CountDownLatch(1);
 
-		//TODO -1
+		//stop price は このテストでは問題にならないので -1
 		Auction auction = auctionHouse.auctionFor(new Item(auctionServer.getItemId(), -1));
 		auction.addAuctionEventListener(auctionClosedListener(auctionWasClosed));
 		
@@ -70,10 +70,7 @@ public class XMPPAuctionHouseTest {
 			}
 			public void currentPrice(int price, int increment, PriceSource priceSource) {}
 			@Override
-			public void auctionFailed() {
-				// TODO Auto-generated method stub
-				
-			}
+			public void auctionFailed() {}
 		};
 	}
 }

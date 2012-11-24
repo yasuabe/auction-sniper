@@ -1,5 +1,10 @@
 package test.endtoend.auctionsniper;
 
+import static java.lang.String.format;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.Matchers.hasProperty;
+import static org.junit.Assert.assertThat;
+
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
@@ -10,14 +15,8 @@ import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
-import org.junit.Assert;
 
 import auctionsniper.Main;
-
-import static java.lang.String.format;
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
-import static org.hamcrest.Matchers.hasProperty;
 
 public class FakeAuctionServer {
 	class SingleMessageListener implements MessageListener {
