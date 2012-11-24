@@ -37,7 +37,7 @@ public class Main {
 	public static final String BID_COMMAND_FORMAT = "SOLVersion: 1.1; Command: BID; Price: %d;";
 
 	private MainWindow ui;
-	private final List<Chat> notToBeGCd = new ArrayList<Chat>();
+	private final List<Auction> notToBeGCd = new ArrayList<Auction>();
 	private final SnipersTableModel snipers = new SnipersTableModel();
 	
 	public Main() throws Exception {
@@ -70,7 +70,7 @@ public class Main {
 				auction.chat.addMessageListener(new AuctionMessageTranslator(connection.getUser(),
 						auctionEventListeners.announce()));
 
-				notToBeGCd.add(auction.chat);
+				notToBeGCd.add(auction);
 				
 				auctionEventListeners.addListener(
 						new AuctionSniper(auction, itemId, new SwingThreadSniperListener(snipers)));
@@ -85,10 +85,6 @@ public class Main {
 			}
 		});
 	}
-	private static String auctionId(String itemId, XMPPConnection connection) {
-		return String.format(AUCTION_ID_FORMAT, itemId, connection.getServiceName());
-	}
-
 	private static XMPPConnection connection(
 			String hostName, String userName, String password) throws XMPPException {
 		XMPPConnection connection = new XMPPConnection(hostName);
