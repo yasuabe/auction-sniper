@@ -64,9 +64,9 @@ public class ApplicationRunner {
 	    startSniper();
 	    openBiddingFor(auction, stopPrice);
 	}
-	public void hasShownSniperIsLosing(FakeAuctionServer auction, int i, int j) {
-		// TODO Auto-generated method stub
-		
+	public void hasShownSniperIsLosing(FakeAuctionServer auction, int lastPrice, int lastBid) {
+	    driver.showsSniperStatus(auction.getItemId(), lastPrice, lastBid, 
+	    		textFor(SniperState.LOSING));
 	}
 	private void openBiddingFor(FakeAuctionServer auction, int stopPrice) {
 		final String itemId = auction.getItemId();
