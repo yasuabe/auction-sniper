@@ -32,13 +32,19 @@ public class XMPPAuctionHouse implements AuctionHouse {
 
 	public static XMPPAuctionHouse connect(//
 			String hostname, String username, String password) //
-			throws XMPPException {
+			throws XMPPAuctionException {
 
 		XMPPConnection connection = new XMPPConnection(hostname);
-		connection.connect();
-		connection.login(username, password, AUCTION_RESOURCE);
+		try {
+			connection.connect();
+			connection.login(username, password, AUCTION_RESOURCE);
 
-		return new XMPPAuctionHouse(connection);
+			return new XMPPAuctionHouse(connection);
+
+		} catch (XMPPException xmppe) {
+			throw new XMPPAuctionException("Could not connect to auction: "
+					+ connection, xmppe);
+		}
 	}
 
 	public void disconnect() {
