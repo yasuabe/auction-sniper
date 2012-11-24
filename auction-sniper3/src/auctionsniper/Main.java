@@ -34,7 +34,6 @@ public class Main {
 	public static final String BID_COMMAND_FORMAT = "SOLVersion: 1.1; Command: BID; Price: %d;";
 
 	private MainWindow ui;
-	private final List<Auction> notToBeGCd = new ArrayList<Auction>();
 	private final SnipersTableModel snipers = new SnipersTableModel();
 	
 	public Main() throws Exception {
@@ -55,19 +54,7 @@ public class Main {
 		main.addUserRequestListenerFor(auctionHouse);
 	}
 	private void addUserRequestListenerFor(final AuctionHouse auctionHouse) {
-		ui.addUserRequestListener(new UserRequestListener() {
-			@Override
-			public void joinAuction(String itemId) {
-				snipers.addSniper(SniperSnapshot.joining(itemId));
-				Auction auction = auctionHouse.auctionFor(itemId);
-
-				notToBeGCd.add(auction);
-				
-				auction.addAuctionEventListener(
-						new AuctionSniper(itemId, auction, new SwingThreadSniperListener(snipers)));
-				auction.join();
-			}
-		});
+		ui.addUserRequestListener(new SniperLauncher(auctionHouse, snipers));
 	}
 	private void disconnectWhenUICloses(final XMPPAuctionHouse auctionHouse) {
 		ui.addWindowListener(new WindowAdapter() {
