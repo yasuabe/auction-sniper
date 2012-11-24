@@ -7,6 +7,7 @@ import javax.swing.table.AbstractTableModel;
 
 import auctionsniper.AuctionSniper;
 import auctionsniper.Defect;
+import auctionsniper.PortfolioListener;
 import auctionsniper.SniperCollector;
 import auctionsniper.SniperListener;
 import auctionsniper.SniperSnapshot;
@@ -14,7 +15,7 @@ import auctionsniper.SniperState;
 
 @SuppressWarnings("serial")
 public class SnipersTableModel extends AbstractTableModel implements
-		SniperListener, SniperCollector {
+		SniperListener, PortfolioListener {
     private static String[] STATUS_TEXT = {
         "Joining",
         "Bidding",
@@ -22,7 +23,6 @@ public class SnipersTableModel extends AbstractTableModel implements
         "Won",
         "Lost"
         };
-    private final ArrayList<AuctionSniper> notToBeGCd = new ArrayList<>();
     private List<SniperSnapshot> snapshots = new ArrayList<SniperSnapshot>();
 	
 	public int getColumnCount() {
@@ -60,8 +60,7 @@ public class SnipersTableModel extends AbstractTableModel implements
 		fireTableRowsInserted(row, row);
 	}
 	@Override
-	public void addSniper(AuctionSniper sniper) {
-		notToBeGCd.add(sniper);
+	public void sniperAdded(AuctionSniper sniper) {
 		addSniperSnapshot(sniper.getSnapshot());
 		sniper.addSniperListener(new SwingThreadSniperListener(this));
 	}

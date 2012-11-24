@@ -6,7 +6,6 @@ import java.awt.event.WindowEvent;
 import javax.swing.SwingUtilities;
 
 import auctionsniper.ui.MainWindow;
-import auctionsniper.ui.SnipersTableModel;
 import auctionsniper.xmpp.XMPPAuctionHouse;
 
 public class Main {
@@ -23,7 +22,6 @@ public class Main {
 	public static final String BID_COMMAND_FORMAT = "SOLVersion: 1.1; Command: BID; Price: %d;";
 
 	private MainWindow ui;
-	private final SnipersTableModel snipers = new SnipersTableModel();
 	private final SniperPortfolio portfolio = new SniperPortfolio();
 	
 	public Main() throws Exception {
@@ -44,7 +42,7 @@ public class Main {
 		main.addUserRequestListenerFor(auctionHouse);
 	}
 	private void addUserRequestListenerFor(final AuctionHouse auctionHouse) {
-		ui.addUserRequestListener(new SniperLauncher(auctionHouse, snipers));
+		ui.addUserRequestListener(new SniperLauncher(auctionHouse, portfolio));
 	}
 	private void disconnectWhenUICloses(final XMPPAuctionHouse auctionHouse) {
 		ui.addWindowListener(new WindowAdapter() {
