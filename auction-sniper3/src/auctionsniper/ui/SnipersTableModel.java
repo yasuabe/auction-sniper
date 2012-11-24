@@ -6,11 +6,11 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 import auctionsniper.AuctionSniper;
-import auctionsniper.Defect;
 import auctionsniper.PortfolioListener;
 import auctionsniper.SniperListener;
 import auctionsniper.SniperSnapshot;
 import auctionsniper.SniperState;
+import auctionsniper.util.Defect;
 
 @SuppressWarnings("serial")
 public class SnipersTableModel extends AbstractTableModel implements

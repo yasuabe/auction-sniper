@@ -15,11 +15,11 @@ import org.jmock.Mockery;
 import org.junit.Before;
 import org.junit.Test;
 
-import auctionsniper.Defect;
 import auctionsniper.SniperSnapshot;
 import auctionsniper.SniperState;
 import auctionsniper.ui.Column;
 import auctionsniper.ui.SnipersTableModel;
+import auctionsniper.util.Defect;
 
 public class SnipersTableModelTest {
 	private final Mockery           context  = new Mockery();

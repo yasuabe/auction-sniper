@@ -1,4 +1,4 @@
-package auctionsniper;
+package auctionsniper.util;
 
 @SuppressWarnings("serial")
 public class Defect extends RuntimeException {
