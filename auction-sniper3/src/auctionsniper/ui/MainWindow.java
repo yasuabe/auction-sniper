@@ -1,5 +1,7 @@
 package auctionsniper.ui;
 
+import static test.auctionsniper.util.TestData.newItem;
+
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.FlowLayout;
@@ -15,7 +17,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-import auctionsniper.Item;
 import auctionsniper.Main;
 import auctionsniper.SniperPortfolio;
 import auctionsniper.UserRequestListener;
@@ -62,7 +63,7 @@ public class MainWindow extends JFrame {
 		joinAuctionButton.setName(JOIN_BUTTON_NAME);
 		joinAuctionButton.addActionListener(new ActionListener() {
 			@Override public void actionPerformed(ActionEvent e) {
-				userRequests.announce().joinAuction(new Item(itemId(), stopPrice()));
+				userRequests.announce().joinAuction(newItem(itemId(), stopPrice()));
 			}
 			private String itemId() {
 				return itemIdField.getText();

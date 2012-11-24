@@ -1,6 +1,7 @@
 package test.integration.auctionsniper.ui;
 
 import static org.hamcrest.Matchers.equalTo;
+import static test.auctionsniper.util.TestData.newItem;
 
 import org.junit.Test;
 
@@ -20,7 +21,7 @@ public class MainWindowTest {
 	@Test
 	public void makesUserRequestWhenJoinButtonClicked() {
 		final ValueMatcherProbe<Item> itemProbe = 
-				new ValueMatcherProbe<Item>(equalTo(new Item("item-id", 789)), "item request");
+				new ValueMatcherProbe<Item>(equalTo(newItem("item-id", 789)), "item request");
 	
 		mainWindow.addUserRequestListener(new UserRequestListener() {
 			public void joinAuction(Item item) {

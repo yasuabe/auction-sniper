@@ -1,6 +1,7 @@
 package test.auctionsniper;
 
 import static org.hamcrest.Matchers.equalTo;
+import static test.auctionsniper.util.TestData.newItem;
 
 import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
@@ -17,17 +18,17 @@ import auctionsniper.SniperCollector;
 import auctionsniper.SniperLauncher;
 
 public class SniperLauncherTest {
-	private final Mockery context = new Mockery();
+	private final Mockery      context      = new Mockery();
 	private final AuctionHouse auctionHouse = context.mock(AuctionHouse.class);
-	private final Auction auction = context.mock(Auction.class);
-	private final States auctionState = context.states("auction state");
+	private final Auction      auction      = context.mock(Auction.class);
+	private final States       auctionState = context.states("auction state");
 	private final SniperCollector sniperCollector = context.mock(SniperCollector.class);
 	private final SniperLauncher launcher = new SniperLauncher(auctionHouse,
 			sniperCollector);
 
 	@Test
 	public void addsNewSniperToCollectorAndThenJoinsAuction() {
-		final Item item = new Item("item 123", 456);
+		final Item item = newItem("item 123", 456);
 		context.checking(new Expectations() {{
 			allowing(auctionHouse).auctionFor(item); will(returnValue(auction));
 

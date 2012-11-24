@@ -1,6 +1,7 @@
 package test.auctionsniper;
 
 import static auctionsniper.SniperState.*;
+import static test.auctionsniper.util.TestData.newItem;
 
 import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
@@ -29,7 +30,7 @@ import static org.hamcrest.CoreMatchers.*;
 @RunWith(JMock.class)
 public class AuctionSniperTest {
 	protected static final String ITEM_ID = "item-id";
-	public static final Item ITEM = new Item(ITEM_ID, 1234);
+	public static final Item ITEM = newItem(ITEM_ID, 1234);
 	
 	private final Mockery context = new Mockery();
 	protected SniperListener sniperListener = context.mock(SniperListener.class);

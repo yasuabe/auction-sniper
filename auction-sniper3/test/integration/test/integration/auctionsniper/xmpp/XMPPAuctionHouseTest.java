@@ -2,6 +2,7 @@ package test.integration.auctionsniper.xmpp;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.Assert.assertTrue;
+import static test.auctionsniper.util.TestData.newItem;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -13,7 +14,6 @@ import org.junit.Test;
 import test.endtoend.auctionsniper.ApplicationRunner;
 import test.endtoend.auctionsniper.FakeAuctionServer;
 import auctionsniper.Auction;
-import auctionsniper.Item;
 import auctionsniper.values.Price;
 import auctionsniper.xmpp.AuctionEventListener;
 import auctionsniper.xmpp.XMPPAuctionHouse;
@@ -53,7 +53,7 @@ public class XMPPAuctionHouseTest {
 		CountDownLatch auctionWasClosed = new CountDownLatch(1);
 
 		//stop price は このテストでは問題にならないので -1
-		Auction auction = auctionHouse.auctionFor(new Item(auctionServer.getItemId(), -1));
+		Auction auction = auctionHouse.auctionFor(newItem(auctionServer.getItemId(), -1));
 		auction.addAuctionEventListener(auctionClosedListener(auctionWasClosed));
 		
 		auction.join();
