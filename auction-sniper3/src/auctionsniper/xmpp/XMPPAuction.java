@@ -10,8 +10,8 @@ import org.jivesoftware.smack.XMPPException;
 
 import auctionsniper.Auction;
 import auctionsniper.util.Announcer;
-import auctionsniper.values.Price;
 import auctionsniper.values.Increment;
+import auctionsniper.values.Price;
 
 public class XMPPAuction implements Auction {
 	public static final String ITEM_ID_AS_LOGIN  = "auction-%s";
