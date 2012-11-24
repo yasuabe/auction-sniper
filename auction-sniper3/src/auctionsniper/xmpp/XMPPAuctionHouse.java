@@ -10,6 +10,7 @@ import auctionsniper.Item;
 public class XMPPAuctionHouse implements AuctionHouse {
 
 	public static final String AUCTION_RESOURCE = "Auction";
+	public static final String LOG_FILE_NAME = "auction-sniper.log";
 	private XMPPConnection connection;
 
 	@Override
