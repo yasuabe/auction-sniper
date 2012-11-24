@@ -23,11 +23,12 @@ import static org.hamcrest.CoreMatchers.*;
 @RunWith(JMock.class)
 public class AuctionSniperTest {
 	protected static final String ITEM_ID = "item-id";
+	public static final Item ITEM = new Item(ITEM_ID, 1234);
 	
 	private final Mockery context = new Mockery();
 	protected SniperListener sniperListener = context.mock(SniperListener.class);
 	protected final Auction auction = context.mock(Auction.class);
-	private final AuctionSniper sniper = new AuctionSniper(new Item(ITEM_ID, -1), auction);
+	private final AuctionSniper sniper = new AuctionSniper(ITEM, auction);
 
 	private final States sniperState = context.states("sniper");
 	

@@ -27,21 +27,19 @@ public class SniperLauncherTest {
 
 	@Test
 	public void addsNewSniperToCollectorAndThenJoinsAuction() {
-		final String itemId = "item 123";
+		final Item item = new Item("item 123", 456);
 		context.checking(new Expectations() {{
-			//TODO -1
-			allowing(auctionHouse).auctionFor(new Item(itemId, -1)); will(returnValue(auction));
+			allowing(auctionHouse).auctionFor(item); will(returnValue(auction));
 
-			oneOf(auction).addAuctionEventListener(with(sniperForItem(itemId)));
+			oneOf(auction).addAuctionEventListener(with(sniperForItem(item.identifier)));
 				when(auctionState.isNot("not joined"));
 				
-			oneOf(sniperCollector).addSniper(with(sniperForItem(itemId)));
+			oneOf(sniperCollector).addSniper(with(sniperForItem(item.identifier)));
 				when(auctionState.isNot("not joined"));
 
 			oneOf(auction).join(); then(auctionState.is("joined"));
 		}});
-		//TODO -1
-		launcher.joinAuction(new Item(itemId, -1));
+		launcher.joinAuction(item);
 	}
 	protected Matcher<AuctionSniper> sniperForItem(String itemId) {
 		return new FeatureMatcher<AuctionSniper, String>(
