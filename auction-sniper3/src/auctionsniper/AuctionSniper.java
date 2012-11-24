@@ -56,6 +56,6 @@ public class AuctionSniper implements AuctionEventListener {
 	@Override
 	public void auctionFailed() {
 		snapshot = snapshot.failed();
-		this.listeners.announce().sniperStateChanged(snapshot);
+		notifyChange();
 	}
 }
