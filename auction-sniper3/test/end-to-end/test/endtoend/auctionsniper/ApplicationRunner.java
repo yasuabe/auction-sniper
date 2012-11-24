@@ -60,4 +60,12 @@ public class ApplicationRunner {
 		driver.showsSniperStatus(auction.getItemId(), lastPrice, lastPrice,
 				SnipersTableModel.textFor(SniperState.WON));
 	}
+	public void startBiddingWithStopPrice(FakeAuctionServer auction, int i) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void hasShownSniperIsLosing(FakeAuctionServer auction, int i, int j) {
+		// TODO Auto-generated method stub
+		
+	}
 }
