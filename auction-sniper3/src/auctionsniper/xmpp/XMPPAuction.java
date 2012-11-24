@@ -4,21 +4,24 @@ import static auctionsniper.Main.BID_COMMAND_FORMAT;
 import static auctionsniper.Main.JOIN_COMMAND_FORMAT;
 import static java.lang.String.format;
 
-import auctionsniper.Auction;
-import auctionsniper.Main;
-import auctionsniper.util.Announcer;
-
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 
+import auctionsniper.Auction;
+import auctionsniper.Main;
+import auctionsniper.util.Announcer;
+
 public class XMPPAuction implements Auction {
+	public static final String ITEM_ID_AS_LOGIN = "auction-%s";
+	public static final String AUCTION_ID_FORMAT = ITEM_ID_AS_LOGIN + "@%s/"
+			+ Main.AUCTION_RESOURCE;
+	
 	private Announcer<AuctionEventListener> auctionEventListeners =
 			Announcer.to(AuctionEventListener.class);
 			 
-	//TODO 後で private に戻す
-	public final Chat chat;
-	
+	private final Chat chat;
+
 	public XMPPAuction(XMPPConnection connection, String itemId) {
 		this.chat = connection.getChatManager().createChat(
 				auctionId(itemId, connection), new AuctionMessageTranslator(
@@ -40,8 +43,7 @@ public class XMPPAuction implements Auction {
 		}
 	}
 	private static String auctionId(String itemId, XMPPConnection connection) {
-		//TODO AUCTION_ID_FORMAT を後でこのクラスに持ってくる
-		return String.format(Main.AUCTION_ID_FORMAT, itemId, connection.getServiceName());
+		return String.format(AUCTION_ID_FORMAT, itemId, connection.getServiceName());
 	}
 	@Override
 	public void addAuctionEventListener(AuctionEventListener auctionSniper) {
