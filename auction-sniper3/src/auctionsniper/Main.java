@@ -18,6 +18,7 @@ import auctionsniper.util.Announcer;
 import auctionsniper.xmpp.AuctionEventListener;
 import auctionsniper.xmpp.AuctionMessageTranslator;
 import auctionsniper.xmpp.XMPPAuction;
+import auctionsniper.xmpp.XMPPAuctionHouse;
 
 public class Main {
 	public static final int ARG_HOSTNAME = 0;
@@ -48,31 +49,30 @@ public class Main {
 	}
 	public static void main(String... args) throws Exception {
 		Main main = new Main();
-		XMPPConnection connection = connection(//
+		XMPPAuctionHouse auctionHouse = XMPPAuctionHouse.connect(//
 				args[ARG_HOSTNAME], args[ARG_USERNAME], args[ARG_PASSWORD]);
-		main.disconnectWhenUICloses(connection);
-		main.addUserRequestListenerFor(connection);
+		main.disconnectWhenUICloses(auctionHouse);
+		main.addUserRequestListenerFor(auctionHouse);
 	}
-	private void addUserRequestListenerFor(final XMPPConnection connection) {
+	private void addUserRequestListenerFor(final AuctionHouse auctionHouse) {
 		ui.addUserRequestListener(new UserRequestListener() {
 			@Override
 			public void joinAuction(String itemId) {
 				snipers.addSniper(SniperSnapshot.joining(itemId));
-				Auction auction = new XMPPAuction(connection, itemId);
+				Auction auction = auctionHouse.auctionFor(itemId);
 
 				notToBeGCd.add(auction);
 				
 				auction.addAuctionEventListener(
-						//TODO AuctionSniper コンストラクタのauction と itemId の順序を変える
 						new AuctionSniper(itemId, auction, new SwingThreadSniperListener(snipers)));
 				auction.join();
 			}
 		});
 	}
-	private void disconnectWhenUICloses(final XMPPConnection connection) {
+	private void disconnectWhenUICloses(final XMPPAuctionHouse auctionHouse) {
 		ui.addWindowListener(new WindowAdapter() {
 			@Override public void windowClosed(WindowEvent e) {
-				connection.disconnect();
+				auctionHouse.disconnect();
 			}
 		});
 	}
