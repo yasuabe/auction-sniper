@@ -62,17 +62,16 @@ public class Main {
 			@Override
 			public void joinAuction(String itemId) {
 				snipers.addSniper(SniperSnapshot.joining(itemId));
-				Chat chat = connection.getChatManager().createChat(
-						auctionId(itemId, connection), null);
+				//TODO 後でAuctionに戻す
+				XMPPAuction auction = new XMPPAuction(connection, itemId);
 				
 				Announcer<AuctionEventListener> auctionEventListeners = 
 						Announcer.to(AuctionEventListener.class);
-				chat.addMessageListener(new AuctionMessageTranslator(connection.getUser(), 
+				auction.chat.addMessageListener(new AuctionMessageTranslator(connection.getUser(),
 						auctionEventListeners.announce()));
 
-				notToBeGCd.add(chat);
-
-				Auction auction = new XMPPAuction(chat);
+				notToBeGCd.add(auction.chat);
+				
 				auctionEventListeners.addListener(
 						new AuctionSniper(auction, itemId, new SwingThreadSniperListener(snipers)));
 				auction.join();
