@@ -22,10 +22,10 @@ public class XMPPAuction implements Auction {
 	private final Chat chat;
 
 	public XMPPAuction(XMPPConnection connection, String itemId) {
+		AuctionMessageTranslator translator = translatorFor(connection);
 		this.chat = connection.getChatManager().createChat(
-				auctionId(itemId, connection), new AuctionMessageTranslator(
-						connection.getUser(),  
-						auctionEventListeners.announce()));
+				auctionId(itemId, connection), translator);
+		addAuctionEventListener(chatDisconnectorFor(translator));
 	}
 	@Override public void bid(int amount) {
 		sendMessage(format(BID_COMMAND_FORMAT, amount));
@@ -47,5 +47,23 @@ public class XMPPAuction implements Auction {
 	@Override
 	public void addAuctionEventListener(AuctionEventListener auctionSniper) {
 		auctionEventListeners.addListener(auctionSniper);
+	}
+
+	private AuctionMessageTranslator translatorFor(XMPPConnection connection) {
+		return new AuctionMessageTranslator(connection.getUser(),
+				auctionEventListeners.announce());
+	}
+	private AuctionEventListener chatDisconnectorFor(
+			final AuctionMessageTranslator translator) {
+
+		return new AuctionEventListener() {
+			public void auctionFailed() {
+				chat.removeMessageListener(translator);
+			}
+			public void auctionClosed() {}
+			public void currentPrice(int price, int increment,
+					PriceSource priceSource) {
+			}
+		};
 	}
 }
