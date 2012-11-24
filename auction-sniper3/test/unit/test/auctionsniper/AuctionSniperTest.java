@@ -90,6 +90,28 @@ public class AuctionSniperTest {
 		sniper.currentPrice(123, 45, PriceSource.FromSniper);
 		sniper.auctionClosed();
 	}
+	@Test
+	public void doesNotBidAndReportsLosingIfPriceAfterWinningIsAboveStopPrice() {
+		final int price = 1233;
+		final int increment = 25;
+
+		allowingSniperBidding();
+		allowingSniperWinning();
+		context.checking(new Expectations() {
+			{
+				int bid = 123 + 45;
+				allowing(auction).bid(bid);
+
+				atLeast(1).of(sniperListener).sniperStateChanged(
+						new SniperSnapshot(ITEM_ID, price, bid, SniperState.LOSING));
+				when(sniperState.is("winning"));
+			}
+		});
+
+		sniper.currentPrice(123, 45, PriceSource.FromOtherBidder);
+		sniper.currentPrice(168, 45, PriceSource.FromSniper);
+		sniper.currentPrice(price, increment, PriceSource.FromOtherBidder);
+	}
 	private Matcher<SniperSnapshot> aSniperThatIs(final SniperState state) {
 		return new FeatureMatcher<SniperSnapshot, SniperState>(
 				equalTo(state), "sniper that is ", "was") {
@@ -98,5 +120,19 @@ public class AuctionSniperTest {
 				return actual.state;
 			}
 		};
+	}
+	private void allowingSniperBidding() {
+		allowSniperStateChange(SniperState.BIDDING, "bidding");
+	}
+	private void allowingSniperWinning() {
+		allowSniperStateChange(SniperState.WINNING, "winning");
+	}
+	private void allowSniperStateChange(final SniperState newState,
+			final String oldState) {
+		context.checking(new Expectations() {{
+				allowing(sniperListener).sniperStateChanged(
+						with(aSniperThatIs(newState)));
+				then(sniperState.is(oldState));
+			}});
 	}
 }
