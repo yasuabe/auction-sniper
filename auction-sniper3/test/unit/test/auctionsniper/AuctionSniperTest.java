@@ -21,6 +21,7 @@ import auctionsniper.AuctionSniper;
 import auctionsniper.SniperListener;
 import auctionsniper.SniperSnapshot;
 import auctionsniper.SniperState;
+import auctionsniper.values.Increment;
 import auctionsniper.values.Item;
 import auctionsniper.values.Price;
 
@@ -208,6 +209,6 @@ public class AuctionSniperTest {
 			}});
 	}
 	private void currentPrice(int price, int increment, PriceSource source) {
-		sniper.currentPrice(Price.fromInt(price), increment, source);
+		sniper.currentPrice(Price.fromInt(price), Increment.fromInt(increment), source);
 	}
 }

@@ -11,6 +11,7 @@ import org.jivesoftware.smack.XMPPException;
 import auctionsniper.Auction;
 import auctionsniper.util.Announcer;
 import auctionsniper.values.Price;
+import auctionsniper.values.Increment;
 
 public class XMPPAuction implements Auction {
 	public static final String ITEM_ID_AS_LOGIN  = "auction-%s";
@@ -64,9 +65,8 @@ public class XMPPAuction implements Auction {
 				chat.removeMessageListener(translator);
 			}
 			public void auctionClosed() {}
-			public void currentPrice(Price price, int increment,
-					PriceSource priceSource) {
-			}
+			public void currentPrice(Price price, Increment increment,
+					PriceSource priceSource) {}
 		};
 	}
 }

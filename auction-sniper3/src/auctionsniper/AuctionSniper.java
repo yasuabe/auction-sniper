@@ -1,6 +1,7 @@
 package auctionsniper;
 
 import auctionsniper.util.Announcer;
+import auctionsniper.values.Increment;
 import auctionsniper.values.Item;
 import auctionsniper.values.Price;
 import auctionsniper.xmpp.AuctionEventListener;
@@ -26,13 +27,15 @@ public class AuctionSniper implements AuctionEventListener {
 	}
 
 	@Override
-	public void currentPrice(Price price, int increment, PriceSource priceSource) {
+	public void currentPrice(Price price, Increment increment, PriceSource priceSource) {
+		//TODO rule 2. Don’t use the ELSE keyword 
 		switch (priceSource) {
 		case FromSniper:
 			snapshot = snapshot.winning(price);
 			break;
 		case FromOtherBidder:
 			Price bid = price.add(increment);
+			//TODO rule 2. Don’t use the ELSE keyword 
 			if (item.allowsBid(bid)) {
 				auction.bid(bid);
 				snapshot = snapshot.bidding(price, bid);

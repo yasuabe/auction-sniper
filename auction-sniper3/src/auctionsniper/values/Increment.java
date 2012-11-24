@@ -3,16 +3,18 @@ package auctionsniper.values;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-public class Price {
+public class Increment {
 	
-	public static final Price ZERO = new Price(0);
 	private final int value;
-
-	private Price(int value) {
+	
+	private Increment(int value) {
 		this.value = value;
 	}
-	public static Price fromInt(int value) {
-		return new Price(value);
+	public static Increment fromInt(int value) {
+		return new Increment(value);
+	}
+	int toInt() {
+		return value;
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -25,15 +27,5 @@ public class Price {
 	@Override
 	public String toString() {
 		return String.valueOf(value);
-	}
-	public Price add(Increment increment) {
-		return new Price(value + increment.toInt());
-	}
-	public int toInt() {
-		//TODO 後で削除。コンパイル通すための暫定コード。
-		return value;
-	}
-	public boolean isGreatorThanOrEqualTo(Price bid) {
-		return value >= bid.value;
 	}
 }

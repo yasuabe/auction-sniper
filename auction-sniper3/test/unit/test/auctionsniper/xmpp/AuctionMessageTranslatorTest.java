@@ -10,6 +10,7 @@ import org.jmock.integration.junit4.JMock;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import auctionsniper.values.Increment;
 import auctionsniper.values.Price;
 import auctionsniper.xmpp.AuctionEventListener;
 import auctionsniper.xmpp.AuctionMessageTranslator;
@@ -38,9 +39,7 @@ public class AuctionMessageTranslatorTest {
 		translator.processMessage(UNUSED_CHAT, message);
 	}
 	@Test public void notifiesBidDetailsWhenCurrentPriceMessageReceivedFromOtherBidder() {
-		context.checking(new Expectations() {{
-			exactly(1).of(listener).currentPrice(Price.fromInt(192), 7, PriceSource.FromOtherBidder);
-		}});
+		expectCurrentPriceEvent(192, 7, PriceSource.FromOtherBidder);
 		Message message = new Message();
 		message.setBody("SOLVersion: 1.1; Event: PRICE; CurrentPrice: 192; Increment: 7; " +
 				"Bidder: Someone else;");
@@ -48,9 +47,7 @@ public class AuctionMessageTranslatorTest {
 		translator.processMessage(UNUSED_CHAT, message);
 	}
 	@Test public void notifiesBidDetailsWhenCurrentPriceMessageReceivedFromSniper() {
-		context.checking(new Expectations() {{
-			exactly(1).of(listener).currentPrice(Price.fromInt(192), 7, PriceSource.FromSniper);
-		}});
+		expectCurrentPriceEvent(192, 7, PriceSource.FromSniper);
 		Message message = new Message();
 		message.setBody("SOLVersion: 1.1; Event: PRICE; CurrentPrice: 192; Increment: 7; " +
 				"Bidder: " + SNIPER_ID + ";");
@@ -68,6 +65,14 @@ public class AuctionMessageTranslatorTest {
 		expectFailureWithMessage(badMessage);
 
 		translator.processMessage(UNUSED_CHAT, message(badMessage));
+	}
+
+	private void expectCurrentPriceEvent(final int price, final int increment,
+			final PriceSource source) {
+
+		context.checking(new Expectations() {{
+			exactly(1).of(listener).currentPrice(Price.fromInt(price), Increment.fromInt(increment), source);
+		}});
 	}
 	private Message message(String body) {
 		Message message = new Message();
