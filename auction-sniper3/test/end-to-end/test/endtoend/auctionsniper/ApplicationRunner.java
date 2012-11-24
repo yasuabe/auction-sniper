@@ -71,4 +71,13 @@ public class ApplicationRunner {
 		driver.startBiddingWithStopPrice(itemId, stopPrice);
 		driver.showsSniperStatus(itemId, 0, 0, textFor(SniperState.JOINING));
 	}
+	public void hasShownSniperHasFailed(FakeAuctionServer auction) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void reportsInvalidMessage(FakeAuctionServer auction,
+			String brokenMessage) {
+		// TODO Auto-generated method stub
+		
+	}
 }

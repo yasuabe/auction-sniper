@@ -10,6 +10,7 @@ import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
+import org.junit.Assert;
 
 import auctionsniper.Main;
 
@@ -94,5 +95,9 @@ public class FakeAuctionServer {
 	public void hasReceivedBid(int bid, String sniperId) throws InterruptedException {
 		receivesAMessageMatching(sniperId, 
 				equalTo(format(Main.BID_COMMAND_FORMAT, bid)));
+	}
+	public void sendInvalidMessageContaining(String brokenMessage) {
+		// TODO Auto-generated method stub
+		Assert.fail();
 	}
 }
