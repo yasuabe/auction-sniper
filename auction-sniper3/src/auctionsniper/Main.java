@@ -62,17 +62,12 @@ public class Main {
 			@Override
 			public void joinAuction(String itemId) {
 				snipers.addSniper(SniperSnapshot.joining(itemId));
-				//TODO 後でAuctionに戻す
-				XMPPAuction auction = new XMPPAuction(connection, itemId);
-				
-				Announcer<AuctionEventListener> auctionEventListeners = 
-						Announcer.to(AuctionEventListener.class);
-				auction.chat.addMessageListener(new AuctionMessageTranslator(connection.getUser(),
-						auctionEventListeners.announce()));
+				Auction auction = new XMPPAuction(connection, itemId);
 
 				notToBeGCd.add(auction);
 				
-				auctionEventListeners.addListener(
+				auction.addAuctionEventListener(
+						//TODO AuctionSniper コンストラクタのauction と itemId の順序を変える
 						new AuctionSniper(auction, itemId, new SwingThreadSniperListener(snipers)));
 				auction.join();
 			}

@@ -43,4 +43,8 @@ public class XMPPAuction implements Auction {
 		//TODO AUCTION_ID_FORMAT を後でこのクラスに持ってくる
 		return String.format(Main.AUCTION_ID_FORMAT, itemId, connection.getServiceName());
 	}
+	@Override
+	public void addAuctionEventListener(AuctionEventListener auctionSniper) {
+		auctionEventListeners.addListener(auctionSniper);
+	}
 }
