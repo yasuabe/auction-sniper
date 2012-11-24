@@ -51,6 +51,7 @@ public class MainWindow extends JFrame {
 		contentPane.add(controls, BorderLayout.NORTH);
 		contentPane.add(new JScrollPane(snipersTable), BorderLayout.CENTER);
 	}
+	//TODO 長すぎるメソッド
 	private JPanel makeControls() {
 		final JTextField itemIdField = itemIdField();
 		final JFormattedTextField stopPriceField = stopPriceField();

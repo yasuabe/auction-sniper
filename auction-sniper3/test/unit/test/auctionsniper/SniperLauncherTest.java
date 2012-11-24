@@ -16,6 +16,7 @@ import auctionsniper.AuctionSniper;
 import auctionsniper.SniperCollector;
 import auctionsniper.SniperLauncher;
 import auctionsniper.values.Item;
+import auctionsniper.values.ItemId;
 
 public class SniperLauncherTest {
 	private final Mockery      context      = new Mockery();
@@ -42,11 +43,11 @@ public class SniperLauncherTest {
 		}});
 		launcher.joinAuction(item);
 	}
-	protected Matcher<AuctionSniper> sniperForItem(String itemId) {
-		return new FeatureMatcher<AuctionSniper, String>(
+	protected Matcher<AuctionSniper> sniperForItem(ItemId itemId) {
+		return new FeatureMatcher<AuctionSniper, ItemId>(
 				equalTo(itemId), "sniper with item id", "item") {
 			@Override
-			protected String featureValueOf(AuctionSniper actual) {
+			protected ItemId featureValueOf(AuctionSniper actual) {
 				return actual.getSnapshot().itemId;
 			}
 		};

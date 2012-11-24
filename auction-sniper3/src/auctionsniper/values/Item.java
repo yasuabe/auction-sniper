@@ -6,10 +6,10 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 
 public class Item {
 	
-	public final String identifier;
+	public final ItemId identifier;
 	public final Price  stopPrice;
 
-	public Item(String identifier, Price stopPrice) {
+	public Item(ItemId identifier, Price stopPrice) {
 		this.identifier = identifier;
 		this.stopPrice  = stopPrice;
 	}

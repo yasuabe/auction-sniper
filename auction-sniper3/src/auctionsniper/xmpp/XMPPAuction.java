@@ -12,6 +12,7 @@ import auctionsniper.Auction;
 import auctionsniper.util.Announcer;
 import auctionsniper.values.Increment;
 import auctionsniper.values.Price;
+import auctionsniper.values.ValueObject;
 
 public class XMPPAuction implements Auction {
 	public static final String ITEM_ID_AS_LOGIN  = "auction-%s";
@@ -24,11 +25,11 @@ public class XMPPAuction implements Auction {
 	private final Chat chat;
 	private final XMPPFailureReporter failureReporter;
 	
-	public XMPPAuction(XMPPConnection connection, String itemId, XMPPFailureReporter failureReporter) {
+	public XMPPAuction(XMPPConnection connection, ValueObject itemId, XMPPFailureReporter failureReporter) {
 		this.failureReporter = failureReporter;
 		AuctionMessageTranslator translator = translatorFor(connection);
 		this.chat = connection.getChatManager().createChat(
-				auctionId(itemId, connection), translator);
+				auctionId(itemId.toString(), connection), translator);
 	    addAuctionEventListener(chatDisconnectorFor(translator));
 	}
 	@Override public void bid(Price amount) {

@@ -6,17 +6,18 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import auctionsniper.values.ItemId;
 import auctionsniper.values.Price;
 
 public class SniperSnapshot {
 
 	//TODO rule 8. No classes with more than two instance variables
-	public final String      itemId; //TODO rule 3. Wrap all primitives and Strings
+	public final ItemId      itemId;
 	public final Price       lastPrice;
 	public final Price       lastBid;
 	public final SniperState state;
 
-	public SniperSnapshot(String itemId, Price lastPrice, Price lastBid, SniperState state) {
+	public SniperSnapshot(ItemId itemId, Price lastPrice, Price lastBid, SniperState state) {
 		this.itemId    = itemId;
 		this.lastPrice = lastPrice;
 		this.lastBid   = lastBid;
@@ -35,7 +36,7 @@ public class SniperSnapshot {
 		return ToStringBuilder.reflectionToString(this);
 	}
 
-	public static SniperSnapshot joining(String itemId) {
+	public static SniperSnapshot joining(ItemId itemId) {
 		return new SniperSnapshot(itemId, Price.ZERO, Price.ZERO, JOINING);
 	}
 	public SniperSnapshot winning(Price newLastPrice) {

@@ -21,6 +21,7 @@ import auctionsniper.SniperState;
 import auctionsniper.ui.Column;
 import auctionsniper.ui.SnipersTableModel;
 import auctionsniper.util.Defect;
+import auctionsniper.values.ItemId;
 import auctionsniper.values.Price;
 
 public class SnipersTableModelTest {
@@ -37,7 +38,7 @@ public class SnipersTableModelTest {
 	}
 	@Test
 	public void setsSniperValuesInColumns() {
-		SniperSnapshot joining = SniperSnapshot.joining("item id"); 
+		SniperSnapshot joining = joining("item id"); 
 		SniperSnapshot bidding = joining.bidding(Price.fromInt(555), Price.fromInt(666));
 		
 		context.checking(new Expectations(){{
@@ -62,7 +63,7 @@ public class SnipersTableModelTest {
 		}
 	}
 	@Test public void notifiesListenersWhenAddingASniper() {
-		SniperSnapshot joining = SniperSnapshot.joining("item123");
+		SniperSnapshot joining = joining("item123");
 		context.checking(new Expectations() {{
 			one(listener).tableChanged(with(anyInsertionAtRow(0)));
 		}});
@@ -78,11 +79,11 @@ public class SnipersTableModelTest {
 			ignoring(listener);
 		}});
 		
-		model.addSniperSnapshot(SniperSnapshot.joining("item 0"));
-		model.addSniperSnapshot(SniperSnapshot.joining("item 1"));
+		model.addSniperSnapshot(joining("item 0"));
+		model.addSniperSnapshot(joining("item 1"));
 		
-		assertEquals("item 0", cellValue(0, Column.ITEM_IDENTIFIER));
-		assertEquals("item 1", cellValue(1, Column.ITEM_IDENTIFIER));
+		assertEqualItemId("item 0", 0);
+		assertEqualItemId("item 1", 1);
 	}
 	@Test(expected = Defect.class)
 	public void throwsDefectIfNoExistingSniperForAnUpdate() {
@@ -94,8 +95,8 @@ public class SnipersTableModelTest {
 			allowing(listener).tableChanged(with(anyInsertionEvent()));
 			allowing(listener).tableChanged(with(aChangeInRow(1)));
 		}});
-		SniperSnapshot item1 = SniperSnapshot.joining("item 1");
-		model.addSniperSnapshot(SniperSnapshot.joining("item 0"));
+		SniperSnapshot item1 = joining("item 1");
+		model.addSniperSnapshot(joining("item 0"));
 		model.addSniperSnapshot(item1);
 
 		SniperSnapshot winning1 = item1.winning(Price.fromInt(123));
@@ -120,5 +121,11 @@ public class SnipersTableModelTest {
 	}
 	private Object cellValue(int rowIndex, Column column) {
 		return model.getValueAt(rowIndex, column.ordinal());
+	}
+	private static SniperSnapshot joining(String itemId) {
+		return SniperSnapshot.joining(ItemId.fromString(itemId));		
+	}
+	private void assertEqualItemId(String expected, int rowIndex) {
+		assertEquals(expected, cellValue(rowIndex, Column.ITEM_IDENTIFIER).toString());
 	}
 }
