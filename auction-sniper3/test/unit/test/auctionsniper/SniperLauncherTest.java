@@ -13,9 +13,9 @@ import org.junit.Test;
 import auctionsniper.Auction;
 import auctionsniper.AuctionHouse;
 import auctionsniper.AuctionSniper;
-import auctionsniper.Item;
 import auctionsniper.SniperCollector;
 import auctionsniper.SniperLauncher;
+import auctionsniper.values.Item;
 
 public class SniperLauncherTest {
 	private final Mockery      context      = new Mockery();

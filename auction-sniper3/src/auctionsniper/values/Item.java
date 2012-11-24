@@ -1,9 +1,8 @@
-package auctionsniper;
+package auctionsniper.values;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-import auctionsniper.values.Price;
 
 public class Item {
 	
@@ -30,8 +29,7 @@ public class Item {
 		return "Item: " + identifier + ", stop price: " + stopPrice;
 	}
 
-	//TODO 後で int -> Price に。テストも書く。
-	public boolean allowsBid(int bid) {
-		return bid <= stopPrice.toInt();
+	public boolean allowsBid(Price bid) {
+		return stopPrice.isGreatorThanOrEqualTo(bid);
 	}
 }

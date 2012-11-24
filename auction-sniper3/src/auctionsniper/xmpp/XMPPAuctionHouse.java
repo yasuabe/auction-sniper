@@ -10,7 +10,7 @@ import org.jivesoftware.smack.XMPPException;
 
 import auctionsniper.Auction;
 import auctionsniper.AuctionHouse;
-import auctionsniper.Item;
+import auctionsniper.values.Item;
 
 public class XMPPAuctionHouse implements AuctionHouse {
 

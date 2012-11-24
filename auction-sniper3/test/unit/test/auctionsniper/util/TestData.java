@@ -1,8 +1,8 @@
 package test.auctionsniper.util;
 
-import auctionsniper.Item;
 import auctionsniper.SniperSnapshot;
 import auctionsniper.SniperState;
+import auctionsniper.values.Item;
 import auctionsniper.values.Price;
 
 public class TestData {

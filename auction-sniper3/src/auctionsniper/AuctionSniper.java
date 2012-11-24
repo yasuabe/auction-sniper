@@ -1,6 +1,7 @@
 package auctionsniper;
 
 import auctionsniper.util.Announcer;
+import auctionsniper.values.Item;
 import auctionsniper.values.Price;
 import auctionsniper.xmpp.AuctionEventListener;
 
@@ -32,7 +33,7 @@ public class AuctionSniper implements AuctionEventListener {
 			break;
 		case FromOtherBidder:
 			Price bid = price.add(increment);
-			if (item.allowsBid(bid.toInt())) {
+			if (item.allowsBid(bid)) {
 				auction.bid(bid.toInt());
 				snapshot = snapshot.bidding(price, bid);
 			} else {

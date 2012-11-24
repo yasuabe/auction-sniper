@@ -1,5 +1,7 @@
 package auctionsniper;
 
+import auctionsniper.values.Item;
+
 public class SniperLauncher implements UserRequestListener {
 	private final AuctionHouse auctionHouse;
 	private final SniperCollector collector;

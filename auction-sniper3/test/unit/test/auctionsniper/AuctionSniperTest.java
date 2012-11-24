@@ -18,10 +18,10 @@ import test.auctionsniper.util.TestData;
 
 import auctionsniper.Auction;
 import auctionsniper.AuctionSniper;
-import auctionsniper.Item;
 import auctionsniper.SniperListener;
 import auctionsniper.SniperSnapshot;
 import auctionsniper.SniperState;
+import auctionsniper.values.Item;
 import auctionsniper.values.Price;
 
 import static auctionsniper.xmpp.AuctionEventListener.PriceSource;

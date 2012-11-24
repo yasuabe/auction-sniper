@@ -6,10 +6,10 @@ import static test.auctionsniper.util.TestData.newItem;
 import org.junit.Test;
 
 import test.endtoend.auctionsniper.AuctionSniperDriver;
-import auctionsniper.Item;
 import auctionsniper.SniperPortfolio;
 import auctionsniper.UserRequestListener;
 import auctionsniper.ui.MainWindow;
+import auctionsniper.values.Item;
 
 import com.objogate.wl.swing.probe.ValueMatcherProbe;
 

@@ -33,4 +33,7 @@ public class Price {
 		//TODO 後で削除。コンパイル通すための暫定コード。
 		return value;
 	}
+	public boolean isGreatorThanOrEqualTo(Price bid) {
+		return value >= bid.value;
+	}
 }
