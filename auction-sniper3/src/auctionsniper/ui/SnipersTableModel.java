@@ -54,7 +54,7 @@ public class SnipersTableModel extends AbstractTableModel implements
 	public static String textFor(SniperState state) {
 		return STATUS_TEXT[state.ordinal()];
 	}
-	public void addSniper(SniperSnapshot joining) {
+	public void addSniperSnapshot(SniperSnapshot joining) {
 		snapshots.add(joining);
 		int row = snapshots.size() - 1;
 		fireTableRowsInserted(row, row);
@@ -62,7 +62,7 @@ public class SnipersTableModel extends AbstractTableModel implements
 	@Override
 	public void addSniper(AuctionSniper sniper) {
 		notToBeGCd.add(sniper);
-		addSniper(sniper.getSnapshot());
+		addSniperSnapshot(sniper.getSnapshot());
 		sniper.addSniperListener(new SwingThreadSniperListener(this));
 	}
 }
