@@ -10,7 +10,7 @@ import auctionsniper.xmpp.AuctionEventListener;
 public class AuctionSniper implements AuctionEventListener {
 
 	private SniperSnapshot       snapshot;
-	
+	//TODO rule 4. First class collections
 	private final Announcer<SniperListener> listeners = Announcer.to(SniperListener.class);
 	private final Auction  auction;
 	private final Item     item;
@@ -26,7 +26,7 @@ public class AuctionSniper implements AuctionEventListener {
 		snapshot = snapshot.closed();
 		notifyChange();
 	}
-
+	//TODO 長すぎるメソッド
 	@Override
 	public void currentPrice(Price price, Increment increment, PriceSource priceSource) {
 		//TODO rule 2. Don’t use the ELSE keyword 
@@ -36,13 +36,9 @@ public class AuctionSniper implements AuctionEventListener {
 			break;
 		case FromOtherBidder:
 			Price bid = price.add(increment);
-			//TODO rule 2. Don’t use the ELSE keyword 
-			if (item.allowsBid(bid)) {
-				auction.bid(bid);
-				snapshot = snapshot.bidding(price, bid);
-			} else {
-				snapshot = snapshot.losing(price);
-			}
+			boolean allowsBid = item.allowsBid(bid);
+			if (allowsBid) auction.bid(bid);
+			snapshot = allowsBid ? snapshot.bidding(price, bid): snapshot.losing(price); 
 			break;
 		}
 		notifyChange();

@@ -30,6 +30,7 @@ public class XMPPAuctionHouse implements AuctionHouse {
 		this.failureReporter = new LoggingXMPPFailureReporter(makeLogger());
 	}
 
+	//TODO 長すぎるメソッド
 	public static XMPPAuctionHouse connect(//
 			String hostname, String username, String password) //
 			throws XMPPAuctionException {
@@ -56,6 +57,7 @@ public class XMPPAuctionHouse implements AuctionHouse {
 		logger.addHandler(simpleFileHandler());
 		return logger;
 	}
+	//TODO 長すぎるメソッド
 	private FileHandler simpleFileHandler() throws XMPPAuctionException {
 		try {
 			FileHandler handler = new FileHandler(LOG_FILE_NAME);

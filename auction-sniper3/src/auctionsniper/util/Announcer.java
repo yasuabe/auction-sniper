@@ -12,7 +12,7 @@ public class Announcer<T extends EventListener> {
 	private final T proxy;
 	private final List<T> listeners = new ArrayList<T>();
 	
-	
+	//TODO 長すぎるメソッド
 	public Announcer(Class<? extends T> listenerType) {
 		proxy = listenerType.cast(Proxy.newProxyInstance(
 			listenerType.getClassLoader(), 
@@ -36,7 +36,7 @@ public class Announcer<T extends EventListener> {
 	public T announce() {
 		return proxy;
 	}
-	
+	//TODO 長すぎるメソッド
 	private void announce(Method m, Object[] args) {
 		try {
 			for (T listener : listeners) {

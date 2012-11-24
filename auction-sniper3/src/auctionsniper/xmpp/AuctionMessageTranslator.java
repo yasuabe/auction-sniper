@@ -17,6 +17,7 @@ public class AuctionMessageTranslator implements MessageListener {
 		this.listener        = listener;
 		this.failureReporter = failureReporter;
 	}
+	//TODO 長すぎるメソッド
 	@Override public void processMessage(Chat chat, Message message) {
 		String messageBody = message.getBody();
 		try {
@@ -26,6 +27,7 @@ public class AuctionMessageTranslator implements MessageListener {
 			listener.auctionFailed();
 		}
 	}
+	//TODO 長すぎるメソッド
 	private void translate(String body) throws Exception {
 		AuctionEvent event     = AuctionEvent.from(body);
 		String       eventType = event.type();
