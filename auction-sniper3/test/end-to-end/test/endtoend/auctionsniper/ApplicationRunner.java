@@ -1,13 +1,19 @@
 package test.endtoend.auctionsniper;
 
-import static org.hamcrest.Matchers.containsString;
 import static auctionsniper.ui.SnipersTableModel.textFor;
+import static org.hamcrest.Matchers.containsString;
 import static test.endtoend.auctionsniper.FakeAuctionServer.XMPP_HOSTNAME;
 
 import java.io.IOException;
 
 import auctionsniper.Main;
-import auctionsniper.SniperState;
+import auctionsniper.snapshot.BiddingSnapshot;
+import auctionsniper.snapshot.FailedSnapshot;
+import auctionsniper.snapshot.JoiningSnapshot;
+import auctionsniper.snapshot.LosingSnapshot;
+import auctionsniper.snapshot.LostSnapshot;
+import auctionsniper.snapshot.WinningSnapshot;
+import auctionsniper.snapshot.WonSnapshot;
 import auctionsniper.ui.MainWindow;
 import auctionsniper.ui.SnipersTableModel;
 
@@ -46,7 +52,7 @@ public class ApplicationRunner {
 	}
 	public void showsSniperHasLostAuction(FakeAuctionServer auction, int lastPrice, int lastBid) {
 		driver.showsSniperStatus(auction.getItemId(), lastPrice, lastBid,
-				SnipersTableModel.textFor(SniperState.LOST));
+				SnipersTableModel.textFor(LostSnapshot.class));
 	}
 
 	public void stop() {
@@ -54,15 +60,15 @@ public class ApplicationRunner {
 	}
 	public void hasShownSniperIsBidding(FakeAuctionServer auction, int lastPrice, int lastBid) {
 		driver.showsSniperStatus(auction.getItemId(), lastPrice, lastBid,
-				SnipersTableModel.textFor(SniperState.BIDDING));
+				SnipersTableModel.textFor(BiddingSnapshot.class));
 	}
 	public void hasShownSniperIsWinning(FakeAuctionServer auction, int winningBid) {
 		driver.showsSniperStatus(auction.getItemId(), winningBid, winningBid,
-				SnipersTableModel.textFor(SniperState.WINNING));
+				SnipersTableModel.textFor(WinningSnapshot.class));
 	}
 	public void showsSniperHasWonAuction(FakeAuctionServer auction, int lastPrice) {
 		driver.showsSniperStatus(auction.getItemId(), lastPrice, lastPrice,
-				SnipersTableModel.textFor(SniperState.WON));
+				SnipersTableModel.textFor(WonSnapshot.class));
 	}
 	public void startBiddingWithStopPrice(FakeAuctionServer auction, int stopPrice) {
 	    startSniper();
@@ -70,15 +76,15 @@ public class ApplicationRunner {
 	}
 	public void hasShownSniperIsLosing(FakeAuctionServer auction, int lastPrice, int lastBid) {
 	    driver.showsSniperStatus(auction.getItemId(), lastPrice, lastBid, 
-	    		textFor(SniperState.LOSING));
+	    		textFor(LosingSnapshot.class));
 	}
 	private void openBiddingFor(FakeAuctionServer auction, int stopPrice) {
 		final String itemId = auction.getItemId();
 		driver.startBiddingWithStopPrice(itemId, stopPrice);
-		driver.showsSniperStatus(itemId, 0, 0, textFor(SniperState.JOINING));
+		driver.showsSniperStatus(itemId, 0, 0, textFor(JoiningSnapshot.class));
 	}
 	public void hasShownSniperHasFailed(FakeAuctionServer auction) {
-	    driver.showsSniperStatus(auction.getItemId(), 0, 0, textFor(SniperState.FAILED));
+	    driver.showsSniperStatus(auction.getItemId(), 0, 0, textFor(FailedSnapshot.class));
 	}
 	public void reportsInvalidMessage(FakeAuctionServer auction,
 			String brokenMessage) throws IOException {

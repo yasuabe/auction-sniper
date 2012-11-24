@@ -1,29 +1,40 @@
 package auctionsniper.ui;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.table.AbstractTableModel;
 
 import auctionsniper.AuctionSniper;
 import auctionsniper.PortfolioListener;
 import auctionsniper.SniperListener;
-import auctionsniper.SniperState;
+import auctionsniper.snapshot.BiddingSnapshot;
+import auctionsniper.snapshot.FailedSnapshot;
+import auctionsniper.snapshot.JoiningSnapshot;
+import auctionsniper.snapshot.LosingSnapshot;
+import auctionsniper.snapshot.LostSnapshot;
 import auctionsniper.snapshot.SniperSnapshot;
+import auctionsniper.snapshot.WinningSnapshot;
+import auctionsniper.snapshot.WonSnapshot;
 import auctionsniper.util.Defect;
 
 @SuppressWarnings("serial")
 public class SnipersTableModel extends AbstractTableModel implements
 		SniperListener, PortfolioListener {
-    private static String[] STATUS_TEXT = {
-        "Joining",
-        "Bidding",
-        "Winning",
-        "Losing",
-        "Won",
-        "Lost",
-        "Failed"
-        };
+
+	private static Map<Class<? extends SniperSnapshot>, String> STATUS_TEXT =
+    		new HashMap<Class<? extends SniperSnapshot>, String>();
+    {
+    	STATUS_TEXT.put(JoiningSnapshot.class, "Joining");
+    	STATUS_TEXT.put(BiddingSnapshot.class, "Bidding");
+    	STATUS_TEXT.put(WinningSnapshot.class, "Winning");
+    	STATUS_TEXT.put(LosingSnapshot.class,  "Losing");
+    	STATUS_TEXT.put(WonSnapshot.class,     "Won");
+    	STATUS_TEXT.put(LostSnapshot.class,    "Lost");
+    	STATUS_TEXT.put(FailedSnapshot.class,  "Failed");
+    }
     private List<SniperSnapshot> snapshots = new ArrayList<SniperSnapshot>();
 	
 	public int getColumnCount() {
@@ -45,6 +56,7 @@ public class SnipersTableModel extends AbstractTableModel implements
 		fireTableRowsUpdated(row, row);
 	}
 	private int rowMatching(SniperSnapshot snapshot) {
+		//TODO rule 1. One level of indentation per method
 		for (int i = 0; i < snapshots.size(); i++) {
 			if (snapshot.isForSameItemAs(snapshots.get(i))) {
 				return i;
@@ -52,8 +64,11 @@ public class SnipersTableModel extends AbstractTableModel implements
 		}
 		throw new Defect("Cannot find match for " + snapshot);
 	}
-	public static String textFor(SniperState state) {
-		return STATUS_TEXT[state.ordinal()];
+	public static String textFor(SniperSnapshot snapshot) {
+		return textFor(snapshot.getClass());
+	}
+	public static String textFor(Class<? extends SniperSnapshot> clazz) {
+		return STATUS_TEXT.get(clazz);
 	}
 	public void addSniperSnapshot(SniperSnapshot joining) {
 		snapshots.add(joining);

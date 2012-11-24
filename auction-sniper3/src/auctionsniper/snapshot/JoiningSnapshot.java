@@ -1,6 +1,5 @@
 package auctionsniper.snapshot;
 
-import auctionsniper.SniperState;
 import auctionsniper.values.ItemId;
 import auctionsniper.values.Price;
 
@@ -11,5 +10,4 @@ public class JoiningSnapshot extends SniperSnapshot {
 	@Override public SniperSnapshot closed() {
 		return new LostSnapshot(itemId, lastPrice(), lastBid());
 	}
-	@Override public SniperState getState() { return SniperState.JOINING; }
 }

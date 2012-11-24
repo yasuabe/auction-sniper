@@ -108,7 +108,7 @@ public class SnipersTableModelTest {
 		assertEquals(snapshot.itemId, cellValue(row, Column.ITEM_IDENTIFIER));
 		assertEquals(snapshot.lastPrice(), cellValue(row, Column.LAST_PRICE));
 		assertEquals(snapshot.lastBid(), cellValue(row, Column.LAST_BID));
-		assertEquals(SnipersTableModel.textFor(snapshot.getState()),
+		assertEquals(SnipersTableModel.textFor(snapshot),
 				cellValue(row, Column.SNIPER_STATE));
 	}
 	Matcher<TableModelEvent> anInsertionAtRow(final int row) {

@@ -1,6 +1,6 @@
 package test.auctionsniper;
 
-import static auctionsniper.SniperState.*;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static test.auctionsniper.util.TestData.newItem;
 
 import org.hamcrest.FeatureMatcher;
@@ -15,18 +15,19 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import test.auctionsniper.util.TestData;
-
 import auctionsniper.Auction;
 import auctionsniper.AuctionSniper;
 import auctionsniper.SniperListener;
-import auctionsniper.SniperState;
+import auctionsniper.snapshot.BiddingSnapshot;
+import auctionsniper.snapshot.LosingSnapshot;
+import auctionsniper.snapshot.LostSnapshot;
 import auctionsniper.snapshot.SniperSnapshot;
+import auctionsniper.snapshot.WinningSnapshot;
+import auctionsniper.snapshot.WonSnapshot;
 import auctionsniper.values.Increment;
 import auctionsniper.values.Item;
 import auctionsniper.values.Price;
-
-import static auctionsniper.xmpp.AuctionEventListener.PriceSource;
-import static org.hamcrest.CoreMatchers.*;
+import auctionsniper.xmpp.AuctionEventListener.PriceSource;
 
 @RunWith(JMock.class)
 public class AuctionSniperTest {
@@ -46,7 +47,7 @@ public class AuctionSniperTest {
 	}
 	@Test public void reportsLostWhenAuctionClosesImmediately() {
 		context.checking(new Expectations() {{
-			atLeast(1).of(sniperListener).sniperStateChanged(with(aSniperThatIs(LOST)));
+			atLeast(1).of(sniperListener).sniperStateChanged(with(aSniperThatIs(LostSnapshot.class)));
 		}});
 		sniper.auctionClosed();
 	}
@@ -54,9 +55,9 @@ public class AuctionSniperTest {
 	@Test public void reportsLostIfAuctionClosesWhenBidding() {
 		context.checking(new Expectations() {{
 			ignoring(auction);
-			allowing(sniperListener).sniperStateChanged(with(aSniperThatIs(BIDDING)));
+			allowing(sniperListener).sniperStateChanged(with(aSniperThatIs(BiddingSnapshot.class)));
 				then(sniperState.is("Bidding"));
-				atLeast(1).of(sniperListener).sniperStateChanged(with(aSniperThatIs(LOST)));
+				atLeast(1).of(sniperListener).sniperStateChanged(with(aSniperThatIs(LostSnapshot.class)));
 				when(sniperState.isNot("bidding"));
 		}});
 		currentPrice(123, 45, PriceSource.FromOtherBidder);
@@ -77,7 +78,7 @@ public class AuctionSniperTest {
 		context.checking(new Expectations() {{
 			ignoring(auction);
 			allowing(sniperListener).sniperStateChanged(
-					with(aSniperThatIs(BIDDING)));
+					with(aSniperThatIs(BiddingSnapshot.class)));
 					then(sniperState.is("bidding"));
 
 			atLeast(1).of(sniperListener).sniperStateChanged(
@@ -90,9 +91,9 @@ public class AuctionSniperTest {
 	@Test public void reportsWonIfAuctionClosesWhenWinning() {
 		context.checking(new Expectations() {{
 			ignoring(auction);
-			allowing(sniperListener).sniperStateChanged(with(aSniperThatIs(WINNING)));
+			allowing(sniperListener).sniperStateChanged(with(aSniperThatIs(WinningSnapshot.class)));
 				then(sniperState.is("winning"));
-				atLeast(1).of(sniperListener).sniperStateChanged(with(aSniperThatIs(WON)));
+				atLeast(1).of(sniperListener).sniperStateChanged(with(aSniperThatIs(WonSnapshot.class)));
 				when(sniperState.is("winning"));
 		}});
 		currentPrice(123, 45, PriceSource.FromSniper);
@@ -182,29 +183,31 @@ public class AuctionSniperTest {
 			when(sniperState.is(state));
 		}});
 	}
-	private Matcher<SniperSnapshot> aSniperThatIs(final SniperState state) {
-		return new FeatureMatcher<SniperSnapshot, SniperState>(
-				equalTo(state), "sniper that is ", "was") {
+	@SuppressWarnings("unchecked")
+	private Matcher<SniperSnapshot> aSniperThatIs(final Class<? extends SniperSnapshot> clazz) {
+		return new FeatureMatcher<SniperSnapshot, Class<? extends SniperSnapshot>>(
+				//TODO 後でキャスト見直し
+				(Matcher<? super Class<? extends SniperSnapshot>>) equalTo(clazz), "sniper that is ", "was") {
 			@Override
-			protected SniperState featureValueOf(SniperSnapshot actual) {
-				return actual.getState();
+			protected Class<? extends SniperSnapshot> featureValueOf(SniperSnapshot actual) {
+				return actual.getClass();
 			}
 		};
 	}
 	private void allowingSniperBidding() {
-		allowSniperStateChange(BIDDING, "bidding");
+		allowSniperStateChange(BiddingSnapshot.class, "bidding");
 	}
 	private void allowingSniperWinning() {
-		allowSniperStateChange(WINNING, "winning");
+		allowSniperStateChange(WinningSnapshot.class, "winning");
 	}
 	private void allowingSniperLosing() {
-		allowSniperStateChange(LOSING, "losing");
+		allowSniperStateChange(LosingSnapshot.class, "losing");
 	}
-	private void allowSniperStateChange(final SniperState newState,
+	private void allowSniperStateChange(final Class<? extends SniperSnapshot> snapshotClass,
 			final String oldState) {
 		context.checking(new Expectations() {{
 				allowing(sniperListener).sniperStateChanged(
-						with(aSniperThatIs(newState)));
+						with(aSniperThatIs(snapshotClass)));
 				then(sniperState.is(oldState));
 			}});
 	}

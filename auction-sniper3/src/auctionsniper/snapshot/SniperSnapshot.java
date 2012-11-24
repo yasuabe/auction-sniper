@@ -1,15 +1,13 @@
 package auctionsniper.snapshot;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import auctionsniper.SniperState;
 import auctionsniper.util.Defect;
 import auctionsniper.values.ItemId;
 import auctionsniper.values.Price;
+import auctionsniper.values.ValueObject;
 
-public abstract class SniperSnapshot {
+public abstract class SniperSnapshot extends ValueObject {
 	public final ItemId   itemId;
 	public final PriceBid lastPriceBid;
 
@@ -17,20 +15,9 @@ public abstract class SniperSnapshot {
 	public Price lastPrice() { return lastPriceBid.price; }
 	public Price lastBid() {   return lastPriceBid.bid; }
 	
-	//TODO getter禁止だけどリファクタ過程で一時的に使う。後で削除。
-	public abstract SniperState getState();
-	
 	public SniperSnapshot(ItemId itemId, Price lastPrice, Price lastBid) {
 		this.itemId    = itemId;
 		this.lastPriceBid = new PriceBid(lastPrice, lastBid);
-	}
-	@Override
-	public boolean equals(Object obj) {
-		return EqualsBuilder.reflectionEquals(this, obj);
-	}
-	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
 	}
 	@Override
 	public String toString() {
