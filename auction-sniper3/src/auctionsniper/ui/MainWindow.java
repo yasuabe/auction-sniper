@@ -62,8 +62,14 @@ public class MainWindow extends JFrame {
 		joinAuctionButton.setName(JOIN_BUTTON_NAME);
 		joinAuctionButton.addActionListener(new ActionListener() {
 			@Override public void actionPerformed(ActionEvent e) {
-				//TODO stop price をテキストボックスから取るようにする
-				userRequests.announce().joinAuction(new Item(itemIdField.getText(), 0));
+				userRequests.announce().joinAuction(new Item(itemId(), stopPrice()));
+			}
+			private String itemId() {
+				return itemIdField.getText();
+			}
+			private int stopPrice() {
+				System.out.println(stopPriceField);
+				return ((Number) stopPriceField.getValue()).intValue();
 			}
 		});
 		controls.add(joinAuctionButton);
