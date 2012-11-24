@@ -5,13 +5,16 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import auctionsniper.AuctionSniper;
 import auctionsniper.Defect;
+import auctionsniper.SniperCollector;
 import auctionsniper.SniperListener;
 import auctionsniper.SniperSnapshot;
 import auctionsniper.SniperState;
 
 @SuppressWarnings("serial")
-public class SnipersTableModel extends AbstractTableModel implements SniperListener {
+public class SnipersTableModel extends AbstractTableModel implements
+		SniperListener, SniperCollector {
     private static String[] STATUS_TEXT = {
         "Joining",
         "Bidding",
@@ -54,5 +57,10 @@ public class SnipersTableModel extends AbstractTableModel implements SniperListe
 		snapshots.add(joining);
 		int row = snapshots.size() - 1;
 		fireTableRowsInserted(row, row);
+	}
+	@Override
+	public void addSniper(AuctionSniper sniper) {
+		// TODO Auto-generated method stub
+		
 	}
 }
