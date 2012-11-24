@@ -1,4 +1,4 @@
-package test.auctionsniper;
+package test.auctionsniper.xmpp;
 
 import static auctionsniper.xmpp.AuctionEventListener.PriceSource;
 
