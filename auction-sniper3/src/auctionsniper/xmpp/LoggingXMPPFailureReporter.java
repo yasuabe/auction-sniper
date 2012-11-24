@@ -3,15 +3,16 @@ package auctionsniper.xmpp;
 import java.util.logging.Logger;
 
 public class LoggingXMPPFailureReporter implements XMPPFailureReporter {
+	private static final String MESSAGE_FORMAT = "<%s> Could not translate message \"%s\" because \"%s\"";
+	private final Logger logger;
 
 	public LoggingXMPPFailureReporter(Logger logger) {
-		// TODO Auto-generated constructor stub
+		this.logger = logger;
 	}
 
-	@Override
 	public void cannotTranslateMessage(String auctionId, String failedMessage,
 			Exception exception) {
-		// TODO Auto-generated method stub
-		
+		logger.severe(String.format(MESSAGE_FORMAT, auctionId, failedMessage,
+				exception.toString()));
 	}
 }
