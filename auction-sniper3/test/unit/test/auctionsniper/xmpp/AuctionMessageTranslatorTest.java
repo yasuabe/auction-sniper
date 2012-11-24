@@ -10,6 +10,7 @@ import org.jmock.integration.junit4.JMock;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import auctionsniper.values.Price;
 import auctionsniper.xmpp.AuctionEventListener;
 import auctionsniper.xmpp.AuctionMessageTranslator;
 import auctionsniper.xmpp.XMPPFailureReporter;
@@ -38,7 +39,7 @@ public class AuctionMessageTranslatorTest {
 	}
 	@Test public void notifiesBidDetailsWhenCurrentPriceMessageReceivedFromOtherBidder() {
 		context.checking(new Expectations() {{
-			exactly(1).of(listener).currentPrice(192, 7, PriceSource.FromOtherBidder);
+			exactly(1).of(listener).currentPrice(Price.fromInt(192), 7, PriceSource.FromOtherBidder);
 		}});
 		Message message = new Message();
 		message.setBody("SOLVersion: 1.1; Event: PRICE; CurrentPrice: 192; Increment: 7; " +
@@ -48,7 +49,7 @@ public class AuctionMessageTranslatorTest {
 	}
 	@Test public void notifiesBidDetailsWhenCurrentPriceMessageReceivedFromSniper() {
 		context.checking(new Expectations() {{
-			exactly(1).of(listener).currentPrice(192, 7, PriceSource.FromSniper);
+			exactly(1).of(listener).currentPrice(Price.fromInt(192), 7, PriceSource.FromSniper);
 		}});
 		Message message = new Message();
 		message.setBody("SOLVersion: 1.1; Event: PRICE; CurrentPrice: 192; Increment: 7; " +

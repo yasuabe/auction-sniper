@@ -26,4 +26,11 @@ public class Price {
 	public String toString() {
 		return String.valueOf(value);
 	}
+	public Price add(int increment) {
+		return new Price(value + increment);
+	}
+	public int toInt() {
+		//TODO 後で削除。コンパイル通すための暫定コード。
+		return value;
+	}
 }

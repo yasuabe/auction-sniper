@@ -1,7 +1,6 @@
 package test.auctionsniper;
 
 import static auctionsniper.SniperState.*;
-import static test.auctionsniper.util.TestData.newSnapshot;
 
 import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
@@ -22,6 +21,7 @@ import auctionsniper.Item;
 import auctionsniper.SniperListener;
 import auctionsniper.SniperSnapshot;
 import auctionsniper.SniperState;
+import auctionsniper.values.Price;
 
 import static auctionsniper.xmpp.AuctionEventListener.PriceSource;
 import static org.hamcrest.CoreMatchers.*;
@@ -57,7 +57,7 @@ public class AuctionSniperTest {
 				atLeast(1).of(sniperListener).sniperStateChanged(with(aSniperThatIs(LOST)));
 				when(sniperState.isNot("bidding"));
 		}});
-		sniper.currentPrice(123, 45, PriceSource.FromOtherBidder);
+		currentPrice(123, 45, PriceSource.FromOtherBidder);
 		sniper.auctionClosed();
 	}
 	@Test public void bidsHigherAndReportsBiddingWhenNewPriceArrives()  {
@@ -69,7 +69,7 @@ public class AuctionSniperTest {
 			atLeast(1).of(sniperListener).sniperStateChanged(
 					TestData.newSnapshot(ITEM_ID, price, bid, BIDDING));
 		}});
-		sniper.currentPrice(price, increment, PriceSource.FromOtherBidder);
+		currentPrice(price, increment, PriceSource.FromOtherBidder);
 	}
 	@Test public void reportsIsWinningWhenCurrentPriceComesFromSniper() {
 		context.checking(new Expectations() {{
@@ -82,8 +82,8 @@ public class AuctionSniperTest {
 					TestData.newSnapshot(ITEM_ID, 135, 135, WINNING));
 					when(sniperState.is("bidding"));
 		}});
-		sniper.currentPrice(123, 12, PriceSource.FromOtherBidder);
-		sniper.currentPrice(135, 45, PriceSource.FromSniper);
+		currentPrice(123, 12, PriceSource.FromOtherBidder);
+		currentPrice(135, 45, PriceSource.FromSniper);
 	}
 	@Test public void reportsWonIfAuctionClosesWhenWinning() {
 		context.checking(new Expectations() {{
@@ -93,7 +93,7 @@ public class AuctionSniperTest {
 				atLeast(1).of(sniperListener).sniperStateChanged(with(aSniperThatIs(WON)));
 				when(sniperState.is("winning"));
 		}});
-		sniper.currentPrice(123, 45, PriceSource.FromSniper);
+		currentPrice(123, 45, PriceSource.FromSniper);
 		sniper.auctionClosed();
 	}
 	@Test
@@ -111,9 +111,9 @@ public class AuctionSniperTest {
 					TestData.newSnapshot(ITEM_ID, price, bid, LOSING));
 			when(sniperState.is("winning"));
 		}});
-		sniper.currentPrice(123, 45, PriceSource.FromOtherBidder);
-		sniper.currentPrice(168, 45, PriceSource.FromSniper);
-		sniper.currentPrice(price, increment, PriceSource.FromOtherBidder);
+		currentPrice(123, 45, PriceSource.FromOtherBidder);
+		currentPrice(168, 45, PriceSource.FromSniper);
+		currentPrice(price, increment, PriceSource.FromOtherBidder);
 	}
 
 	@Test
@@ -125,7 +125,7 @@ public class AuctionSniperTest {
 			atLeast(1).of(sniperListener).sniperStateChanged(
 					TestData.newSnapshot(ITEM_ID, price, 0, LOSING));
 		}});
-		sniper.currentPrice(price, increment, PriceSource.FromOtherBidder);
+		currentPrice(price, increment, PriceSource.FromOtherBidder);
 	}
 
 	@Test
@@ -137,7 +137,7 @@ public class AuctionSniperTest {
 			when(sniperState.is("losing"));
 		}});
 
-		sniper.currentPrice(1230, 456, PriceSource.FromOtherBidder);
+		currentPrice(1230, 456, PriceSource.FromOtherBidder);
 		sniper.auctionClosed();
 	}
 
@@ -155,8 +155,8 @@ public class AuctionSniperTest {
 					TestData.newSnapshot(ITEM_ID, price2, 0, LOSING));
 			inSequence(states);
 		}});
-		sniper.currentPrice(price1, 25, PriceSource.FromOtherBidder);
-		sniper.currentPrice(price2, 25, PriceSource.FromOtherBidder);
+		currentPrice(price1, 25, PriceSource.FromOtherBidder);
+		currentPrice(price2, 25, PriceSource.FromOtherBidder);
 	}
 	@Test
 	public void reportsFailedIfAuctionFailsWhenBidding() {
@@ -165,7 +165,7 @@ public class AuctionSniperTest {
 
 		expectSniperToFailWhenItIs("bidding");
 
-		sniper.currentPrice(123, 45, PriceSource.FromOtherBidder);
+		currentPrice(123, 45, PriceSource.FromOtherBidder);
 		sniper.auctionFailed();
 	}
 	private void ignoringAuction() {
@@ -205,5 +205,8 @@ public class AuctionSniperTest {
 						with(aSniperThatIs(newState)));
 				then(sniperState.is(oldState));
 			}});
+	}
+	private void currentPrice(int price, int increment, PriceSource source) {
+		sniper.currentPrice(Price.fromInt(price), increment, source);
 	}
 }

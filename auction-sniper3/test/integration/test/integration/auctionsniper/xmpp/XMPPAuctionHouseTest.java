@@ -14,6 +14,7 @@ import test.endtoend.auctionsniper.ApplicationRunner;
 import test.endtoend.auctionsniper.FakeAuctionServer;
 import auctionsniper.Auction;
 import auctionsniper.Item;
+import auctionsniper.values.Price;
 import auctionsniper.xmpp.AuctionEventListener;
 import auctionsniper.xmpp.XMPPAuctionHouse;
 
@@ -68,7 +69,7 @@ public class XMPPAuctionHouseTest {
 			public void auctionClosed() {
 				auctionWasClosed.countDown();
 			}
-			public void currentPrice(int price, int increment, PriceSource priceSource) {}
+			public void currentPrice(Price price, int increment, PriceSource priceSource) {}
 			@Override
 			public void auctionFailed() {}
 		};
