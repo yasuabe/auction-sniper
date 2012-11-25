@@ -9,7 +9,6 @@ import org.jivesoftware.smack.XMPPException;
 
 import auctionsniper.Auction;
 import auctionsniper.util.Announcer;
-import auctionsniper.values.Increment;
 import auctionsniper.values.Price;
 import auctionsniper.values.SniperId;
 import auctionsniper.values.ValueObject;
@@ -37,8 +36,7 @@ public class XMPPAuction implements Auction {
 	@Override public void bid(Price amount) {
 		sendMessage(BID.format(amount));
 	}
-	@Override
-	public void join() {
+	@Override public void join() {
 		sendMessage(JOIN.format());
 	}
 	private void sendMessage(final String message) {
@@ -60,17 +58,11 @@ public class XMPPAuction implements Auction {
 		return new AuctionMessageTranslator(SniperId.fromString(connection.getUser()),
 				auctionEventListeners.announce(), failureReporter);
 	}
-	//TODO 長すぎるメソッド
-	private AuctionEventListener chatDisconnectorFor(
-			final AuctionMessageTranslator translator) {
-
-		return new AuctionEventListener() {
+	private AuctionEventListener chatDisconnectorFor(final AuctionMessageTranslator translator) {
+		return new AuctionEventAdapter() {
 			public void auctionFailed() {
 				chat.removeMessageListener(translator);
 			}
-			public void auctionClosed() {}
-			public void currentPrice(Price price, Increment increment,
-					PriceSource priceSource) {}
 		};
 	}
 }
