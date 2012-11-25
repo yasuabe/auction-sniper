@@ -5,14 +5,14 @@ import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.packet.Message;
 
 import auctionsniper.AuctionEvent;
+import auctionsniper.values.SniperId;
 
 public class AuctionMessageTranslator implements MessageListener {
 	private final AuctionEventListener listener;
-	//TODO rule 3. Wrap all primitives and Strings
-	private final String               sniperId;
+	private final SniperId             sniperId;
 	private final XMPPFailureReporter  failureReporter;
 	
-	public AuctionMessageTranslator(String sniperId,
+	public AuctionMessageTranslator(SniperId sniperId,
 			AuctionEventListener listener, XMPPFailureReporter failureReporter) {
 		this.sniperId        = sniperId;
 		this.listener        = listener;

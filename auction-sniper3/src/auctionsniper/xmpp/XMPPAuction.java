@@ -11,6 +11,7 @@ import auctionsniper.Auction;
 import auctionsniper.util.Announcer;
 import auctionsniper.values.Increment;
 import auctionsniper.values.Price;
+import auctionsniper.values.SniperId;
 import auctionsniper.values.ValueObject;
 
 //TODO rule 7. Keep all entities small
@@ -56,7 +57,7 @@ public class XMPPAuction implements Auction {
 	}
 
 	private AuctionMessageTranslator translatorFor(XMPPConnection connection) {
-		return new AuctionMessageTranslator(connection.getUser(),
+		return new AuctionMessageTranslator(SniperId.fromString(connection.getUser()),
 				auctionEventListeners.announce(), failureReporter);
 	}
 	//TODO 長すぎるメソッド

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import auctionsniper.values.Increment;
 import auctionsniper.values.Price;
+import auctionsniper.values.SniperId;
 import auctionsniper.xmpp.AuctionEventListener.PriceSource;
 import static auctionsniper.xmpp.AuctionEventListener.PriceSource.*;
 
@@ -45,10 +46,10 @@ public class AuctionEvent {
 	static String[] fieldsIn(String messageBody) {
 		return messageBody.split(";");
 	}
-	public PriceSource isFrom(String sniperId) throws MissingValueException {
+	public PriceSource isFrom(SniperId sniperId) throws MissingValueException {
 		return sniperId.equals(bidder()) ? FromSniper: FromOtherBidder;
 	}
-	private String bidder() throws MissingValueException {
-		return get("Bidder");
+	private SniperId bidder() throws MissingValueException {
+		return SniperId.fromString(get("Bidder"));
 	}
 }

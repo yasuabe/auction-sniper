@@ -1,5 +1,7 @@
 package auctionsniper.xmpp;
 
+import auctionsniper.values.SniperId;
+
 public interface XMPPFailureReporter { 
-  void cannotTranslateMessage(String auctionId, String failedMessage, Exception exception);
+  void cannotTranslateMessage(SniperId sniperId, String failedMessage, Exception exception);
 }

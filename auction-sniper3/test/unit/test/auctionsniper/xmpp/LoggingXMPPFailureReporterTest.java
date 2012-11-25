@@ -11,6 +11,7 @@ import org.junit.AfterClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import auctionsniper.values.SniperId;
 import auctionsniper.xmpp.LoggingXMPPFailureReporter;
 
 @RunWith(JMock.class)
@@ -36,7 +37,7 @@ public class LoggingXMPPFailureReporterTest {
 							+ "because \"java.lang.Exception: an exception\"");
 		}});
 
-		reporter.cannotTranslateMessage("auction id", "bad message",
+		reporter.cannotTranslateMessage(SniperId.fromString("auction id"), "bad message",
 				new Exception("an exception"));
 	}
 }

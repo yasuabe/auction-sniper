@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 
 import auctionsniper.values.Increment;
 import auctionsniper.values.Price;
+import auctionsniper.values.SniperId;
 import auctionsniper.xmpp.AuctionEventListener;
 import auctionsniper.xmpp.AuctionMessageTranslator;
 import auctionsniper.xmpp.XMPPFailureReporter;
@@ -19,7 +20,7 @@ import auctionsniper.xmpp.XMPPFailureReporter;
 @RunWith(JMock.class)
 public class AuctionMessageTranslatorTest {
 
-	private static final String SNIPER_ID   = "sniper id";
+	private static final SniperId SNIPER_ID   = SniperId.fromString("sniper id");
 	public  static final Chat   UNUSED_CHAT = null;
 	
 	private final Mockery context = new Mockery();
