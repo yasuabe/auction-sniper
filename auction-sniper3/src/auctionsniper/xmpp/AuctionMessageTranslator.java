@@ -5,7 +5,9 @@ import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.packet.Message;
 
-import auctionsniper.AuctionEvent;
+import auctionsniper.event.AuctionEvent;
+import auctionsniper.event.CloseEventHandler;
+import auctionsniper.event.PriceEventHandler;
 import auctionsniper.values.SniperId;
 
 public class AuctionMessageTranslator implements MessageListener {

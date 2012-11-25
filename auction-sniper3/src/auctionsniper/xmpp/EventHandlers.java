@@ -3,8 +3,9 @@ package auctionsniper.xmpp;
 import java.util.HashMap;
 import java.util.Map;
 
-import auctionsniper.AuctionEvent;
 import auctionsniper.MissingValueException;
+import auctionsniper.event.AuctionEvent;
+import auctionsniper.event.EventHandler;
 
 public class EventHandlers {
 	private final Map<String, EventHandler> map = new HashMap<String, EventHandler>();

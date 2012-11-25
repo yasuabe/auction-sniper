@@ -1,8 +1,9 @@
-package auctionsniper;
+package auctionsniper.event;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import auctionsniper.MissingValueException;
 import auctionsniper.values.Increment;
 import auctionsniper.values.Price;
 import auctionsniper.values.SniperId;

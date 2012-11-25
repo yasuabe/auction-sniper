@@ -1,8 +1,8 @@
-package auctionsniper.xmpp;
+package auctionsniper.event;
 
-import auctionsniper.AuctionEvent;
 import auctionsniper.MissingValueException;
 import auctionsniper.values.SniperId;
+import auctionsniper.xmpp.AuctionEventListener;
 
 public abstract class EventHandler {
 	protected final AuctionEventListener listener;
@@ -13,5 +13,5 @@ public abstract class EventHandler {
 		this.sniperId = sniperId;
 	}
 
-	abstract void handle(AuctionEvent event) throws MissingValueException;
+	public abstract void handle(AuctionEvent event) throws MissingValueException;
 }

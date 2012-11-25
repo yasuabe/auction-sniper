@@ -20,7 +20,6 @@ public class XMPPAuction implements Auction {
 
 	private AnnouncerToAuctionEventListener auctionEventListeners =
 			new AnnouncerToAuctionEventListener();
-			 
 	private final Chat chat;
 	
 	public XMPPAuction(XMPPConnection connection, ValueObject itemId, XMPPFailureReporter failureReporter) {
