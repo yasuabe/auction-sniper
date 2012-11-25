@@ -2,17 +2,16 @@ package auctionsniper;
 
 
 import auctionsniper.snapshot.SniperSnapshot;
-import auctionsniper.util.Announcer;
 import auctionsniper.values.Increment;
 import auctionsniper.values.Item;
 import auctionsniper.values.Price;
 import auctionsniper.xmpp.AuctionEventListener;
 
+//TODO rule 7. Keep all entities small
 public class AuctionSniper implements AuctionEventListener {
 	//TODO rule 8. No classes with more than two instance variables
 	private SniperSnapshot       snapshot;
-	//TODO rule 4. First class collections
-	private final Announcer<SniperListener> listeners = Announcer.to(SniperListener.class);
+	private final AnnouncerToSniperListener listeners = new AnnouncerToSniperListener();
 	private final Auction  auction;
 	private final Item     item;
 
@@ -32,7 +31,7 @@ public class AuctionSniper implements AuctionEventListener {
 
 	CurrentPriceProcessors processors = new CurrentPriceProcessors();
 	{
-		processors.put(PriceSource.FromSniper, fromSniper);
+		processors.put(PriceSource.FromSniper,      fromSniper);
 		processors.put(PriceSource.FromOtherBidder, fromOtherBidder);
 	}
 
@@ -53,7 +52,7 @@ public class AuctionSniper implements AuctionEventListener {
 		notifyChange();
 	}
 	private void notifyChange() {
-		this.listeners.announce().sniperStateChanged(snapshot);
+		this.listeners.sniperStateChanged(snapshot);
 	}
 	public void addSniperListener(SniperListener listener) {
 		listeners.addListener(listener);
