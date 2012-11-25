@@ -1,10 +1,6 @@
 package auctionsniper.values;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-
-
-public class Item {
+public class Item extends ValueObject {
 	
 	public final ItemId identifier;
 	public final Price  stopPrice;
@@ -13,22 +9,10 @@ public class Item {
 		this.identifier = identifier;
 		this.stopPrice  = stopPrice;
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		return EqualsBuilder.reflectionEquals(this, obj);
-	}
-
-	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
-	}
-
 	@Override
 	public String toString() {
 		return "Item: " + identifier + ", stop price: " + stopPrice;
 	}
-
 	public boolean allowsBid(Price bid) {
 		return stopPrice.isGreatorThanOrEqualTo(bid);
 	}
