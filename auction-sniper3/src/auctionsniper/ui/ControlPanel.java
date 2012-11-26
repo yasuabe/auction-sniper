@@ -14,9 +14,6 @@ import auctionsniper.util.Announcer;
 
 @SuppressWarnings("serial")
 public class ControlPanel extends JPanel {
-	public static final String NEW_ITEM_ID_NAME    = "item id";
-	public static final String NEW_ITEM_STOP_PRICE_NAME = "stop price";
-
 	private final JButton     joinAuctionButton = new JoinAuctionButton();
 	private final InputFields inputFields       = new InputFields();
 

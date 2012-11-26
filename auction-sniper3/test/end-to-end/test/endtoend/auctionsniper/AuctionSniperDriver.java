@@ -9,7 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.table.JTableHeader;
 
 import auctionsniper.Main;
-import auctionsniper.ui.ControlPanel;
+import auctionsniper.ui.InputFields;
 import auctionsniper.ui.JoinAuctionButton;
 
 import com.objogate.wl.swing.AWTEventQueueProber;
@@ -57,14 +57,14 @@ public class AuctionSniperDriver extends JFrameDriver {
 
 	private JTextFieldDriver itemIdField() {
 		JTextFieldDriver newItemId = new JTextFieldDriver(this,
-				JTextField.class, named(ControlPanel.NEW_ITEM_ID_NAME));
+				JTextField.class, named(InputFields.NEW_ITEM_ID_NAME));
 		newItemId.focusWithMouse();
 		newItemId.focusWithMouse();
 		return newItemId;
 	}
 	public void startBiddingWithStopPrice(String itemId, int stopPrice) {
-	    textField(ControlPanel.NEW_ITEM_ID_NAME).replaceAllText(itemId); 
-	    textField(ControlPanel.NEW_ITEM_STOP_PRICE_NAME).replaceAllText(String.valueOf(stopPrice)); 
+	    textField(InputFields.NEW_ITEM_ID_NAME).replaceAllText(itemId); 
+	    textField(InputFields.NEW_ITEM_STOP_PRICE_NAME).replaceAllText(String.valueOf(stopPrice)); 
 	    bidButton().click(); 
 	}
 	private JTextFieldDriver textField(String fieldName) {
