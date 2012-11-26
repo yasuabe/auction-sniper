@@ -5,6 +5,7 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.SwingUtilities;
 
+import auctionsniper.connection.ConnectionInfo;
 import auctionsniper.ui.MainWindow;
 import auctionsniper.xmpp.XMPPAuctionHouse;
 

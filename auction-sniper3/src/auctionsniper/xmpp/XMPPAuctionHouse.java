@@ -4,7 +4,7 @@ import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import auctionsniper.Auction;
 import auctionsniper.AuctionHouse;
-import auctionsniper.ConnectionInfo;
+import auctionsniper.connection.ConnectionInfo;
 import auctionsniper.values.Item;
 
 public class XMPPAuctionHouse implements AuctionHouse {
