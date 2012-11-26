@@ -1,5 +1,8 @@
 package auctionsniper.event;
 
+import static auctionsniper.xmpp.AuctionEventListener.PriceSource.FromOtherBidder;
+import static auctionsniper.xmpp.AuctionEventListener.PriceSource.FromSniper;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +11,6 @@ import auctionsniper.values.Increment;
 import auctionsniper.values.Price;
 import auctionsniper.values.SniperId;
 import auctionsniper.xmpp.AuctionEventListener.PriceSource;
-import static auctionsniper.xmpp.AuctionEventListener.PriceSource.*;
 
 public class AuctionEvent {
 	private final Map<String, String> fields = new HashMap<String, String>();
@@ -27,25 +29,16 @@ public class AuctionEvent {
 	}
 	public String get(String fieldName) throws MissingValueException {
 		String value = fields.get(fieldName);
-		if (null == value) {
-			throw new MissingValueException(fieldName);
-		}
+		if (null == value) throw new MissingValueException(fieldName);
 		return value;
 	}
 	public static AuctionEvent from(String messageBody) {
 		AuctionEvent event = new AuctionEvent();
-		for (String field : fieldsIn(messageBody)) {
-			event.addField(field);
-		}
+		for (Field field : Field.fieldsIn(messageBody)) event.addField(field);
 		return event;
 	}
-	private void addField(String field) {
-		String[] pair = field.split(":");
-		//TODO rule 5. One dot per line
-		fields.put(pair[0].trim(), pair[1].trim());
-	}
-	static String[] fieldsIn(String messageBody) {
-		return messageBody.split(";");
+	private void addField(Field field) {
+		field.register(fields);
 	}
 	public PriceSource isFrom(SniperId sniperId) throws MissingValueException {
 		return sniperId.equals(bidder()) ? FromSniper: FromOtherBidder;
