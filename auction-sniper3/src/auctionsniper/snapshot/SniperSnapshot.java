@@ -1,17 +1,15 @@
 package auctionsniper.snapshot;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-
 import auctionsniper.util.Defect;
-import auctionsniper.values.ItemId;
 import auctionsniper.values.Amount;
+import auctionsniper.values.ItemId;
 import auctionsniper.values.ValueObject;
 
 public abstract class SniperSnapshot extends ValueObject {
 	public final ItemId   itemId;
 	public final PriceBid lastPriceBid;
 
-	//TODO rule 9. No getters/setters/properties
 	public Amount lastPrice() { return lastPriceBid.price; }
 	public Amount lastBid() {   return lastPriceBid.bid; }
 	
@@ -42,8 +40,10 @@ public abstract class SniperSnapshot extends ValueObject {
 		return new FailedSnapshot(itemId, Amount.ZERO, Amount.ZERO);
 	}
 	public boolean isForSameItemAs(SniperSnapshot sniperSnapshot) {
-		return itemId.equals(sniperSnapshot.itemId);
+		return isForSameItemAs(sniperSnapshot.itemId);
 	}
+	public boolean isForSameItemAs(ItemId itemId) { return itemId.equals(itemId); }
+
 	public SniperSnapshot closed() {
 		throw new Defect("Auction is already closed");
 	}
