@@ -25,4 +25,10 @@ public class InputFields {
 		
 		return stopPriceField;
 	}
+	public String itemId() {
+		return itemIdField.getText();
+	}
+	public int stopPrice() {
+		return ((Number) stopPriceField.getValue()).intValue();
+	}
 }

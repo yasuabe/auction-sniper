@@ -20,22 +20,26 @@ public class ControlPanel extends JPanel {
 	private final JButton     joinAuctionButton = new JoinAuctionButton();
 	private final InputFields inputFields       = new InputFields();
 
-	//TODO rule 7. Keep all entities small
 	ControlPanel(final Announcer<UserRequestListener> userRequests) {
 		super(new FlowLayout());
+
 		add(inputFields.itemIdField);
 		add(inputFields.stopPriceField);
-		joinAuctionButton.addActionListener(new ActionListener() {
+		
+		joinAuctionButton.addActionListener(createListener(userRequests));
+		add(joinAuctionButton);
+	}
+
+	private ActionListener createListener(
+			final Announcer<UserRequestListener> userRequests) {
+		return new ActionListener() {
 			@Override public void actionPerformed(ActionEvent e) {
+				//TODO rule 5. One dot per line
 				userRequests.announce().joinAuction(newItem(itemId(), stopPrice()));
 			}
-			private String itemId() {
-				return inputFields.itemIdField.getText();
-			}
-			private int stopPrice() {
-				return ((Number) inputFields.stopPriceField.getValue()).intValue();
-			}
-		});
-		add(joinAuctionButton);
+			private String itemId() { return inputFields.itemId(); }
+			//TODO rule 3. Wrap all primitives and Strings
+			private int stopPrice() { return inputFields.stopPrice(); }
+		};
 	}
 }
