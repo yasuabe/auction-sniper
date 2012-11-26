@@ -4,21 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import auctionsniper.sniper.AuctionSniper;
-import auctionsniper.util.Announcer;
 
 public class SniperPortfolio implements SniperCollector {
-	//TODO rule 4. First class collections
-	private final Announcer<PortfolioListener> announcer = Announcer
-			.to(PortfolioListener.class);
+	private final AnnouncerToPortfolioListener announcer = new AnnouncerToPortfolioListener();
 	private final List<AuctionSniper> snipers = new ArrayList<AuctionSniper>();
 
 	public void addPortfolioListener(PortfolioListener listener) {
 		announcer.addListener(listener);
 	}
 
-	@Override
-	public void addSniper(AuctionSniper sniper) {
-		snipers.add(sniper);
-		announcer.announce().sniperAdded(sniper);
+	@Override public void addSniper(AuctionSniper sniper) {
+		snipers.add(sniper);//GC 防止のために必要らしい
+		announcer.announceSniperAdded(sniper);
 	}
 }
