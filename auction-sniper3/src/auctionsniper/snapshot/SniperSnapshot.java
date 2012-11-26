@@ -4,7 +4,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import auctionsniper.util.Defect;
 import auctionsniper.values.ItemId;
-import auctionsniper.values.Price;
+import auctionsniper.values.Amount;
 import auctionsniper.values.ValueObject;
 
 public abstract class SniperSnapshot extends ValueObject {
@@ -12,10 +12,10 @@ public abstract class SniperSnapshot extends ValueObject {
 	public final PriceBid lastPriceBid;
 
 	//TODO rule 9. No getters/setters/properties
-	public Price lastPrice() { return lastPriceBid.price; }
-	public Price lastBid() {   return lastPriceBid.bid; }
+	public Amount lastPrice() { return lastPriceBid.price; }
+	public Amount lastBid() {   return lastPriceBid.bid; }
 	
-	public SniperSnapshot(ItemId itemId, Price lastPrice, Price lastBid) {
+	public SniperSnapshot(ItemId itemId, Amount lastPrice, Amount lastBid) {
 		this.itemId       = itemId;
 		this.lastPriceBid = new PriceBid(lastPrice, lastBid);
 	}
@@ -24,22 +24,22 @@ public abstract class SniperSnapshot extends ValueObject {
 		return ToStringBuilder.reflectionToString(this);
 	}
 	public static SniperSnapshot joining(ItemId itemId) {
-		return new JoiningSnapshot(itemId, Price.ZERO, Price.ZERO);
+		return new JoiningSnapshot(itemId, Amount.ZERO, Amount.ZERO);
 	}
-	public SniperSnapshot winning(Price newLastPrice) {
+	public SniperSnapshot winning(Amount newLastPrice) {
 		return new WinningSnapshot(itemId, newLastPrice, lastPriceBid.bid);
 	}
-	public SniperSnapshot bidding(Price newLastPrice, Price newLastBid) {
+	public SniperSnapshot bidding(Amount newLastPrice, Amount newLastBid) {
 		return new BiddingSnapshot(itemId, newLastPrice, newLastBid);
 	}
-	public SniperSnapshot losing(Price newLastPrice) {
+	public SniperSnapshot losing(Amount newLastPrice) {
 		return new LosingSnapshot(itemId, newLastPrice, lastPriceBid.bid);
 	}
-	public SniperSnapshot lost(Price newLastPrice) {
-		return new LostSnapshot(itemId, newLastPrice, Price.ZERO);
+	public SniperSnapshot lost(Amount newLastPrice) {
+		return new LostSnapshot(itemId, newLastPrice, Amount.ZERO);
 	}
 	public SniperSnapshot failed() {
-		return new FailedSnapshot(itemId, Price.ZERO, Price.ZERO);
+		return new FailedSnapshot(itemId, Amount.ZERO, Amount.ZERO);
 	}
 	public boolean isForSameItemAs(SniperSnapshot sniperSnapshot) {
 		return itemId.equals(sniperSnapshot.itemId);

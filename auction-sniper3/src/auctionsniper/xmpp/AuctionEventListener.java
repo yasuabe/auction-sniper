@@ -3,7 +3,7 @@ package auctionsniper.xmpp;
 import java.util.EventListener;
 
 import auctionsniper.values.Increment;
-import auctionsniper.values.Price;
+import auctionsniper.values.Amount;
 
 public interface AuctionEventListener extends EventListener {
 
@@ -12,6 +12,6 @@ public interface AuctionEventListener extends EventListener {
 		FromOtherBidder
 	}
 	void auctionClosed();
-	void currentPrice(Price price, Increment increment, PriceSource priceSource);
+	void currentPrice(Amount price, Increment increment, PriceSource priceSource);
 	void auctionFailed();
 }

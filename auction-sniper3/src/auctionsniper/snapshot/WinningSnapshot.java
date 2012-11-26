@@ -1,10 +1,10 @@
 package auctionsniper.snapshot;
 
 import auctionsniper.values.ItemId;
-import auctionsniper.values.Price;
+import auctionsniper.values.Amount;
 
 public class WinningSnapshot extends SniperSnapshot {
-	public WinningSnapshot(ItemId itemId, Price lastPrice, Price lastBid) {
+	public WinningSnapshot(ItemId itemId, Amount lastPrice, Amount lastBid) {
 		super(itemId, lastPrice, lastBid);
 	}
 	@Override public SniperSnapshot closed() {

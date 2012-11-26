@@ -5,7 +5,7 @@ import auctionsniper.SniperListener;
 import auctionsniper.snapshot.SniperSnapshot;
 import auctionsniper.values.Increment;
 import auctionsniper.values.Item;
-import auctionsniper.values.Price;
+import auctionsniper.values.Amount;
 import auctionsniper.xmpp.AuctionEventListener.PriceSource;
 
 public class AuctionSniperCore {
@@ -18,7 +18,7 @@ public class AuctionSniperCore {
 	void notifyChange(SniperSnapshot snapshot) {
 		listeners.sniperStateChanged(snapshot);
 	}
-	SniperSnapshot process(Price price, Increment increment,
+	SniperSnapshot process(Amount price, Increment increment,
 			PriceSource source, SniperSnapshot snapshot) {
 		return helper.process(price, increment, source, snapshot);
 	}

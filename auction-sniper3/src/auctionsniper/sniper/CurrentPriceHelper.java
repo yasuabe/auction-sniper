@@ -4,7 +4,7 @@ import auctionsniper.Auction;
 import auctionsniper.snapshot.SniperSnapshot;
 import auctionsniper.values.Increment;
 import auctionsniper.values.Item;
-import auctionsniper.values.Price;
+import auctionsniper.values.Amount;
 import auctionsniper.xmpp.AuctionEventListener.PriceSource;
 
 public class CurrentPriceHelper {
@@ -16,13 +16,13 @@ public class CurrentPriceHelper {
 	private final Item     item;
 	
 	CurrentPriceProcessor fromSniper = new CurrentPriceProcessor() {
-		@Override public SniperSnapshot process(Price price, Increment increment, SniperSnapshot snapshot) {
+		@Override public SniperSnapshot process(Amount price, Increment increment, SniperSnapshot snapshot) {
 			return snapshot.winning(price);
 		}
 	};
 	CurrentPriceProcessor fromOtherBidder = new CurrentPriceProcessor() {
-		@Override public SniperSnapshot process(Price price, Increment increment, SniperSnapshot snapshot) {
-			Price   bid       = price.add(increment);
+		@Override public SniperSnapshot process(Amount price, Increment increment, SniperSnapshot snapshot) {
+			Amount   bid       = price.add(increment);
 			boolean allowsBid = item.allowsBid(bid);
 			if (allowsBid) auction.bid(bid);
 			return allowsBid ? snapshot.bidding(price, bid): snapshot.losing(price); 
@@ -34,7 +34,7 @@ public class CurrentPriceHelper {
 		processors.put(PriceSource.FromOtherBidder, fromOtherBidder);
 	}
 
-	SniperSnapshot process(Price price, Increment increment,
+	SniperSnapshot process(Amount price, Increment increment,
 			PriceSource source, SniperSnapshot snapshot) {
 		return processors.get(source).process(price, increment, snapshot);
 	}

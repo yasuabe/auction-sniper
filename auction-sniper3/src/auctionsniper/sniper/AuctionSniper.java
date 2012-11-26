@@ -7,7 +7,7 @@ import auctionsniper.snapshot.SniperSnapshot;
 import auctionsniper.ui.SnipersTableModel;
 import auctionsniper.values.Increment;
 import auctionsniper.values.Item;
-import auctionsniper.values.Price;
+import auctionsniper.values.Amount;
 import auctionsniper.xmpp.AuctionEventListener;
 
 public class AuctionSniper implements AuctionEventListener {
@@ -23,7 +23,7 @@ public class AuctionSniper implements AuctionEventListener {
 		snapshot = snapshot.closed();
 		core.notifyChange(snapshot);
 	}
-	@Override public void currentPrice(Price price, Increment increment, PriceSource source) {
+	@Override public void currentPrice(Amount price, Increment increment, PriceSource source) {
 		snapshot = core.process(price, increment, source, snapshot);
 		core.notifyChange(snapshot);
 	}

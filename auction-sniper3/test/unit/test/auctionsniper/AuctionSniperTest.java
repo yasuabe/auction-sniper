@@ -26,7 +26,7 @@ import auctionsniper.snapshot.WonSnapshot;
 import auctionsniper.sniper.AuctionSniper;
 import auctionsniper.values.Increment;
 import auctionsniper.values.Item;
-import auctionsniper.values.Price;
+import auctionsniper.values.Amount;
 import auctionsniper.xmpp.AuctionEventListener.PriceSource;
 
 @RunWith(JMock.class)
@@ -68,7 +68,7 @@ public class AuctionSniperTest {
 		final int increment = 25;
 		final int bid = price + increment;
 		context.checking(new Expectations() {{
-			one(auction).bid(Price.fromInt(bid));
+			one(auction).bid(Amount.fromInt(bid));
 			atLeast(1).of(sniperListener).sniperStateChanged(
 					TestData.biddingSnapshot(ITEM_ID, price, bid));
 		}});
@@ -108,7 +108,7 @@ public class AuctionSniperTest {
 		allowingSniperWinning();
 		context.checking(new Expectations() {{
 			int bid = 123 + 45;
-			allowing(auction).bid(Price.fromInt(bid));
+			allowing(auction).bid(Amount.fromInt(bid));
 
 			atLeast(1).of(sniperListener).sniperStateChanged(
 					TestData.losingSnapshot(ITEM_ID, price, bid));
@@ -212,6 +212,6 @@ public class AuctionSniperTest {
 			}});
 	}
 	private void currentPrice(int price, int increment, PriceSource source) {
-		sniper.currentPrice(Price.fromInt(price), Increment.fromInt(increment), source);
+		sniper.currentPrice(Amount.fromInt(price), Increment.fromInt(increment), source);
 	}
 }

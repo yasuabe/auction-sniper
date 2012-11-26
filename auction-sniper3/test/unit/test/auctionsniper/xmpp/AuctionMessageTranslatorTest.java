@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import auctionsniper.values.Increment;
-import auctionsniper.values.Price;
+import auctionsniper.values.Amount;
 import auctionsniper.values.SniperId;
 import auctionsniper.xmpp.AuctionEventListener;
 import auctionsniper.xmpp.AuctionMessageTranslator;
@@ -72,7 +72,7 @@ public class AuctionMessageTranslatorTest {
 			final PriceSource source) {
 
 		context.checking(new Expectations() {{
-			exactly(1).of(listener).currentPrice(Price.fromInt(price), Increment.fromInt(increment), source);
+			exactly(1).of(listener).currentPrice(Amount.fromInt(price), Increment.fromInt(increment), source);
 		}});
 	}
 	private Message message(String body) {

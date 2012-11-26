@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import auctionsniper.values.Price;
+import auctionsniper.values.Amount;
 
 public class PriceTest {
 
@@ -21,6 +21,6 @@ public class PriceTest {
 		assertFalse(isGreatorThanOrEqualTo(criteria, target));
 	}
 	private static boolean  isGreatorThanOrEqualTo(int criteria, int target) {
-		return Price.fromInt(criteria).isGreatorThanOrEqualTo(Price.fromInt(target));
+		return Amount.fromInt(criteria).isGreatorThanOrEqualTo(Amount.fromInt(target));
 	}
 }

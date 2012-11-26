@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 import auctionsniper.values.Item;
 import auctionsniper.values.ItemId;
-import auctionsniper.values.Price;
+import auctionsniper.values.Amount;
 
 
 @SuppressWarnings("serial")
@@ -34,7 +34,7 @@ public class ControlPanel extends JPanel {
 				announcer.announceJoinAuction(new Item(itemId(), stopPrice()));
 			}
 			private ItemId itemId() {   return inputFields.itemId(); }
-			private Price stopPrice() { return inputFields.stopPrice(); }
+			private Amount stopPrice() { return inputFields.stopPrice(); }
 		};
 	}
 }

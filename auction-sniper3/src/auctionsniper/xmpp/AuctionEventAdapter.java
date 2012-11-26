@@ -1,11 +1,11 @@
 package auctionsniper.xmpp;
 
 import auctionsniper.values.Increment;
-import auctionsniper.values.Price;
+import auctionsniper.values.Amount;
 
 public class AuctionEventAdapter implements AuctionEventListener {
 	public void auctionFailed() {}
 	public void auctionClosed() {}
-	public void currentPrice(Price price, Increment increment,
+	public void currentPrice(Amount price, Increment increment,
 			PriceSource priceSource) {}
 }

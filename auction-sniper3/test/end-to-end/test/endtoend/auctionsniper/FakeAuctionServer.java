@@ -17,7 +17,7 @@ import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
 
-import auctionsniper.values.Price;
+import auctionsniper.values.Amount;
 
 public class FakeAuctionServer {
 	class SingleMessageListener implements MessageListener {
@@ -94,7 +94,7 @@ public class FakeAuctionServer {
 
 	public void hasReceivedBid(int bid, String sniperId) throws InterruptedException {
 		receivesAMessageMatching(sniperId, 
-				equalTo(format(BID.format(Price.fromInt(bid)))));
+				equalTo(format(BID.format(Amount.fromInt(bid)))));
 	}
 	public void sendInvalidMessageContaining(String brokenMessage) throws XMPPException {
 		currentChat.sendMessage(brokenMessage);

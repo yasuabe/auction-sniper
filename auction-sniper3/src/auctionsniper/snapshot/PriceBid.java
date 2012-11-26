@@ -1,13 +1,13 @@
 package auctionsniper.snapshot;
 
-import auctionsniper.values.Price;
+import auctionsniper.values.Amount;
 import auctionsniper.values.ValueObject;
 
 public class PriceBid extends ValueObject {
-	final Price price;
-	final Price bid;
+	final Amount price;
+	final Amount bid;
 
-	PriceBid(Price price, Price bid) {
+	PriceBid(Amount price, Amount bid) {
 		this.price = price;
 		this.bid   = bid;
 	}

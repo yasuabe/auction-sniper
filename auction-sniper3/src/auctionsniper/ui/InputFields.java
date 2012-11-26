@@ -6,7 +6,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 
 import auctionsniper.values.ItemId;
-import auctionsniper.values.Price;
+import auctionsniper.values.Amount;
 
 public class InputFields {
 	public static final String NEW_ITEM_ID_NAME         = "item id";
@@ -35,7 +35,7 @@ public class InputFields {
 	public ItemId itemId() {
 		return ItemId.fromString(itemIdField.getText());
 	}
-	public Price stopPrice() {
-		return Price.fromInt(((Number) stopPriceField.getValue()).intValue());
+	public Amount stopPrice() {
+		return Amount.fromInt(((Number) stopPriceField.getValue()).intValue());
 	}
 }

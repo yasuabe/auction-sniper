@@ -8,7 +8,7 @@ import java.util.Map;
 
 import auctionsniper.MissingValueException;
 import auctionsniper.values.Increment;
-import auctionsniper.values.Price;
+import auctionsniper.values.Amount;
 import auctionsniper.values.SniperId;
 import auctionsniper.xmpp.AuctionEventListener.PriceSource;
 
@@ -18,8 +18,8 @@ public class AuctionEvent {
 	public String type() throws MissingValueException {
 		return get("Event");
 	}
-	public Price currentPrice() throws MissingValueException {
-		return Price.fromInt(getInt("CurrentPrice"));
+	public Amount currentPrice() throws MissingValueException {
+		return Amount.fromInt(getInt("CurrentPrice"));
 	}
 	public Increment increment() throws MissingValueException {
 		return Increment.fromInt(getInt("Increment"));

@@ -23,7 +23,7 @@ import auctionsniper.ui.SnipersTableModel;
 import auctionsniper.ui.StatusTexts;
 import auctionsniper.util.Defect;
 import auctionsniper.values.ItemId;
-import auctionsniper.values.Price;
+import auctionsniper.values.Amount;
 
 public class SnipersTableModelTest {
 	private final Mockery           context  = new Mockery();
@@ -40,7 +40,7 @@ public class SnipersTableModelTest {
 	@Test
 	public void setsSniperValuesInColumns() {
 		SniperSnapshot joining = joining("item id"); 
-		SniperSnapshot bidding = joining.bidding(Price.fromInt(555), Price.fromInt(666));
+		SniperSnapshot bidding = joining.bidding(Amount.fromInt(555), Amount.fromInt(666));
 		
 		context.checking(new Expectations(){{
 			allowing(listener).tableChanged(with(anyInsertionEvent()));
@@ -100,7 +100,7 @@ public class SnipersTableModelTest {
 		model.addSniperSnapshot(joining("item 0"));
 		model.addSniperSnapshot(item1);
 
-		SniperSnapshot winning1 = item1.winning(Price.fromInt(123));
+		SniperSnapshot winning1 = item1.winning(Amount.fromInt(123));
 		model.sniperStateChanged(winning1);
 		
 		assertRowMatchesSnapshot(1, winning1);
