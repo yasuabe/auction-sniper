@@ -16,7 +16,6 @@ import auctionsniper.snapshot.WinningSnapshot;
 import auctionsniper.snapshot.WonSnapshot;
 import auctionsniper.ui.MainWindow;
 
-//TODO rule 7. Keep all entities small (class: 94 lines)
 public class ApplicationRunner {
 	public static final String SNIPER_ID = "sniper";
 	public static final String SNIPER_PASSWORD = "sniper";
@@ -31,7 +30,6 @@ public class ApplicationRunner {
 			openBiddingFor(auction, Integer.MAX_VALUE);
 		}
 	}
-	//TODO rule 7. Keep all entities small (method: 19 lines)
 	private void startSniper() {
 		logDriver.clearLog();
 		Thread thread = new Thread("Test Application") {

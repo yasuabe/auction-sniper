@@ -14,9 +14,8 @@ class SniperSnapshots {
 		return snapshots.size() - 1;
 	}
 	private int rowMatching(SniperSnapshot snapshot) {
-		for (int i = 0; i < snapshots.size(); i++) {
+		for (int i = 0; i < snapshots.size(); i++) 
 			if (snapshot.isForSameItemAs(snapshots.get(i))) return i;
-		}
 		throw new Defect("Cannot find match for " + snapshot);
 	}
 	public int set(SniperSnapshot newSnapshot) {

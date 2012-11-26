@@ -16,7 +16,7 @@ public abstract class SniperSnapshot extends ValueObject {
 	public Price lastBid() {   return lastPriceBid.bid; }
 	
 	public SniperSnapshot(ItemId itemId, Price lastPrice, Price lastBid) {
-		this.itemId    = itemId;
+		this.itemId       = itemId;
 		this.lastPriceBid = new PriceBid(lastPrice, lastBid);
 	}
 	@Override
