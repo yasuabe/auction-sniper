@@ -2,7 +2,7 @@ package auctionsniper.sniper;
 
 import auctionsniper.SniperListener;
 import auctionsniper.snapshot.SniperSnapshot;
-import auctionsniper.util.Announcer;
+import auctionsniper.util.announcer.Announcer;
 
 public class AnnouncerToSniperListener {
 	Announcer<SniperListener> listeners = Announcer.to(SniperListener.class);

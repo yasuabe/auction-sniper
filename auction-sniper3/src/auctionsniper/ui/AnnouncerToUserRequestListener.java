@@ -1,7 +1,7 @@
 package auctionsniper.ui;
 
 import auctionsniper.UserRequestListener;
-import auctionsniper.util.Announcer;
+import auctionsniper.util.announcer.Announcer;
 import auctionsniper.values.Item;
 
 public class AnnouncerToUserRequestListener {

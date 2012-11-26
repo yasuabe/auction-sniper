@@ -1,6 +1,6 @@
 package auctionsniper.xmpp;
 
-import auctionsniper.util.Announcer;
+import auctionsniper.util.announcer.Announcer;
 
 public class AnnouncerToAuctionEventListener {
 	private Announcer<AuctionEventListener> announcer =

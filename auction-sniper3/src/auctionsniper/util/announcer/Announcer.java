@@ -1,29 +1,17 @@
-package auctionsniper.util;
+package auctionsniper.util.announcer;
 
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.List;
 
-//TODO rule 7. Keep all entities small
 public class Announcer<T extends EventListener> {
 	private final T       proxy;
 	private final List<T> listeners = new ArrayList<T>();
 	
-	//TODO 長すぎるメソッド
 	public Announcer(Class<? extends T> listenerType) {
-		proxy = listenerType.cast(Proxy.newProxyInstance(
-			listenerType.getClassLoader(), 
-			new Class<?>[]{listenerType}, 
-			new InvocationHandler() {
-				public Object invoke(Object aProxy, Method method, Object[] args) throws Throwable {
-					announce(method, args);
-					return null;
-				}
-			}));
+		proxy = ProxyFactory.create(this, listenerType);
 	}
 	public void addListener(T listener) { listeners.add(listener); }
 	
@@ -31,7 +19,7 @@ public class Announcer<T extends EventListener> {
 	
 	public T announce() { return proxy; }
 
-	private void announce(Method m, Object[] args) {
+	void announce(Method m, Object[] args) {
 		try { invokeAll(m, args); }
 		catch (IllegalAccessException e) { couldNotInvokeListener(e); }
 		catch (InvocationTargetException e) { handleInvocationTargetException(e); }

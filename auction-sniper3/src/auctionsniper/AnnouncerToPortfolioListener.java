@@ -1,7 +1,7 @@
 package auctionsniper;
 
 import auctionsniper.sniper.AuctionSniper;
-import auctionsniper.util.Announcer;
+import auctionsniper.util.announcer.Announcer;
 
 class AnnouncerToPortfolioListener {
 	private final Announcer<PortfolioListener> announcer = Announcer
