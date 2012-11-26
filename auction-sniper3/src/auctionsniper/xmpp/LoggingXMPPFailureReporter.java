@@ -12,10 +12,9 @@ public class LoggingXMPPFailureReporter implements XMPPFailureReporter {
 		this.logger = logger;
 	}
 
-	//TODO auctionId ? sniperId ?
-	public void cannotTranslateMessage(SniperId auctionId, String failedMessage,
+	public void cannotTranslateMessage(SniperId sniperId, String failedMessage,
 			Exception exception) {
-		logger.severe(String.format(MESSAGE_FORMAT, auctionId, failedMessage,
+		logger.severe(String.format(MESSAGE_FORMAT, sniperId, failedMessage,
 				exception.toString()));
 	}
 }
