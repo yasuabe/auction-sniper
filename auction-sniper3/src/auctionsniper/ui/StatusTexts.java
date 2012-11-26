@@ -27,4 +27,7 @@ public class StatusTexts {
 	public static String textFor(Class<? extends SniperSnapshot> clazz) {
 		return STATUS_TEXT.get(clazz);
 	}
+	public static String textFor(SniperSnapshot snapshot) {
+		return textFor(snapshot.getClass());
+	}
 }

@@ -20,6 +20,7 @@ import test.auctionsniper.util.TestData;
 import auctionsniper.snapshot.SniperSnapshot;
 import auctionsniper.ui.Column;
 import auctionsniper.ui.SnipersTableModel;
+import auctionsniper.ui.StatusTexts;
 import auctionsniper.util.Defect;
 import auctionsniper.values.ItemId;
 import auctionsniper.values.Price;
@@ -108,7 +109,7 @@ public class SnipersTableModelTest {
 		assertEquals(snapshot.itemId, cellValue(row, Column.ITEM_IDENTIFIER));
 		assertEquals(snapshot.lastPrice(), cellValue(row, Column.LAST_PRICE));
 		assertEquals(snapshot.lastBid(), cellValue(row, Column.LAST_BID));
-		assertEquals(SnipersTableModel.textFor(snapshot),
+		assertEquals(StatusTexts.textFor(snapshot),
 				cellValue(row, Column.SNIPER_STATE));
 	}
 	Matcher<TableModelEvent> anInsertionAtRow(final int row) {

@@ -9,15 +9,20 @@ import auctionsniper.snapshot.SniperSnapshot;
 import auctionsniper.sniper.AuctionSniper;
 import auctionsniper.util.Defect;
 
-//TODO rule 7. Keep all entities small
 @SuppressWarnings("serial")
 public class SnipersTableModel extends AbstractTableModel implements
 		SniperListener, PortfolioListener {
 
-	private List<SniperSnapshot> snapshots = new ArrayList<SniperSnapshot>();
+	//TODO rule 4. First class collections
+	private final List<SniperSnapshot> snapshots = new ArrayList<SniperSnapshot>();
 	
 	@Override public int getColumnCount() { return Column.values().length; }
 	@Override public String getColumnName(int column) { return Column.at(column).name; }
+	@Override public int getRowCount() { return snapshots.size(); }
+	@Override public Object getValueAt(int row, int column) {
+		return Column.at(column).valueIn(snapshots.get(row));
+	}	
+
 	@Override public void sniperStateChanged(SniperSnapshot newSnapshot) {
 		int row = rowMatching(newSnapshot);
 		snapshots.set(row, newSnapshot);
@@ -27,22 +32,14 @@ public class SnipersTableModel extends AbstractTableModel implements
 		addSniperSnapshot(sniper.getSnapshot());
 		sniper.addSniperListener(new SwingThreadSniperListener(this));
 	}
-	@Override public int getRowCount() { return snapshots.size(); }
-
-	@Override public Object getValueAt(int rowIndex, int columnIndex) {
-		return Column.at(columnIndex).valueIn(snapshots.get(rowIndex));
-	}	
 	private int rowMatching(SniperSnapshot snapshot) {
 		for (int i = 0; i < snapshots.size(); i++) {
 			if (snapshot.isForSameItemAs(snapshots.get(i))) return i;
 		}
 		throw new Defect("Cannot find match for " + snapshot);
 	}
-	public static String textFor(SniperSnapshot snapshot) {
-		return StatusTexts.textFor(snapshot.getClass());
-	}
-	public void addSniperSnapshot(SniperSnapshot joining) {
-		snapshots.add(joining);
+	public void addSniperSnapshot(SniperSnapshot snapshot) {
+		snapshots.add(snapshot);
 		int row = snapshots.size() - 1;
 		fireTableRowsInserted(row, row);
 	}
