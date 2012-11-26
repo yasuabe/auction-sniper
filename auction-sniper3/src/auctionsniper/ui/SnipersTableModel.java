@@ -7,7 +7,6 @@ import java.util.Map;
 
 import javax.swing.table.AbstractTableModel;
 
-import auctionsniper.AuctionSniper;
 import auctionsniper.PortfolioListener;
 import auctionsniper.SniperListener;
 import auctionsniper.snapshot.BiddingSnapshot;
@@ -18,6 +17,7 @@ import auctionsniper.snapshot.LostSnapshot;
 import auctionsniper.snapshot.SniperSnapshot;
 import auctionsniper.snapshot.WinningSnapshot;
 import auctionsniper.snapshot.WonSnapshot;
+import auctionsniper.sniper.AuctionSniper;
 import auctionsniper.util.Defect;
 
 @SuppressWarnings("serial")

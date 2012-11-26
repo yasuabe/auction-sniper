@@ -1,5 +1,6 @@
-package auctionsniper;
+package auctionsniper.sniper;
 
+import auctionsniper.SniperListener;
 import auctionsniper.snapshot.SniperSnapshot;
 import auctionsniper.util.Announcer;
 

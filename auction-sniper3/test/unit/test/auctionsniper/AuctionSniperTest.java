@@ -16,7 +16,6 @@ import org.junit.runner.RunWith;
 
 import test.auctionsniper.util.TestData;
 import auctionsniper.Auction;
-import auctionsniper.AuctionSniper;
 import auctionsniper.SniperListener;
 import auctionsniper.snapshot.BiddingSnapshot;
 import auctionsniper.snapshot.LosingSnapshot;
@@ -24,6 +23,7 @@ import auctionsniper.snapshot.LostSnapshot;
 import auctionsniper.snapshot.SniperSnapshot;
 import auctionsniper.snapshot.WinningSnapshot;
 import auctionsniper.snapshot.WonSnapshot;
+import auctionsniper.sniper.AuctionSniper;
 import auctionsniper.values.Increment;
 import auctionsniper.values.Item;
 import auctionsniper.values.Price;

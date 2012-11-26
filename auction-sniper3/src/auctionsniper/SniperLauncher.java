@@ -1,5 +1,6 @@
 package auctionsniper;
 
+import auctionsniper.sniper.AuctionSniper;
 import auctionsniper.values.Item;
 
 public class SniperLauncher implements UserRequestListener {

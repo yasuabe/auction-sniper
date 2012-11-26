@@ -1,4 +1,4 @@
-package auctionsniper;
+package auctionsniper.sniper;
 
 import auctionsniper.snapshot.SniperSnapshot;
 import auctionsniper.values.Increment;

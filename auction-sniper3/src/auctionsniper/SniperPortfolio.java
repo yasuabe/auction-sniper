@@ -3,6 +3,7 @@ package auctionsniper;
 import java.util.ArrayList;
 import java.util.List;
 
+import auctionsniper.sniper.AuctionSniper;
 import auctionsniper.util.Announcer;
 
 public class SniperPortfolio implements SniperCollector {

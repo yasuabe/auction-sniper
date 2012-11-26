@@ -12,9 +12,9 @@ import org.junit.Test;
 
 import auctionsniper.Auction;
 import auctionsniper.AuctionHouse;
-import auctionsniper.AuctionSniper;
 import auctionsniper.SniperCollector;
 import auctionsniper.SniperLauncher;
+import auctionsniper.sniper.AuctionSniper;
 import auctionsniper.values.Item;
 import auctionsniper.values.ItemId;
 

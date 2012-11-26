@@ -1,6 +1,8 @@
-package auctionsniper;
+package auctionsniper.sniper;
 
 
+import auctionsniper.Auction;
+import auctionsniper.SniperListener;
 import auctionsniper.snapshot.SniperSnapshot;
 import auctionsniper.values.Increment;
 import auctionsniper.values.Item;
@@ -31,6 +33,7 @@ public class AuctionSniper implements AuctionEventListener {
 	public void addSniperListener(SniperListener listener) {
 		core.addListener(listener);
 	}
+	//TODO rule 9. No getters/setters/properties
 	public SniperSnapshot getSnapshot() {
 		return snapshot;
 	}
