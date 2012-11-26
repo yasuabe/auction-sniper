@@ -11,15 +11,12 @@ import javax.swing.JTable;
 import auctionsniper.Main;
 import auctionsniper.SniperPortfolio;
 import auctionsniper.UserRequestListener;
-import auctionsniper.util.Announcer;
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {
 	public static final String APPLICATION_TITLE   = "Auction Sniper";
 	
-	private final Announcer<UserRequestListener> userRequests = Announcer
-			.to(UserRequestListener.class);
-	
+	private final AnnouncerToUserRequestListener userRequests = new AnnouncerToUserRequestListener();
 	public MainWindow(SniperPortfolio portfolio) {
 		super(APPLICATION_TITLE);
 
@@ -43,7 +40,7 @@ public class MainWindow extends JFrame {
 
 		return new SnipersTable(model);
 	}
-	public void addUserRequestListener(UserRequestListener userRequestListener) {
-		userRequests.addListener(userRequestListener);
+	public void addUserRequestListener(UserRequestListener listener) {
+		userRequests.add(listener);
  	}
 }
