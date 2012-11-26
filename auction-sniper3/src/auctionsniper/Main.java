@@ -34,7 +34,7 @@ public class Main {
 		main.addUserRequestListenerFor(auctionHouse);
 	}
 	private void addUserRequestListenerFor(final AuctionHouse auctionHouse) {
-		ui.addUserRequestListener(new SniperLauncher(auctionHouse, portfolio));
+		ui.add(new SniperLauncher(auctionHouse, portfolio));
 	}
 	private void disconnectWhenUICloses(final XMPPAuctionHouse auctionHouse) {
 		ui.addWindowListener(new WindowAdapter() {

@@ -14,14 +14,14 @@ import auctionsniper.UserRequestListener;
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {
-	public static final String APPLICATION_TITLE   = "Auction Sniper";
+	public static final String APPLICATION_TITLE = "Auction Sniper";
 	
-	private final AnnouncerToUserRequestListener userRequests = new AnnouncerToUserRequestListener();
+	private final AnnouncerToUserRequestListener announcer = new AnnouncerToUserRequestListener();
 	public MainWindow(SniperPortfolio portfolio) {
 		super(APPLICATION_TITLE);
 
 		setName(Main.MAIN_WINDOW_NAME);
-		fillContentPane(makeSnipersTable(portfolio), new ControlPanel(userRequests));
+		fillContentPane(makeSnipersTable(portfolio), new ControlPanel(announcer));
 		pack();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,7 +40,7 @@ public class MainWindow extends JFrame {
 
 		return new SnipersTable(model);
 	}
-	public void addUserRequestListener(UserRequestListener listener) {
-		userRequests.add(listener);
+	public void add(UserRequestListener listener) {
+		announcer.add(listener);
  	}
 }

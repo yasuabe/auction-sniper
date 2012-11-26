@@ -6,14 +6,6 @@ import auctionsniper.values.ItemId;
 import auctionsniper.values.Price;
 
 public class TestData {
-//
-//	public static SniperSnapshot newSnapshot(String itemId, int price, int bid,
-//			SniperState state) {
-//
-//		return new SniperSnapshot(ItemId.fromString(itemId),
-//				Price.fromInt(price), Price.fromInt(bid), state);
-//	}
-//
 	public static SniperSnapshot joinSnapshot(String itemId) {
 		return SniperSnapshot.joining(ItemId.fromString(itemId));
 	}

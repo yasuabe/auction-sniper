@@ -17,23 +17,23 @@ public class ControlPanel extends JPanel {
 	private final JButton     joinAuctionButton = new JoinAuctionButton();
 	private final InputFields inputFields       = new InputFields();
 
-	ControlPanel(final AnnouncerToUserRequestListener userRequests) {
+	ControlPanel(final AnnouncerToUserRequestListener announcer) {
 		super(new FlowLayout());
 
 		add(inputFields.itemIdField);
 		add(inputFields.stopPriceField);
 		
-		joinAuctionButton.addActionListener(createListener(userRequests));
+		joinAuctionButton.addActionListener(createListener(announcer));
 		add(joinAuctionButton);
 	}
 
 	private ActionListener createListener(
-			final AnnouncerToUserRequestListener userRequests) {
+			final AnnouncerToUserRequestListener announcer) {
 		return new ActionListener() {
 			@Override public void actionPerformed(ActionEvent e) {
-				userRequests.joinAuction(new Item(itemId(), stopPrice()));
+				announcer.announceJoinAuction(new Item(itemId(), stopPrice()));
 			}
-			private ItemId itemId() { return inputFields.itemId(); }
+			private ItemId itemId() {   return inputFields.itemId(); }
 			private Price stopPrice() { return inputFields.stopPrice(); }
 		};
 	}

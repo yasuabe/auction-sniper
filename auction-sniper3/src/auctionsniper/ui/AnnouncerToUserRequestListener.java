@@ -5,14 +5,16 @@ import auctionsniper.util.Announcer;
 import auctionsniper.values.Item;
 
 public class AnnouncerToUserRequestListener {
-	private final Announcer<UserRequestListener> userRequests;
+	
+	private final Announcer<UserRequestListener> announcer;
+
 	AnnouncerToUserRequestListener() {			
-		userRequests = new Announcer<>(UserRequestListener.class);
+		announcer = new Announcer<>(UserRequestListener.class);
 	}
 	public void add(UserRequestListener listener) {
-		userRequests.addListener(listener);
+		announcer.addListener(listener);
 	}
-	public void joinAuction(Item newItem) {
-		userRequests.announce().joinAuction(newItem);
+	public void announceJoinAuction(Item newItem) {
+		announcer.announce().joinAuction(newItem);
 	}
 }
