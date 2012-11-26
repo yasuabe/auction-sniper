@@ -14,6 +14,7 @@ import org.junit.Test;
 import test.endtoend.auctionsniper.ApplicationRunner;
 import test.endtoend.auctionsniper.FakeAuctionServer;
 import auctionsniper.Auction;
+import auctionsniper.ConnectionInfo;
 import auctionsniper.values.Increment;
 import auctionsniper.values.Price;
 import auctionsniper.xmpp.AuctionEventListener;
@@ -26,10 +27,10 @@ public class XMPPAuctionHouseTest {
 
 	@Before
 	public void openConnection() throws Exception {
-		auctionHouse = XMPPAuctionHouse.connect(
+		auctionHouse = XMPPAuctionHouse.connect(new ConnectionInfo(new String[]{
 				FakeAuctionServer.XMPP_HOSTNAME, 
 				ApplicationRunner.SNIPER_ID, 
-				ApplicationRunner.SNIPER_PASSWORD);
+				ApplicationRunner.SNIPER_PASSWORD}));
 	}
 
 	@After

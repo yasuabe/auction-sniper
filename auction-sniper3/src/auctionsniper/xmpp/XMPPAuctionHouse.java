@@ -10,6 +10,7 @@ import org.jivesoftware.smack.XMPPException;
 
 import auctionsniper.Auction;
 import auctionsniper.AuctionHouse;
+import auctionsniper.ConnectionInfo;
 import auctionsniper.values.Item;
 
 public class XMPPAuctionHouse implements AuctionHouse {
@@ -31,14 +32,13 @@ public class XMPPAuctionHouse implements AuctionHouse {
 	}
 
 	//TODO 長すぎるメソッド
-	public static XMPPAuctionHouse connect(//
-			String hostname, String username, String password) //
+	public static XMPPAuctionHouse connect(ConnectionInfo info) //
 			throws XMPPAuctionException {
 
-		XMPPConnection connection = new XMPPConnection(hostname);
+		XMPPConnection connection = new XMPPConnection(info.hostname());
 		try {
 			connection.connect();
-			connection.login(username, password, AUCTION_RESOURCE);
+			connection.login(info.username(), info.password(), AUCTION_RESOURCE);
 
 			return new XMPPAuctionHouse(connection);
 

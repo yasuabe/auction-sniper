@@ -9,12 +9,8 @@ import auctionsniper.ui.MainWindow;
 import auctionsniper.xmpp.XMPPAuctionHouse;
 
 public class Main {
-	public static final int ARG_HOSTNAME = 0;
-	public static final int ARG_USERNAME = 1;
-	public static final int ARG_PASSWORD = 2;
-	public static final int ARG_ITEM_ID = 3;
-	
-	public static final String MAIN_WINDOW_NAME = "Auction Sniper Main";
+	//TODO: 置き場所再考
+	public static final String MAIN_WINDOW_NAME   = "Auction Sniper Main";
 	public static final String SNIPER_STATUS_NAME = "sniper status";
 	
 	private MainWindow ui;
@@ -31,9 +27,9 @@ public class Main {
 		});
 	}
 	public static void main(String... args) throws Exception {
+		XMPPAuctionHouse auctionHouse = XMPPAuctionHouse.connect(new ConnectionInfo(args));
+
 		Main main = new Main();
-		XMPPAuctionHouse auctionHouse = XMPPAuctionHouse.connect(//
-				args[ARG_HOSTNAME], args[ARG_USERNAME], args[ARG_PASSWORD]);
 		main.disconnectWhenUICloses(auctionHouse);
 		main.addUserRequestListenerFor(auctionHouse);
 	}
