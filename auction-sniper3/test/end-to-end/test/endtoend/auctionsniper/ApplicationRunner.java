@@ -1,6 +1,6 @@
 package test.endtoend.auctionsniper;
 
-import static auctionsniper.ui.SnipersTableModel.textFor;
+import static auctionsniper.ui.StatusTexts.textFor;
 import static org.hamcrest.Matchers.containsString;
 import static test.endtoend.auctionsniper.FakeAuctionServer.XMPP_HOSTNAME;
 
@@ -15,8 +15,8 @@ import auctionsniper.snapshot.LostSnapshot;
 import auctionsniper.snapshot.WinningSnapshot;
 import auctionsniper.snapshot.WonSnapshot;
 import auctionsniper.ui.MainWindow;
-import auctionsniper.ui.SnipersTableModel;
 
+//TODO rule 7. Keep all entities small (class: 94 lines)
 public class ApplicationRunner {
 	public static final String SNIPER_ID = "sniper";
 	public static final String SNIPER_PASSWORD = "sniper";
@@ -31,6 +31,7 @@ public class ApplicationRunner {
 			openBiddingFor(auction, Integer.MAX_VALUE);
 		}
 	}
+	//TODO rule 7. Keep all entities small (method: 19 lines)
 	private void startSniper() {
 		logDriver.clearLog();
 		Thread thread = new Thread("Test Application") {
@@ -52,7 +53,7 @@ public class ApplicationRunner {
 	}
 	public void showsSniperHasLostAuction(FakeAuctionServer auction, int lastPrice, int lastBid) {
 		driver.showsSniperStatus(auction.getItemId(), lastPrice, lastBid,
-				SnipersTableModel.textFor(LostSnapshot.class));
+				textFor(LostSnapshot.class));
 	}
 
 	public void stop() {
@@ -60,15 +61,15 @@ public class ApplicationRunner {
 	}
 	public void hasShownSniperIsBidding(FakeAuctionServer auction, int lastPrice, int lastBid) {
 		driver.showsSniperStatus(auction.getItemId(), lastPrice, lastBid,
-				SnipersTableModel.textFor(BiddingSnapshot.class));
+				textFor(BiddingSnapshot.class));
 	}
 	public void hasShownSniperIsWinning(FakeAuctionServer auction, int winningBid) {
 		driver.showsSniperStatus(auction.getItemId(), winningBid, winningBid,
-				SnipersTableModel.textFor(WinningSnapshot.class));
+				textFor(WinningSnapshot.class));
 	}
 	public void showsSniperHasWonAuction(FakeAuctionServer auction, int lastPrice) {
 		driver.showsSniperStatus(auction.getItemId(), lastPrice, lastPrice,
-				SnipersTableModel.textFor(WonSnapshot.class));
+				textFor(WonSnapshot.class));
 	}
 	public void startBiddingWithStopPrice(FakeAuctionServer auction, int stopPrice) {
 	    startSniper();
