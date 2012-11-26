@@ -1,10 +1,6 @@
 package auctionsniper.xmpp;
 
-import java.util.logging.FileHandler;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
-import org.apache.commons.io.FilenameUtils;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 
@@ -13,24 +9,22 @@ import auctionsniper.AuctionHouse;
 import auctionsniper.ConnectionInfo;
 import auctionsniper.values.Item;
 
+//TODO rule 7. Keep all entities small
 public class XMPPAuctionHouse implements AuctionHouse {
 
 	public static final String AUCTION_RESOURCE = "Auction";
-	public static final String LOG_FILE_NAME = "auction-sniper.log";
-	private static final String LOGGER_NAME = "auction-sniper";
-	private XMPPConnection connection;
+
+	private final XMPPConnection      connection;
 	private final XMPPFailureReporter failureReporter;
 	
 	@Override
 	public Auction auctionFor(Item item) {
 	    return new XMPPAuction(connection, item.identifier, failureReporter);
 	}
-
 	public XMPPAuctionHouse(XMPPConnection connection) throws XMPPAuctionException {
 		this.connection      = connection;
-		this.failureReporter = new LoggingXMPPFailureReporter(makeLogger());
+		this.failureReporter = LoggingXMPPFailureReporterFactory.create();
 	}
-
 	//TODO 長すぎるメソッド
 	public static XMPPAuctionHouse connect(ConnectionInfo info) //
 			throws XMPPAuctionException {
@@ -47,27 +41,7 @@ public class XMPPAuctionHouse implements AuctionHouse {
 					+ connection, xmppe);
 		}
 	}
-
 	public void disconnect() {
 		connection.disconnect();		
-	}
-	private Logger makeLogger() throws SecurityException, XMPPAuctionException  {
-		Logger logger = Logger.getLogger(LOGGER_NAME);
-		logger.setUseParentHandlers(false);
-		logger.addHandler(simpleFileHandler());
-		return logger;
-	}
-	//TODO 長すぎるメソッド
-	private FileHandler simpleFileHandler() throws XMPPAuctionException {
-		try {
-			FileHandler handler = new FileHandler(LOG_FILE_NAME);
-			handler.setFormatter(new SimpleFormatter());
-
-			return handler;
-		} catch (Exception e) {
-			throw new XMPPAuctionException (
-					"Could not create logger FileHandler "
-							+ FilenameUtils.getFullPath(LOG_FILE_NAME), e);
-		}
 	}
 }
