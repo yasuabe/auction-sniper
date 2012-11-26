@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import auctionsniper.Main;
 import auctionsniper.SniperPortfolio;
 import auctionsniper.UserRequestListener;
 
@@ -17,10 +16,13 @@ public class MainWindow extends JFrame {
 	public static final String APPLICATION_TITLE = "Auction Sniper";
 	
 	private final AnnouncerToUserRequestListener announcer = new AnnouncerToUserRequestListener();
+
+	//TODO: 置き場所再考
+	public static final String MAIN_WINDOW_NAME   = "Auction Sniper Main";
 	public MainWindow(SniperPortfolio portfolio) {
 		super(APPLICATION_TITLE);
 
-		setName(Main.MAIN_WINDOW_NAME);
+		setName(MainWindow.MAIN_WINDOW_NAME);
 		fillContentPane(makeSnipersTable(portfolio), new ControlPanel(announcer));
 		pack();
 		

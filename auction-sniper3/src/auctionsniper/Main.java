@@ -10,11 +10,7 @@ import auctionsniper.ui.MainWindow;
 import auctionsniper.xmpp.XMPPAuctionHouse;
 
 public class Main {
-	//TODO: 置き場所再考
-	public static final String MAIN_WINDOW_NAME   = "Auction Sniper Main";
-	public static final String SNIPER_STATUS_NAME = "sniper status";
-	
-	private MainWindow ui;
+	private       MainWindow      ui;
 	private final SniperPortfolio portfolio = new SniperPortfolio();
 	
 	public Main() throws Exception {

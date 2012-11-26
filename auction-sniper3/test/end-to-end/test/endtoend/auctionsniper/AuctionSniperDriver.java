@@ -8,9 +8,9 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.table.JTableHeader;
 
-import auctionsniper.Main;
 import auctionsniper.ui.InputFields;
 import auctionsniper.ui.JoinAuctionButton;
+import auctionsniper.ui.MainWindow;
 
 import com.objogate.wl.swing.AWTEventQueueProber;
 import com.objogate.wl.swing.driver.JButtonDriver;
@@ -26,7 +26,7 @@ public class AuctionSniperDriver extends JFrameDriver {
 	public AuctionSniperDriver(int timeoutMillis) {
 		super(new GesturePerformer(),
 				JFrameDriver.topLevelFrame(
-						named(Main.MAIN_WINDOW_NAME),
+						named(MainWindow.MAIN_WINDOW_NAME),
 						showingOnScreen()),
 						new AWTEventQueueProber(timeoutMillis, 100));
 	}
