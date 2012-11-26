@@ -1,0 +1,12 @@
+package auctionsniper.ui;
+
+import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
+
+public class SnipersTable extends JTable {
+	private static final String SNIPERS_TABLE_NAME = "Snipers Table";
+	SnipersTable(AbstractTableModel model) {
+		super(model);
+		setName(SNIPERS_TABLE_NAME);
+	}
+}

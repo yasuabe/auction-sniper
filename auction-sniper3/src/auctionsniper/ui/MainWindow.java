@@ -15,8 +15,6 @@ import auctionsniper.util.Announcer;
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {
-	private static final String SNIPERS_TABLE_NAME = "Snipers Table";
-	
 	public static final String APPLICATION_TITLE   = "Auction Sniper";
 	
 	private final Announcer<UserRequestListener> userRequests = Announcer
@@ -42,11 +40,8 @@ public class MainWindow extends JFrame {
 	private JTable makeSnipersTable(SniperPortfolio portfolio) {
 		SnipersTableModel model = new SnipersTableModel();
 		portfolio.addPortfolioListener(model);
-		
-		final JTable snipersTable = new JTable(model);
-		snipersTable.setName(SNIPERS_TABLE_NAME);
-		
-		return snipersTable;
+
+		return new SnipersTable(model);
 	}
 	public void addUserRequestListener(UserRequestListener userRequestListener) {
 		userRequests.addListener(userRequestListener);
