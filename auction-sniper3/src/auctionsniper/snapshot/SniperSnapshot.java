@@ -42,7 +42,7 @@ public abstract class SniperSnapshot extends ValueObject {
 	public boolean isForSameItemAs(SniperSnapshot sniperSnapshot) {
 		return isForSameItemAs(sniperSnapshot.itemId);
 	}
-	public boolean isForSameItemAs(ItemId itemId) { return itemId.equals(itemId); }
+	public boolean isForSameItemAs(ItemId itemId2) { return itemId.equals(itemId2); }
 
 	public SniperSnapshot closed() {
 		throw new Defect("Auction is already closed");
