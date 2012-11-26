@@ -10,6 +10,7 @@ import javax.swing.table.JTableHeader;
 
 import auctionsniper.Main;
 import auctionsniper.ui.ControlPanel;
+import auctionsniper.ui.JoinAuctionButton;
 
 import com.objogate.wl.swing.AWTEventQueueProber;
 import com.objogate.wl.swing.driver.JButtonDriver;
@@ -51,7 +52,7 @@ public class AuctionSniperDriver extends JFrameDriver {
 		bidButton().click();
 	}
 	private JButtonDriver bidButton() {
-		return new JButtonDriver(this, JButton.class, named(ControlPanel.JOIN_BUTTON_NAME));
+		return new JButtonDriver(this, JButton.class, named(JoinAuctionButton.JOIN_BUTTON_NAME));
 	}
 
 	private JTextFieldDriver itemIdField() {
