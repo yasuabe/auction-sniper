@@ -1,5 +1,6 @@
 package auctionsniper.xmpp;
 
+import java.io.IOException;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
@@ -22,17 +23,20 @@ public class LoggingXMPPFailureReporterFactory {
 
 		return logger;
 	}
-	//TODO 長すぎるメソッド
 	private static FileHandler simpleFileHandler() throws XMPPAuctionException {
-		try {
-			FileHandler handler = new FileHandler(LOG_FILE_NAME);
-			handler.setFormatter(new SimpleFormatter());
+		try                 { return createHandler(); }
+		catch (Exception e) { throw createXMPPAuctionException(e); }
+	}
+	private static FileHandler createHandler() throws IOException {
+		FileHandler handler = new FileHandler(LOG_FILE_NAME);
+		handler.setFormatter(new SimpleFormatter());
 
-			return handler;
-		} catch (Exception e) {
-			throw new XMPPAuctionException (
-					"Could not create logger FileHandler "
-							+ FilenameUtils.getFullPath(LOG_FILE_NAME), e);
-		}
+		return handler;
+	}
+	//TODO rule 6. Don’t abbreviate
+	private static XMPPAuctionException createXMPPAuctionException(Exception e) {
+		return new XMPPAuctionException (
+				"Could not create logger FileHandler "
+						+ FilenameUtils.getFullPath(LOG_FILE_NAME), e);
 	}
 }
