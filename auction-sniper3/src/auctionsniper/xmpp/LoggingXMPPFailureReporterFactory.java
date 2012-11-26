@@ -7,8 +7,10 @@ import java.util.logging.SimpleFormatter;
 import org.apache.commons.io.FilenameUtils;
 
 public class LoggingXMPPFailureReporterFactory {
-	public static final String LOG_FILE_NAME = "auction-sniper.log";
-	private static final String LOGGER_NAME = "auction-sniper";
+	
+	public  static final String LOG_FILE_NAME = "auction-sniper.log";//TODO 置き場所再考
+	private static final String LOGGER_NAME   = "auction-sniper";
+
 	public static XMPPFailureReporter create() throws XMPPAuctionException {
 		return new LoggingXMPPFailureReporter(makeLogger());
 	}
