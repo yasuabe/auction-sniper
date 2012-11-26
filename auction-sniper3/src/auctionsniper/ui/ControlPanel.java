@@ -1,13 +1,15 @@
 package auctionsniper.ui;
 
-import static test.auctionsniper.util.TestData.newItem;
-
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import auctionsniper.values.Item;
+import auctionsniper.values.ItemId;
+import auctionsniper.values.Price;
 
 
 @SuppressWarnings("serial")
@@ -29,11 +31,10 @@ public class ControlPanel extends JPanel {
 			final AnnouncerToUserRequestListener userRequests) {
 		return new ActionListener() {
 			@Override public void actionPerformed(ActionEvent e) {
-				userRequests.joinAuction(newItem(itemId(), stopPrice()));
+				userRequests.joinAuction(new Item(itemId(), stopPrice()));
 			}
-			private String itemId() { return inputFields.itemId(); }
-			//TODO rule 3. Wrap all primitives and Strings
-			private int stopPrice() { return inputFields.stopPrice(); }
+			private ItemId itemId() { return inputFields.itemId(); }
+			private Price stopPrice() { return inputFields.stopPrice(); }
 		};
 	}
 }
