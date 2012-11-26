@@ -29,7 +29,7 @@ public class SnipersTableModel extends AbstractTableModel implements
 		fireTableRowsUpdated(row, row);
 	}
 	@Override public void sniperAdded(AuctionSniper sniper) {
-		addSniperSnapshot(sniper.getSnapshot());
+		sniper.register(this);
 		sniper.addSniperListener(new SwingThreadSniperListener(this));
 	}
 	private int rowMatching(SniperSnapshot snapshot) {
