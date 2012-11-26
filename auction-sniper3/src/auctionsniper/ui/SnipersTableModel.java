@@ -20,6 +20,7 @@ import auctionsniper.snapshot.WonSnapshot;
 import auctionsniper.sniper.AuctionSniper;
 import auctionsniper.util.Defect;
 
+//TODO rule 7. Keep all entities small
 @SuppressWarnings("serial")
 public class SnipersTableModel extends AbstractTableModel implements
 		SniperListener, PortfolioListener {
@@ -37,30 +38,32 @@ public class SnipersTableModel extends AbstractTableModel implements
     }
     private List<SniperSnapshot> snapshots = new ArrayList<SniperSnapshot>();
 	
-	public int getColumnCount() {
+    @Override public int getColumnCount() {
 		return Column.values().length;
 	}
 	@Override
 	public String getColumnName(int column) {
 		return Column.at(column).name;
 	}
-	public int getRowCount() { return snapshots.size(); }
-
-	public Object getValueAt(int rowIndex, int columnIndex) {
-		return Column.at(columnIndex).valueIn(snapshots.get(rowIndex));
-	}	
 	@Override
 	public void sniperStateChanged(SniperSnapshot newSnapshot) {
 		int row = rowMatching(newSnapshot);
 		snapshots.set(row, newSnapshot);
 		fireTableRowsUpdated(row, row);
 	}
+	@Override
+	public void sniperAdded(AuctionSniper sniper) {
+		addSniperSnapshot(sniper.getSnapshot());
+		sniper.addSniperListener(new SwingThreadSniperListener(this));
+	}
+	@Override public int getRowCount() { return snapshots.size(); }
+
+	@Override public Object getValueAt(int rowIndex, int columnIndex) {
+		return Column.at(columnIndex).valueIn(snapshots.get(rowIndex));
+	}	
 	private int rowMatching(SniperSnapshot snapshot) {
-		//TODO rule 1. One level of indentation per method
 		for (int i = 0; i < snapshots.size(); i++) {
-			if (snapshot.isForSameItemAs(snapshots.get(i))) {
-				return i;
-			}
+			if (snapshot.isForSameItemAs(snapshots.get(i))) return i;
 		}
 		throw new Defect("Cannot find match for " + snapshot);
 	}
@@ -74,10 +77,5 @@ public class SnipersTableModel extends AbstractTableModel implements
 		snapshots.add(joining);
 		int row = snapshots.size() - 1;
 		fireTableRowsInserted(row, row);
-	}
-	@Override
-	public void sniperAdded(AuctionSniper sniper) {
-		addSniperSnapshot(sniper.getSnapshot());
-		sniper.addSniperListener(new SwingThreadSniperListener(this));
 	}
 }
