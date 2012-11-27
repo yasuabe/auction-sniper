@@ -1,6 +1,6 @@
 package auctionsniper.xmpp;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 import auctionsniper.MissingValueException;
@@ -8,7 +8,7 @@ import auctionsniper.event.AuctionEvent;
 import auctionsniper.event.EventHandler;
 
 public class EventHandlers {
-	private final Map<EventType , EventHandler> map = new HashMap<>();
+	private final Map<EventType , EventHandler> map = new EnumMap<>(EventType.class);
 
 	void handle(AuctionEvent event) throws MissingValueException {
 		EventHandler handler = map.get(event.type());
