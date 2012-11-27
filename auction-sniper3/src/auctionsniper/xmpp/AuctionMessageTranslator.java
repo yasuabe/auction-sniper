@@ -1,6 +1,5 @@
 package auctionsniper.xmpp;
 
-
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.packet.Message;
@@ -25,11 +24,12 @@ public class AuctionMessageTranslator implements MessageListener {
 		initializeHandlers();
 	}
 	private void initializeHandlers() {
-		handlers.put("CLOSE", new CloseEventHandler(listener, sniperId));
-		handlers.put("PRICE", new PriceEventHandler(listener, sniperId));
+		handlers.put(EventType.CLOSE, new CloseEventHandler(listener, sniperId));
+		handlers.put(EventType.PRICE, new PriceEventHandler(listener, sniperId));
 	}
 	@Override public void processMessage(Chat chat, Message message) {
 		String messageBody = message.getBody();
+		
 		try { translate(messageBody); }
 		catch (Exception parseException) {
 			processParseException(messageBody, parseException);

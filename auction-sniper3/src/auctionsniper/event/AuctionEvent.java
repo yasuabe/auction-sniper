@@ -11,12 +11,13 @@ import auctionsniper.values.Increment;
 import auctionsniper.values.Amount;
 import auctionsniper.values.SniperId;
 import auctionsniper.xmpp.AuctionEventListener.PriceSource;
+import auctionsniper.xmpp.EventType;
 
 public class AuctionEvent {
 	private final Map<String, String> fields = new HashMap<String, String>();
 
-	public String type() throws MissingValueException {
-		return get("Event");
+	public EventType type() throws MissingValueException {
+		return EventType.valueOf(get("Event"));
 	}
 	public Amount currentPrice() throws MissingValueException {
 		return Amount.fromInt(getInt("CurrentPrice"));

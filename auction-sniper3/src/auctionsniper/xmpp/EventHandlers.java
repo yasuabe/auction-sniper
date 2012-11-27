@@ -8,13 +8,13 @@ import auctionsniper.event.AuctionEvent;
 import auctionsniper.event.EventHandler;
 
 public class EventHandlers {
-	private final Map<String, EventHandler> map = new HashMap<String, EventHandler>();
+	private final Map<EventType , EventHandler> map = new HashMap<>();
 
 	void handle(AuctionEvent event) throws MissingValueException {
 		EventHandler handler = map.get(event.type());
 		if (null != handler) handler.handle(event);
 	}
-	public void put(String event, EventHandler handler) {
-		map.put(event, handler);
+	public void put(EventType eventType, EventHandler handler) {
+		map.put(eventType, handler);
 	}
 }
