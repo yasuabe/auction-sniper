@@ -9,7 +9,7 @@ import org.apache.commons.io.FilenameUtils;
 
 public class LoggingXMPPFailureReporterFactory {
 	
-	public  static final String LOG_FILE_NAME = "auction-sniper.log";//TODO 置き場所再考
+	public  static final String LOG_FILE_NAME = "auction-sniper.log";
 	private static final String LOGGER_NAME   = "auction-sniper";
 
 	public static XMPPFailureReporter create() throws XMPPAuctionException {
@@ -33,10 +33,9 @@ public class LoggingXMPPFailureReporterFactory {
 
 		return handler;
 	}
-	//TODO rule 6. Don’t abbreviate
-	private static XMPPAuctionException createXMPPAuctionException(Exception e) {
+	private static XMPPAuctionException createXMPPAuctionException(Exception exception) {
 		return new XMPPAuctionException (
 				"Could not create logger FileHandler "
-						+ FilenameUtils.getFullPath(LOG_FILE_NAME), e);
+						+ FilenameUtils.getFullPath(LOG_FILE_NAME), exception);
 	}
 }
