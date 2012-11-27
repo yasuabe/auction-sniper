@@ -10,6 +10,7 @@ import auctionsniper.Auction;
 import auctionsniper.values.ItemId;
 import auctionsniper.values.Amount;
 import auctionsniper.values.SniperId;
+import auctionsniper.xmpp.translator.AuctionMessageTranslator;
 
 public class XMPPAuction implements Auction {
 	

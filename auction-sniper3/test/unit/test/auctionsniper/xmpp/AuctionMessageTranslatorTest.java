@@ -14,8 +14,8 @@ import auctionsniper.values.Increment;
 import auctionsniper.values.Amount;
 import auctionsniper.values.SniperId;
 import auctionsniper.xmpp.AuctionEventListener;
-import auctionsniper.xmpp.AuctionMessageTranslator;
 import auctionsniper.xmpp.XMPPFailureReporter;
+import auctionsniper.xmpp.translator.AuctionMessageTranslator;
 
 @RunWith(JMock.class)
 public class AuctionMessageTranslatorTest {

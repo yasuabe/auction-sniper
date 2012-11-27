@@ -1,14 +1,16 @@
-package auctionsniper.xmpp;
+package auctionsniper.xmpp.translator;
 
 import auctionsniper.event.AuctionEvent;
 import auctionsniper.event.CloseEventHandler;
 import auctionsniper.event.PriceEventHandler;
 import auctionsniper.values.SniperId;
+import auctionsniper.xmpp.AuctionEventListener;
+import auctionsniper.xmpp.EventType;
 
-class AuctionMessageTranslatorCore {
+class TranslatorCore {
 	private final EventHandlers handlers = new EventHandlers();
 
-	AuctionMessageTranslatorCore(SniperId sniperId, AuctionEventListener listener) {
+	TranslatorCore(SniperId sniperId, AuctionEventListener listener) {
 		initializeHandlers(sniperId, listener);
 	}
 	private void initializeHandlers(SniperId sniperId, AuctionEventListener listener) {
