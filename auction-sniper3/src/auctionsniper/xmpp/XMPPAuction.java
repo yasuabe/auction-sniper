@@ -3,7 +3,6 @@ package auctionsniper.xmpp;
 import static auctionsniper.util.CommandFormat.BID;
 import static auctionsniper.util.CommandFormat.JOIN;
 
-import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import auctionsniper.Auction;
@@ -14,25 +13,23 @@ import auctionsniper.xmpp.translator.AuctionMessageTranslator;
 
 public class XMPPAuction implements Auction {
 	
-	private AnnouncerToAuctionEventListener announcer =	 new AnnouncerToAuctionEventListener();
-	private final Chat chat;
+	private final AnnouncerToAuctionEventListener announcer = new AnnouncerToAuctionEventListener();
+	private final ChatWrapper                     chat;
 	
 	public XMPPAuction(XMPPConnection connection, ItemId itemId,
 			XMPPFailureReporter failureReporter) {
 
 		AuctionMessageTranslator translator = translatorFor(connection, failureReporter);
-		//TODO rule 5. One dot per line
-		this.chat = connection.getChatManager().createChat(
-				AuctionId.from(itemId, connection.getServiceName()), translator);
+		this.chat = ChatWrapper.create(connection, itemId, translator);
 	    addAuctionEventListener(chatDisconnectorFor(translator));
 	}
 	@Override public void bid(Amount bid) { sendMessage(BID.format(bid)); }
-	@Override public void join()         { sendMessage(JOIN.format());   }
+	@Override public void join()          { sendMessage(JOIN.format());   }
 	@Override public void addAuctionEventListener(AuctionEventListener auctionSniper) {
 		announcer.addListener(auctionSniper);
 	}
 	private void sendMessage(final String message) {
-		try { chat.sendMessage(message); } 
+		try { chat.send(message); } 
 		catch (XMPPException e) { e.printStackTrace(); }
 	}
 	private AuctionMessageTranslator translatorFor(//
@@ -43,7 +40,7 @@ public class XMPPAuction implements Auction {
 	private AuctionEventListener chatDisconnectorFor(final AuctionMessageTranslator translator) {
 		return new AuctionEventAdapter() {
 			public void auctionFailed() {
-				chat.removeMessageListener(translator);
+				chat.removeListener(translator);
 			}
 		};
 	}
