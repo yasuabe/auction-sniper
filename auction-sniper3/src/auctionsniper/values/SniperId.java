@@ -1,18 +1,10 @@
 package auctionsniper.values;
 
-public class SniperId extends ValueObject {
+public class SniperId extends StringObject {
 	public static SniperId fromString(String value) {
 		return new SniperId(value);
 	}
-
-	private final String value;
-	
 	public SniperId(String value) {
-		this.value = value;
-	}
-
-	@Override
-	public String toString() {
-		return value;
+		super(value);
 	}
 }

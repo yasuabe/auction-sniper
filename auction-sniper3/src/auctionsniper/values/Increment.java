@@ -1,6 +1,5 @@
 package auctionsniper.values;
 
-
 public class Increment extends IntValue {
 	
 	private Increment(int value) {

@@ -3,6 +3,7 @@ package auctionsniper.xmpp.translator;
 import auctionsniper.AuctionEventListener;
 import auctionsniper.event.AuctionEvent;
 import auctionsniper.event.CloseEventHandler;
+import auctionsniper.event.EventHandlers;
 import auctionsniper.event.EventType;
 import auctionsniper.event.PriceEventHandler;
 import auctionsniper.values.SniperId;
