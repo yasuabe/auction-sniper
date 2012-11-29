@@ -1,4 +1,4 @@
-package auctionsniper.connection;
+package auctionsniper.main;
 
 enum ArgumentIndex {
 	Hostname(0),

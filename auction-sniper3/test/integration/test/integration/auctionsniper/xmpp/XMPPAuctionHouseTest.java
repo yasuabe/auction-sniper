@@ -15,7 +15,7 @@ import test.endtoend.auctionsniper.ApplicationRunner;
 import test.endtoend.auctionsniper.FakeAuctionServer;
 import auctionsniper.Auction;
 import auctionsniper.AuctionEventListener;
-import auctionsniper.connection.ConnectionInfo;
+import auctionsniper.main.ConnectionInfo;
 import auctionsniper.values.Increment;
 import auctionsniper.values.Amount;
 import auctionsniper.xmpp.XMPPAuctionHouse;

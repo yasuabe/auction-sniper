@@ -1,4 +1,4 @@
-package auctionsniper.connection;
+package auctionsniper.main;
 
 public class ConnectionInfo {
 	private String[] args;
