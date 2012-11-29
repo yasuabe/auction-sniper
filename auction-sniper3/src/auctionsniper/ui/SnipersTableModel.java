@@ -4,11 +4,12 @@ import javax.swing.table.AbstractTableModel;
 import auctionsniper.PortfolioListener;
 import auctionsniper.SniperListener;
 import auctionsniper.snapshot.SniperSnapshot;
+import auctionsniper.snapshot.SnapshotRegistry;
 import auctionsniper.sniper.AuctionSniper;
 
 @SuppressWarnings("serial")
 public class SnipersTableModel extends AbstractTableModel implements
-		SniperListener, PortfolioListener {
+		SniperListener, PortfolioListener, SnapshotRegistry {
 
 	SniperSnapshots snapshots = new SniperSnapshots();
 	
@@ -28,7 +29,7 @@ public class SnipersTableModel extends AbstractTableModel implements
 		sniper.register(this);
 		sniper.addSniperListener(new SwingThreadSniperListener(this));
 	}
-	public void addSniperSnapshot(SniperSnapshot snapshot) {
+	@Override public void addSniperSnapshot(SniperSnapshot snapshot) {
 		int row = snapshots.add(snapshot);
 		fireTableRowsInserted(row, row);
 	}

@@ -3,8 +3,8 @@ package auctionsniper.sniper;
 import auctionsniper.Auction;
 import auctionsniper.AuctionEventListener;
 import auctionsniper.SniperListener;
+import auctionsniper.snapshot.SnapshotRegistry;
 import auctionsniper.snapshot.SniperSnapshot;
-import auctionsniper.ui.SnipersTableModel;
 import auctionsniper.values.Increment;
 import auctionsniper.values.Item;
 import auctionsniper.values.Amount;
@@ -33,7 +33,7 @@ public class AuctionSniper implements AuctionEventListener {
 	public void addSniperListener(SniperListener listener) {
 		core.addListener(listener);
 	}
-	public void register(SnipersTableModel model) {
-		model.addSniperSnapshot(snapshot);		
+	public void register(SnapshotRegistry registry) {
+		registry.addSniperSnapshot(snapshot);		
 	}
 }

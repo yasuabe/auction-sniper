@@ -17,8 +17,7 @@ public abstract class SniperSnapshot extends ValueObject {
 		this.itemId       = itemId;
 		this.lastPriceBid = new PriceBid(lastPrice, lastBid);
 	}
-	@Override
-	public String toString() {
+	@Override public String toString() {
 		return ToStringBuilder.reflectionToString(this);
 	}
 	public static SniperSnapshot joining(ItemId itemId) {
