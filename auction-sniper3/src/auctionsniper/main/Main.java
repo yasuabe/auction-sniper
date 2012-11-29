@@ -1,10 +1,13 @@
-package auctionsniper;
+package auctionsniper.main;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.SwingUtilities;
 
+import auctionsniper.AuctionHouse;
+import auctionsniper.SniperLauncher;
+import auctionsniper.SniperPortfolio;
 import auctionsniper.connection.ConnectionInfo;
 import auctionsniper.ui.MainWindow;
 import auctionsniper.xmpp.XMPPAuctionHouse;

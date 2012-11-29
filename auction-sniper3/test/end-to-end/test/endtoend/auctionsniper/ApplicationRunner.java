@@ -6,7 +6,7 @@ import static test.endtoend.auctionsniper.FakeAuctionServer.XMPP_HOSTNAME;
 
 import java.io.IOException;
 
-import auctionsniper.Main;
+import auctionsniper.main.Main;
 import auctionsniper.snapshot.BiddingSnapshot;
 import auctionsniper.snapshot.FailedSnapshot;
 import auctionsniper.snapshot.JoiningSnapshot;
