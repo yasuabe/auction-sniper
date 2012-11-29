@@ -1,4 +1,4 @@
-package auctionsniper.xmpp;
+package auctionsniper;
 
 import java.util.EventListener;
 

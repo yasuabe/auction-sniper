@@ -1,6 +1,6 @@
 package test.auctionsniper.xmpp;
 
-import static auctionsniper.xmpp.AuctionEventListener.PriceSource;
+import static auctionsniper.AuctionEventListener.PriceSource;
 
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.packet.Message;
@@ -10,10 +10,10 @@ import org.jmock.integration.junit4.JMock;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import auctionsniper.AuctionEventListener;
 import auctionsniper.values.Increment;
 import auctionsniper.values.Amount;
 import auctionsniper.values.SniperId;
-import auctionsniper.xmpp.AuctionEventListener;
 import auctionsniper.xmpp.XMPPFailureReporter;
 import auctionsniper.xmpp.translator.AuctionMessageTranslator;
 

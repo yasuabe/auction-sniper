@@ -1,5 +1,6 @@
 package auctionsniper.xmpp;
 
+import auctionsniper.AuctionEventListener;
 import auctionsniper.values.Increment;
 import auctionsniper.values.Amount;
 

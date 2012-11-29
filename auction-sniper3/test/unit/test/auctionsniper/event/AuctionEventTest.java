@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import auctionsniper.MissingValueException;
 import auctionsniper.event.AuctionEvent;
+import auctionsniper.event.MissingValueException;
 import auctionsniper.xmpp.EventType;
 
 public class AuctionEventTest {

@@ -17,6 +17,7 @@ import org.junit.runner.RunWith;
 import test.auctionsniper.util.TestData;
 import auctionsniper.Auction;
 import auctionsniper.SniperListener;
+import auctionsniper.AuctionEventListener.PriceSource;
 import auctionsniper.snapshot.BiddingSnapshot;
 import auctionsniper.snapshot.LosingSnapshot;
 import auctionsniper.snapshot.LostSnapshot;
@@ -27,7 +28,6 @@ import auctionsniper.sniper.AuctionSniper;
 import auctionsniper.values.Increment;
 import auctionsniper.values.Item;
 import auctionsniper.values.Amount;
-import auctionsniper.xmpp.AuctionEventListener.PriceSource;
 
 @RunWith(JMock.class)
 public class AuctionSniperTest {

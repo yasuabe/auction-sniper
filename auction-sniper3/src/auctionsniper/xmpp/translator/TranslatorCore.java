@@ -1,10 +1,10 @@
 package auctionsniper.xmpp.translator;
 
+import auctionsniper.AuctionEventListener;
 import auctionsniper.event.AuctionEvent;
 import auctionsniper.event.CloseEventHandler;
 import auctionsniper.event.PriceEventHandler;
 import auctionsniper.values.SniperId;
-import auctionsniper.xmpp.AuctionEventListener;
 import auctionsniper.xmpp.EventType;
 
 class TranslatorCore {

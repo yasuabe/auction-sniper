@@ -1,7 +1,7 @@
 package auctionsniper.xmpp.translator;
 
+import auctionsniper.AuctionEventListener;
 import auctionsniper.values.SniperId;
-import auctionsniper.xmpp.AuctionEventListener;
 import auctionsniper.xmpp.XMPPFailureReporter;
 
 class ExceptionHandler {

@@ -7,7 +7,7 @@ import auctionsniper.sniper.AuctionSniper;
 
 public class SniperPortfolio implements SniperCollector {
 	private final AnnouncerToPortfolioListener announcer = new AnnouncerToPortfolioListener();
-	private final List<AuctionSniper> snipers = new ArrayList<AuctionSniper>();
+	private final List<AuctionSniper>          snipers   = new ArrayList<AuctionSniper>();
 
 	public void addPortfolioListener(PortfolioListener listener) {
 		announcer.addListener(listener);

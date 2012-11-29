@@ -6,6 +6,7 @@ import static auctionsniper.util.CommandFormat.JOIN;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import auctionsniper.Auction;
+import auctionsniper.AuctionEventListener;
 import auctionsniper.values.ItemId;
 import auctionsniper.values.Amount;
 import auctionsniper.values.SniperId;

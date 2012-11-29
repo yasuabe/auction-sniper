@@ -1,16 +1,15 @@
 package auctionsniper.event;
 
-import static auctionsniper.xmpp.AuctionEventListener.PriceSource.FromOtherBidder;
-import static auctionsniper.xmpp.AuctionEventListener.PriceSource.FromSniper;
+import static auctionsniper.AuctionEventListener.PriceSource.FromOtherBidder;
+import static auctionsniper.AuctionEventListener.PriceSource.FromSniper;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import auctionsniper.MissingValueException;
+import auctionsniper.AuctionEventListener.PriceSource;
 import auctionsniper.values.Increment;
 import auctionsniper.values.Amount;
 import auctionsniper.values.SniperId;
-import auctionsniper.xmpp.AuctionEventListener.PriceSource;
 import auctionsniper.xmpp.EventType;
 
 public class AuctionEvent {

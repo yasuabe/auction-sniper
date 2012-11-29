@@ -1,7 +1,7 @@
 package auctionsniper.event;
 
+import auctionsniper.AuctionEventListener;
 import auctionsniper.values.SniperId;
-import auctionsniper.xmpp.AuctionEventListener;
 
 public class CloseEventHandler extends EventHandler {
 	public CloseEventHandler(AuctionEventListener listener, SniperId sniperId) {

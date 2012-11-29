@@ -1,14 +1,13 @@
 package auctionsniper.sniper;
 
-
 import auctionsniper.Auction;
+import auctionsniper.AuctionEventListener;
 import auctionsniper.SniperListener;
 import auctionsniper.snapshot.SniperSnapshot;
 import auctionsniper.ui.SnipersTableModel;
 import auctionsniper.values.Increment;
 import auctionsniper.values.Item;
 import auctionsniper.values.Amount;
-import auctionsniper.xmpp.AuctionEventListener;
 
 public class AuctionSniper implements AuctionEventListener {
 	private       SniperSnapshot    snapshot;

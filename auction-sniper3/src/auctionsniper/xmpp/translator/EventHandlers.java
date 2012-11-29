@@ -3,9 +3,9 @@ package auctionsniper.xmpp.translator;
 import java.util.EnumMap;
 import java.util.Map;
 
-import auctionsniper.MissingValueException;
 import auctionsniper.event.AuctionEvent;
 import auctionsniper.event.EventHandler;
+import auctionsniper.event.MissingValueException;
 import auctionsniper.xmpp.EventType;
 
 public class EventHandlers {

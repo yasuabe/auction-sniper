@@ -1,8 +1,7 @@
 package auctionsniper.event;
 
-import auctionsniper.MissingValueException;
+import auctionsniper.AuctionEventListener;
 import auctionsniper.values.SniperId;
-import auctionsniper.xmpp.AuctionEventListener;
 
 public class PriceEventHandler extends EventHandler {
 	public PriceEventHandler(AuctionEventListener listener, SniperId sniperId) {

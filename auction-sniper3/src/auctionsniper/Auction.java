@@ -1,7 +1,6 @@
 package auctionsniper;
 
 import auctionsniper.values.Amount;
-import auctionsniper.xmpp.AuctionEventListener;
 
 public interface Auction {
 

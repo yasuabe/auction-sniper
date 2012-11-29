@@ -3,7 +3,7 @@ package auctionsniper.sniper;
 import java.util.HashMap;
 import java.util.Map;
 
-import auctionsniper.xmpp.AuctionEventListener.PriceSource;
+import auctionsniper.AuctionEventListener.PriceSource;
 
 public class CurrentPriceProcessors {
 	Map<PriceSource, CurrentPriceProcessor> map = new HashMap<>();

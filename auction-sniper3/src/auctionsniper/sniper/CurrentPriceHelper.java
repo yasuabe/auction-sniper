@@ -1,11 +1,11 @@
 package auctionsniper.sniper;
 
 import auctionsniper.Auction;
+import auctionsniper.AuctionEventListener.PriceSource;
 import auctionsniper.snapshot.SniperSnapshot;
 import auctionsniper.values.Increment;
 import auctionsniper.values.Item;
 import auctionsniper.values.Amount;
-import auctionsniper.xmpp.AuctionEventListener.PriceSource;
 
 public class CurrentPriceHelper {
 	public CurrentPriceHelper(Auction auction, Item item) {

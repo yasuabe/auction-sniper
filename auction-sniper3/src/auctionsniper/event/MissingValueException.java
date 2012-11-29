@@ -1,4 +1,4 @@
-package auctionsniper;
+package auctionsniper.event;
 
 @SuppressWarnings("serial")
 public class MissingValueException extends Exception {

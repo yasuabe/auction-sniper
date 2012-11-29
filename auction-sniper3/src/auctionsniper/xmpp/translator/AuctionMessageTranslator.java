@@ -4,8 +4,8 @@ import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.packet.Message;
 
+import auctionsniper.AuctionEventListener;
 import auctionsniper.values.SniperId;
-import auctionsniper.xmpp.AuctionEventListener;
 import auctionsniper.xmpp.XMPPFailureReporter;
 
 public class AuctionMessageTranslator implements MessageListener {
