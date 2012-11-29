@@ -1,4 +1,4 @@
-package auctionsniper.xmpp;
+package auctionsniper.event;
 
 public enum EventType {
 	CLOSE,

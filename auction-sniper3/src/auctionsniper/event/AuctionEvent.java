@@ -10,7 +10,6 @@ import auctionsniper.AuctionEventListener.PriceSource;
 import auctionsniper.values.Increment;
 import auctionsniper.values.Amount;
 import auctionsniper.values.SniperId;
-import auctionsniper.xmpp.EventType;
 
 public class AuctionEvent {
 	private final Map<String, String> fields = new HashMap<String, String>();

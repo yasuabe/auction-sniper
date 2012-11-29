@@ -3,9 +3,9 @@ package auctionsniper.xmpp.translator;
 import auctionsniper.AuctionEventListener;
 import auctionsniper.event.AuctionEvent;
 import auctionsniper.event.CloseEventHandler;
+import auctionsniper.event.EventType;
 import auctionsniper.event.PriceEventHandler;
 import auctionsniper.values.SniperId;
-import auctionsniper.xmpp.EventType;
 
 class TranslatorCore {
 	private final EventHandlers handlers = new EventHandlers();
