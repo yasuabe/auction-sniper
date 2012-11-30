@@ -8,7 +8,7 @@ public class AnnouncerToUserRequestListener {
 	
 	private final Announcer<UserRequestListener> announcer;
 
-	AnnouncerToUserRequestListener() {			
+	public AnnouncerToUserRequestListener() {			
 		announcer = new Announcer<>(UserRequestListener.class);
 	}
 	public void add(UserRequestListener listener) {

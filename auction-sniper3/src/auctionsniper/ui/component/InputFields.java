@@ -1,4 +1,4 @@
-package auctionsniper.ui;
+package auctionsniper.ui.component;
 
 import java.text.NumberFormat;
 

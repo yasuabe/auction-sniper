@@ -8,9 +8,9 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.table.JTableHeader;
 
-import auctionsniper.ui.InputFields;
-import auctionsniper.ui.JoinAuctionButton;
-import auctionsniper.ui.MainWindow;
+import auctionsniper.ui.component.InputFields;
+import auctionsniper.ui.component.JoinAuctionButton;
+import auctionsniper.ui.component.MainWindow;
 
 import com.objogate.wl.swing.AWTEventQueueProber;
 import com.objogate.wl.swing.driver.JButtonDriver;

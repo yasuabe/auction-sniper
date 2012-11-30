@@ -14,7 +14,7 @@ import auctionsniper.snapshot.WonSnapshot;
 
 public class StatusTexts {
 	private static Map<Class<? extends SniperSnapshot>, String> STATUS_TEXT =
-    		new HashMap<Class<? extends SniperSnapshot>, String>();
+    		new HashMap<>();
     static {
     	STATUS_TEXT.put(JoiningSnapshot.class, "Joining");
     	STATUS_TEXT.put(BiddingSnapshot.class, "Bidding");

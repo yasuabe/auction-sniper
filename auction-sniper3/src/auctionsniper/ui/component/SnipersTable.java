@@ -1,4 +1,4 @@
-package auctionsniper.ui;
+package auctionsniper.ui.component;
 
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;

@@ -1,4 +1,4 @@
-package auctionsniper.ui;
+package auctionsniper.ui.component;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -10,6 +10,8 @@ import javax.swing.JTable;
 
 import auctionsniper.SniperPortfolio;
 import auctionsniper.UserRequestListener;
+import auctionsniper.ui.AnnouncerToUserRequestListener;
+import auctionsniper.ui.SnipersTableModel;
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {

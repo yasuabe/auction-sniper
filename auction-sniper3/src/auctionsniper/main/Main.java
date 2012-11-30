@@ -8,7 +8,7 @@ import javax.swing.SwingUtilities;
 import auctionsniper.AuctionHouse;
 import auctionsniper.SniperLauncher;
 import auctionsniper.SniperPortfolio;
-import auctionsniper.ui.MainWindow;
+import auctionsniper.ui.component.MainWindow;
 import auctionsniper.xmpp.XMPPAuctionHouse;
 
 public class Main {

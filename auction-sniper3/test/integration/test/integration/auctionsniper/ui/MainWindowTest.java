@@ -8,7 +8,7 @@ import org.junit.Test;
 import test.endtoend.auctionsniper.AuctionSniperDriver;
 import auctionsniper.SniperPortfolio;
 import auctionsniper.UserRequestListener;
-import auctionsniper.ui.MainWindow;
+import auctionsniper.ui.component.MainWindow;
 import auctionsniper.values.Item;
 
 import com.objogate.wl.swing.probe.ValueMatcherProbe;

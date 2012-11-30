@@ -1,4 +1,4 @@
-package auctionsniper.ui;
+package auctionsniper.ui.component;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import auctionsniper.ui.AnnouncerToUserRequestListener;
 import auctionsniper.values.Item;
 import auctionsniper.values.ItemId;
 import auctionsniper.values.Amount;

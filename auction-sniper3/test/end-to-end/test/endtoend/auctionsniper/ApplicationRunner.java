@@ -14,7 +14,7 @@ import auctionsniper.snapshot.LosingSnapshot;
 import auctionsniper.snapshot.LostSnapshot;
 import auctionsniper.snapshot.WinningSnapshot;
 import auctionsniper.snapshot.WonSnapshot;
-import auctionsniper.ui.MainWindow;
+import auctionsniper.ui.component.MainWindow;
 
 public class ApplicationRunner {
 	public static final String SNIPER_ID = "sniper";
