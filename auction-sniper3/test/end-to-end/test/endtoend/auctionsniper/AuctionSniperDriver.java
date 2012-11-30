@@ -8,9 +8,10 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.table.JTableHeader;
 
-import auctionsniper.ui.component.InputFields;
+import auctionsniper.ui.component.ItemIdField;
 import auctionsniper.ui.component.JoinAuctionButton;
 import auctionsniper.ui.component.MainWindow;
+import auctionsniper.ui.component.StopPriceField;
 
 import com.objogate.wl.swing.AWTEventQueueProber;
 import com.objogate.wl.swing.driver.JButtonDriver;
@@ -57,14 +58,14 @@ public class AuctionSniperDriver extends JFrameDriver {
 
 	private JTextFieldDriver itemIdField() {
 		JTextFieldDriver newItemId = new JTextFieldDriver(this,
-				JTextField.class, named(InputFields.NEW_ITEM_ID_NAME));
+				JTextField.class, named(ItemIdField.NEW_ITEM_ID_NAME));
 		newItemId.focusWithMouse();
 		newItemId.focusWithMouse();
 		return newItemId;
 	}
 	public void startBiddingWithStopPrice(String itemId, int stopPrice) {
-	    textField(InputFields.NEW_ITEM_ID_NAME).replaceAllText(itemId); 
-	    textField(InputFields.NEW_ITEM_STOP_PRICE_NAME).replaceAllText(String.valueOf(stopPrice)); 
+	    textField(ItemIdField.NEW_ITEM_ID_NAME).replaceAllText(itemId); 
+	    textField(StopPriceField.NEW_ITEM_STOP_PRICE_NAME).replaceAllText(String.valueOf(stopPrice)); 
 	    bidButton().click(); 
 	}
 	private JTextFieldDriver textField(String fieldName) {
